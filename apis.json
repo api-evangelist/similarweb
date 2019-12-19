@@ -1,0 +1,70 @@
+{
+    "name": "SimilarWeb",
+    "description": "Grow your market share and website traffic with SimilarWeb's digital market intelligence platform. Compare any website traffic statistics & analytics.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/3499-similarweb.jpg",
+    "tags": [
+        "have api",
+        "market data",
+        "target",
+        "website management"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/similarweb\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "SimilarWeb",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/3499-similarweb.jpg",
+            "humanURL": "http:\/\/www.similarweb.com\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/similarweb-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/similarweb-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "http:\/\/api.similarweb.com\/"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/blog.similarweb.com\/"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/blog.similarweb.com\/feed"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/similarweb"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/developer.similarweb.com\/"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/similarweb"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/SimilarWeb"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/www.similarweb.com\/"
+        }
+    ]
+}
