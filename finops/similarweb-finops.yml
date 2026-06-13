@@ -1,0 +1,133 @@
+name: SimilarWeb API FinOps Framework
+description: >-
+  FinOps guidance for managing SimilarWeb API costs using a FOCUS-aligned
+  framework. SimilarWeb operates on a data credit model where credit consumption
+  is driven by the endpoints called and the volume of data returned. Effective
+  cost management requires visibility into credit usage by endpoint, team, and
+  use case, combined with proactive quota monitoring and architectural choices
+  that minimize unnecessary credit spend.
+specificationVersion: '1.0'
+url: https://www.similarweb.com/corp/daas/api/
+
+pricingModel:
+  type: credit-based
+  description: >-
+    Customers purchase a monthly data credit allocation. Each API call consumes
+    credits based on the endpoint and data volume. Credits reset monthly. No
+    credits are consumed for rate-limit errors (HTTP 429). Pricing is
+    negotiated per contract and is not publicly listed.
+  billingUnit: data-credits
+  billingPeriod: monthly
+  currency: USD
+
+costDrivers:
+  - name: Endpoint Selection
+    description: >-
+      Different endpoints carry different credit costs. Keyword intelligence,
+      app performance, and audience overlap endpoints typically cost more than
+      basic traffic summary endpoints.
+    impact: high
+    recommendation: >-
+      Audit which endpoints are called and correlate them to business value.
+      Avoid calling high-cost endpoints more frequently than needed.
+
+  - name: Data Volume Per Call
+    description: >-
+      Some endpoints scale credit cost with the volume of data returned (e.g.,
+      number of keywords, date range, number of countries). Wider queries cost
+      more.
+    impact: high
+    recommendation: >-
+      Scope queries to the minimum required date range, geography, and result
+      size. Use pagination parameters to avoid over-fetching.
+
+  - name: Call Frequency
+    description: >-
+      Repeated calls to the same endpoint for the same data consume credits
+      each time. Real-time dashboards that poll frequently can exhaust quotas
+      quickly.
+    impact: high
+    recommendation: >-
+      Cache API responses at the application layer. SimilarWeb data for most
+      metrics updates daily or weekly; sub-minute polling is wasteful.
+
+  - name: Batch vs. REST Choice
+    description: >-
+      Using the REST API in a loop over thousands of domains is less efficient
+      than using the Batch API for the same volume. REST calls may also
+      consume more total credits due to per-call overhead.
+    impact: medium
+    recommendation: >-
+      For bulk analysis of more than a few hundred domains, prefer the Batch
+      API. Reserve REST for real-time, user-triggered queries.
+
+  - name: Failed and Validated Requests
+    description: >-
+      HTTP 429 rate-limit errors do not consume credits. However, application
+      bugs that generate invalid requests may consume partial credits depending
+      on implementation.
+    impact: low
+    recommendation: >-
+      Use the Request Validate endpoint to estimate costs before executing
+      large production queries. Implement error handling to avoid retry storms.
+
+visibility:
+  - name: Credit Usage Monitoring
+    description: Track monthly credit consumption against quota via the SimilarWeb platform dashboard.
+    actions:
+      - Review credit usage weekly during active development.
+      - Set up internal alerts when consumption exceeds 70% of monthly quota.
+      - Map credit consumption to specific teams, products, or use cases using API key segmentation.
+
+  - name: Cost Attribution
+    description: Use separate API keys per team or product line to attribute credit spend accurately.
+    actions:
+      - Request multiple API keys from the account admin for different teams.
+      - Tag outbound API calls in application logs with team or product identifiers.
+      - Export credit usage data monthly for chargeback or showback reporting.
+
+optimization:
+  - name: Response Caching
+    description: Cache endpoint responses to avoid re-fetching unchanged data.
+    strategy: >-
+      Implement a TTL-based cache (Redis, Memcached, or database) keyed by
+      endpoint + parameters. Set TTL based on SimilarWeb data refresh cadence
+      (typically 24 hours for traffic, weekly for some keyword data).
+
+  - name: Query Scoping
+    description: Minimize query breadth to reduce per-call credit cost.
+    strategy: >-
+      Request only the countries, date ranges, and metrics needed. Avoid
+      defaulting to global or maximum date ranges. Use the Request Validate
+      endpoint to measure the impact of scope changes.
+
+  - name: Batch API for Bulk Work
+    description: Use the Batch API instead of REST loops for large-scale domain analysis.
+    strategy: >-
+      Consolidate domain lists and submit single Batch API jobs. Receive
+      results in S3 or Snowflake for downstream processing. This avoids
+      per-call overhead and is architecturally more efficient.
+
+  - name: Credit Budget Alerts
+    description: Set internal thresholds to avoid unexpected credit exhaustion.
+    strategy: >-
+      Implement application-level counters that track estimated credits
+      consumed per session. Halt or throttle non-critical jobs when approaching
+      quota limits. Coordinate with the SimilarWeb account manager for
+      temporary credit extensions if needed.
+
+governance:
+  - name: API Key Access Control
+    description: >-
+      Only account administrators can generate API keys. Key issuance should
+      follow least-privilege principles — provide keys only to teams and
+      systems that have an approved use case.
+  - name: Contract Review
+    description: >-
+      SimilarWeb pricing is negotiated annually or per contract. Review credit
+      allocation vs. actual consumption at each renewal to right-size the
+      contract and avoid over-purchasing or credit waste.
+  - name: Unused Key Deactivation
+    description: >-
+      Deactivate API keys for departed employees or deprecated integrations
+      promptly to prevent unauthorized credit consumption.

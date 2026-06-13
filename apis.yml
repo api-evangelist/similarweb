@@ -1,0 +1,115 @@
+aid: similarweb
+name: SimilarWeb
+description: >-
+  SimilarWeb is a digital intelligence platform offering a REST API for accessing
+  website traffic estimates, audience demographics, keyword analytics, competitive
+  benchmarking, app intelligence data, and lead generation insights. The API
+  provides real-time and historical data covering traffic sources, search behavior,
+  technographics, e-commerce shopper intelligence, and firmographic company data,
+  enabling developers to integrate market intelligence into applications,
+  dashboards, and data pipelines.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/similarweb/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Digital Intelligence
+  - Web Analytics
+  - Traffic Analytics
+  - Competitive Intelligence
+  - Keyword Analytics
+  - Audience Demographics
+  - App Intelligence
+  - Market Research
+  - E-commerce
+  - SEO
+apis:
+  - aid: similarweb:similarweb-rest-api
+    name: SimilarWeb REST API
+    description: >-
+      The SimilarWeb REST API provides real-time access to digital intelligence
+      data via individual HTTP requests. Endpoints cover website traffic and
+      engagement metrics, traffic source breakdowns (organic search, paid search,
+      referrals, social, display), audience demographics, keyword and search
+      intelligence, mobile app performance, technographic data, e-commerce shopper
+      behavior, company firmographics, and rank tracking. Authentication is via
+      API key and usage is metered on a data credit model.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.similarweb.com/
+    baseURL: https://api.similarweb.com
+    tags:
+      - Web Traffic
+      - Audience Analytics
+      - Keyword Intelligence
+      - App Intelligence
+      - Competitive Benchmarking
+    properties:
+      - type: Documentation
+        url: https://developers.similarweb.com/
+      - type: OpenAPI
+        url: https://developers.similarweb.com/llms.txt
+      - type: GettingStarted
+        url: https://developers.similarweb.com/docs/getting-started
+      - type: Authentication
+        url: https://developers.similarweb.com/docs/authentication
+      - type: RateLimits
+        url: https://developers.similarweb.com/docs/rate-limit
+    contact:
+      - FN: SimilarWeb Support
+        url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+        email: ''
+
+  - aid: similarweb:similarweb-batch-api
+    name: SimilarWeb Batch API
+    description: >-
+      The SimilarWeb Batch API is optimized for large-scale bulk data extraction,
+      supporting jobs of up to one million domains per request. It delivers data
+      asynchronously to cloud storage destinations including Amazon S3, Google
+      Cloud Storage, and Snowflake. It is ideal for historical analysis, data
+      warehouse ingestion, and large-scale competitive research workflows.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.similarweb.com/
+    baseURL: https://api.similarweb.com
+    tags:
+      - Batch Processing
+      - Bulk Data
+      - Data Export
+      - Snowflake
+      - Amazon S3
+    properties:
+      - type: Documentation
+        url: https://developers.similarweb.com/
+      - type: GettingStarted
+        url: https://developers.similarweb.com/docs/getting-started
+    contact:
+      - FN: SimilarWeb Support
+        url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+        email: ''
+
+common:
+  - type: Website
+    url: https://www.similarweb.com/
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GitHubOrg
+    url: https://github.com/similarweb
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/similarweb
+  - type: Blog
+    url: https://www.similarweb.com/blog/
+  - type: Pricing
+    url: https://www.similarweb.com/corp/daas/api/
+  - type: X
+    url: https://x.com/similarweb
+  - type: Plans
+    url: plans/similarweb-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/similarweb-rate-limits.yml
+  - type: FinOps
+    url: finops/similarweb-finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

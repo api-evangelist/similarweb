@@ -1,0 +1,69 @@
+name: SimilarWeb API Rate Limits
+description: >-
+  SimilarWeb enforces rate limits on the REST API to ensure platform stability
+  and fair use across all customers. The primary limit is 10 requests per second
+  per API key. The Batch API is available for high-volume use cases and processes
+  asynchronously, bypassing per-second rate limits. Enterprise customers may
+  negotiate higher rate limits with the SimilarWeb team.
+specificationVersion: '0.1'
+url: https://developers.similarweb.com/docs/rate-limit
+
+limits:
+  - name: Requests Per Second
+    description: >-
+      The REST API is capped at 10 requests per second per API key. Exceeding
+      this limit returns HTTP 429 Too Many Requests. No data credits are consumed
+      when a request is rate-limited.
+    type: rate
+    scope: api-key
+    value: 10
+    unit: requests
+    period: second
+    errorCode: 429
+    errorMessage: Too many requests
+    creditsConsumed: false
+
+  - name: Monthly Data Credit Quota
+    description: >-
+      Each API plan includes a monthly allocation of data credits. Credits are
+      consumed per API call based on the endpoint accessed and the volume of data
+      returned. The quota resets monthly. Customers can use the Request Validate
+      endpoint to estimate credit costs before running large queries.
+    type: quota
+    scope: account
+    unit: data-credits
+    period: monthly
+    resetBehavior: monthly
+    validateEndpoint: true
+    notes: >-
+      Credit costs vary by endpoint. High-value endpoints (e.g., keyword
+      intelligence, app performance) typically consume more credits per call
+      than basic traffic summary endpoints.
+
+  - name: Batch API Job Size
+    description: >-
+      Individual Batch API jobs can include up to one million domains. Batch
+      jobs are processed asynchronously and do not count against the per-second
+      rate limit. Results are delivered to Amazon S3, Google Cloud Storage,
+      or Snowflake.
+    type: size
+    scope: job
+    value: 1000000
+    unit: domains
+    period: per-job
+    delivery:
+      - Amazon S3
+      - Google Cloud Storage
+      - Snowflake
+
+headers:
+  - name: HTTP 429
+    description: Returned when the 10 requests-per-second limit is exceeded.
+    action: Implement request throttling; retry after a brief back-off period.
+
+bestPractices:
+  - Implement client-side throttling to stay at or below 10 requests per second.
+  - Use the Request Validate endpoint before running large or expensive queries.
+  - Use the Batch API for bulk domain analysis rather than looping REST calls.
+  - Monitor monthly credit consumption to avoid exhausting quotas mid-month.
+  - Contact SimilarWeb support to discuss higher rate limits for enterprise workloads.

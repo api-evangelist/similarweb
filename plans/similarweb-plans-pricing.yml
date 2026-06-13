@@ -1,0 +1,90 @@
+name: SimilarWeb API Plans & Pricing
+description: >-
+  SimilarWeb API pricing is based on a data credit model — customers pay for
+  the data returned, not simply for API calls made. API access is available
+  as part of Business and Enterprise platform plans, or as a standalone API
+  package. Pricing is customized based on endpoint access, data credit volume,
+  number of users, and contract term. Public list prices are not published;
+  prospective customers must request a quote from the sales team.
+specificationVersion: '0.1'
+url: https://www.similarweb.com/corp/daas/api/
+
+plans:
+  - name: Business
+    description: >-
+      Business plan includes platform access plus REST API connectivity.
+      Suitable for small teams needing real-time traffic, keyword, and
+      audience data for a moderate number of domains.
+    type: paid
+    pricingModel: credit-based
+    currency: USD
+    billingPeriod: monthly
+    features:
+      - REST API access
+      - Website traffic and engagement metrics
+      - Traffic source breakdowns
+      - Keyword and search analytics
+      - Audience demographics
+      - Monthly data credit reset
+      - Standard support
+    apiAccess: true
+    creditModel: true
+    contactSales: true
+    url: https://www.similarweb.com/corp/daas/api/
+
+  - name: Enterprise
+    description: >-
+      Enterprise plan provides full platform and API coverage including Batch
+      API, advanced datasets (app intelligence, technographics, shopper
+      intelligence, firmographics), higher data credit allocations, dedicated
+      account management, and custom integrations. Supports Snowflake, Amazon
+      S3, and Salesforce data delivery.
+    type: paid
+    pricingModel: credit-based
+    currency: USD
+    billingPeriod: annual
+    features:
+      - REST API access
+      - Batch API access (up to 1M domains per job)
+      - Full dataset access (traffic, keywords, apps, technographics, shopper, firmographics)
+      - Snowflake integration
+      - Amazon S3 delivery
+      - Google Cloud Storage delivery
+      - Salesforce integration
+      - MCP server support (Claude, Cursor, Copilot Studio)
+      - Google Sheets and Excel add-ons
+      - Higher data credit volume
+      - Dedicated account manager
+      - Enterprise SLA and support
+      - Custom rate limit negotiation
+    apiAccess: true
+    creditModel: true
+    contactSales: true
+    url: https://www.similarweb.com/corp/daas/api/
+
+  - name: API Standalone
+    description: >-
+      API-only package for customers who need programmatic data access without
+      the full SimilarWeb platform UI. Credit volume and endpoint access are
+      negotiated based on use case.
+    type: paid
+    pricingModel: credit-based
+    currency: USD
+    billingPeriod: monthly
+    features:
+      - REST API access
+      - Endpoint access scoped to agreed datasets
+      - Monthly credit allocation
+      - Developer documentation and support
+    apiAccess: true
+    creditModel: true
+    contactSales: true
+    url: https://www.similarweb.com/corp/daas/api/
+
+notes:
+  - Data credits are consumed per API call based on the endpoint and data volume returned.
+  - Use the Request Validate endpoint to estimate credit cost before executing large queries.
+  - No credits are charged for rate-limit errors (HTTP 429).
+  - Credit quotas reset monthly.
+  - Pricing ranges from approximately $500/month for entry-level to $20,000+/month for high-volume enterprise use.
+  - All plans require contacting the SimilarWeb sales team for a custom quote.
