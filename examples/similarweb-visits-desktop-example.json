@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "request": {
+      "domain": "example.com",
+      "start_date": "2024-01",
+      "end_date": "2024-03",
+      "country": "us",
+      "format": "json",
+      "granularity": "monthly",
+      "main_domain_only": false
+    },
+    "status": "Success",
+    "last_updated": "2024-04-01"
+  },
+  "visits": [
+    { "date": "2024-01-01", "visits": 1234567.89 },
+    { "date": "2024-02-01", "visits": 1189432.12 },
+    { "date": "2024-03-01", "visits": 1301876.45 }
+  ]
+}

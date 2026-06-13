@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/similarweb/json-schema/similarweb-traffic-engagement.json",
+  "title": "SimilarWeb Traffic and Engagement Response",
+  "description": "JSON Schema for SimilarWeb website traffic and engagement API responses including visits, bounce rate, pages per visit, and unique visitors.",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "$ref": "#/$defs/Meta"
+    },
+    "visits": {
+      "type": "array",
+      "description": "Time series of visit estimates",
+      "items": {
+        "$ref": "#/$defs/DateValueNumber"
+      }
+    },
+    "bounce_rate": {
+      "type": "array",
+      "description": "Time series of bounce rate values (0–1 decimal)",
+      "items": {
+        "$ref": "#/$defs/DateBounceRate"
+      }
+    },
+    "pages_per_visit": {
+      "type": "array",
+      "description": "Time series of pages per visit values",
+      "items": {
+        "$ref": "#/$defs/DateValueNumber"
+      }
+    },
+    "unique_visitors": {
+      "type": "array",
+      "description": "Time series of unique visitor estimates",
+      "items": {
+        "$ref": "#/$defs/DateValueNumber"
+      }
+    },
+    "avg_visit_duration": {
+      "type": "array",
+      "description": "Time series of average visit duration in seconds",
+      "items": {
+        "$ref": "#/$defs/DateValueNumber"
+      }
+    }
+  },
+  "required": ["meta"],
+  "$defs": {
+    "Meta": {
+      "type": "object",
+      "description": "Standard response metadata block",
+      "properties": {
+        "request": {
+          "type": "object",
+          "description": "Echo of the original request parameters",
+          "properties": {
+            "domain": { "type": "string" },
+            "start_date": { "type": "string" },
+            "end_date": { "type": "string" },
+            "country": { "type": "string" },
+            "format": { "type": "string" },
+            "granularity": { "type": "string" },
+            "main_domain_only": { "type": "boolean" }
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Request status",
+          "examples": ["Success"]
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date",
+          "description": "Timestamp of the most recent data update"
+        }
+      },
+      "required": ["status"]
+    },
+    "DateValueNumber": {
+      "type": "object",
+      "description": "A date-keyed numeric metric data point",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the data point (YYYY-MM-DD)"
+        },
+        "value": {
+          "type": "number",
+          "description": "Numeric metric value for the date"
+        }
+      },
+      "required": ["date"]
+    },
+    "DateBounceRate": {
+      "type": "object",
+      "description": "Bounce rate data point",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "bounce_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Bounce rate as a decimal between 0 and 1"
+        }
+      },
+      "required": ["date", "bounce_rate"]
+    }
+  }
+}

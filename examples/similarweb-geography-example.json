@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "query": {
+      "limit": 10,
+      "offset": 0,
+      "sort": null,
+      "asc": null
+    },
+    "request": {
+      "domain": "example.com",
+      "start_date": null,
+      "end_date": null,
+      "country": "world",
+      "format": "json",
+      "main_domain_only": false,
+      "show_verified": false
+    },
+    "status": "Success",
+    "last_updated": "2024-04-01"
+  },
+  "records": [
+    {
+      "country": 840,
+      "country_name": "United States",
+      "share": 0.4231,
+      "visits": 521890.0,
+      "pages_per_visit": 4.7,
+      "average_time": 183,
+      "bounce_rate": 0.42,
+      "rank": 1250
+    },
+    {
+      "country": 826,
+      "country_name": "United Kingdom",
+      "share": 0.1108,
+      "visits": 136720.0,
+      "pages_per_visit": 3.9,
+      "average_time": 156,
+      "bounce_rate": 0.48,
+      "rank": 4320
+    },
+    {
+      "country": 276,
+      "country_name": "Germany",
+      "share": 0.0834,
+      "visits": 102910.0,
+      "pages_per_visit": 3.5,
+      "average_time": 141,
+      "bounce_rate": 0.51,
+      "rank": 6780
+    }
+  ]
+}

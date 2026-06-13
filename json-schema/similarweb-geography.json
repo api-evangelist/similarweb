@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/similarweb/json-schema/similarweb-geography.json",
+  "title": "SimilarWeb Geography Response",
+  "description": "JSON Schema for SimilarWeb geographic traffic distribution API responses. Each record represents traffic share and engagement metrics for a country.",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "Response metadata",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "limit": { "type": "integer" },
+            "offset": { "type": "integer" },
+            "sort": { "type": ["string", "null"] },
+            "asc": { "type": ["boolean", "null"] }
+          }
+        },
+        "request": {
+          "type": "object",
+          "properties": {
+            "domain": { "type": "string" },
+            "start_date": { "type": ["string", "null"] },
+            "end_date": { "type": ["string", "null"] },
+            "country": { "type": "string" },
+            "format": { "type": "string" },
+            "main_domain_only": { "type": "boolean" },
+            "show_verified": { "type": "boolean" }
+          }
+        },
+        "status": { "type": "string" },
+        "last_updated": { "type": "string", "format": "date" }
+      },
+      "required": ["status"]
+    },
+    "records": {
+      "type": "array",
+      "description": "Country-level traffic records",
+      "items": {
+        "$ref": "#/$defs/GeographyRecord"
+      }
+    }
+  },
+  "required": ["meta", "records"],
+  "$defs": {
+    "GeographyRecord": {
+      "type": "object",
+      "description": "Traffic metrics for a single country",
+      "properties": {
+        "country": {
+          "type": "integer",
+          "description": "ISO 3166-1 numeric country code"
+        },
+        "country_name": {
+          "type": "string",
+          "description": "Human-readable country name"
+        },
+        "share": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Share of total site traffic from this country"
+        },
+        "visits": {
+          "type": "number",
+          "description": "Estimated visit count from this country"
+        },
+        "pages_per_visit": {
+          "type": "number",
+          "description": "Average pages viewed per visit from this country"
+        },
+        "average_time": {
+          "type": "number",
+          "description": "Average time on site in seconds"
+        },
+        "bounce_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Bounce rate for visitors from this country"
+        },
+        "rank": {
+          "type": "integer",
+          "description": "Domain rank within this country"
+        }
+      },
+      "required": ["country", "share"]
+    }
+  }
+}

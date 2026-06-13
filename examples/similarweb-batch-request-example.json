@@ -1,0 +1,30 @@
+{
+  "report_query": {
+    "tables": [
+      {
+        "vtable": "similarweb_websites_traffic",
+        "granularity": "monthly",
+        "start_date": "2024-01",
+        "end_date": "2024-06",
+        "filters": {
+          "domain": ["example.com", "competitor.com"]
+        },
+        "metrics": [
+          "visits",
+          "unique_visitors",
+          "pages_per_visit",
+          "bounce_rate",
+          "avg_visit_duration"
+        ],
+        "paging": {
+          "limit": 1000,
+          "offset": 0
+        }
+      }
+    ]
+  },
+  "delivery_information": {
+    "delivery_method": "download_link",
+    "response_format": "json"
+  }
+}

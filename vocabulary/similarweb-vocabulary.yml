@@ -1,0 +1,280 @@
+vocabulary:
+  name: SimilarWeb API Vocabulary
+  description: >-
+    Domain vocabulary for the SimilarWeb digital intelligence API covering
+    traffic analytics, audience measurement, keyword intelligence, app
+    analytics, competitive benchmarking, and firmographic data.
+  version: 1.0.0
+  source: https://developers.similarweb.com/
+
+terms:
+
+  # Authentication and access
+  - term: api_key
+    label: API Key
+    definition: >-
+      A personal authentication token passed as a query parameter (api_key)
+      or request header (api-key) to authenticate REST and Batch API requests.
+    category: Authentication
+
+  - term: data_credits
+    label: Data Credits
+    definition: >-
+      The usage currency for SimilarWeb API calls. Each endpoint request
+      consumes a defined number of credits. Credits reset on a scheduled
+      cycle defined by the subscription plan.
+    category: Authentication
+    seeAlso: https://developers.similarweb.com/docs/data-credits-unpublished-whats-new-in-v40.md
+
+  # Core traffic metrics
+  - term: visits
+    label: Visits
+    definition: >-
+      Estimated total number of sessions to a website in a given time
+      period across desktop or mobile web (or combined). A visit ends
+      after 30 minutes of inactivity.
+    category: Traffic Metrics
+
+  - term: unique_visitors
+    label: Unique Visitors
+    definition: >-
+      Estimated count of distinct individuals who visited a website in
+      a given month, deduplicated by device.
+    category: Traffic Metrics
+
+  - term: pages_per_visit
+    label: Pages Per Visit
+    definition: >-
+      Average number of pages viewed per session on a website.
+    category: Traffic Metrics
+
+  - term: bounce_rate
+    label: Bounce Rate
+    definition: >-
+      The percentage of visitors who leave a website after viewing only
+      one page. Expressed as a decimal (0–1) in API responses.
+    category: Traffic Metrics
+
+  - term: avg_visit_duration
+    label: Average Visit Duration
+    definition: >-
+      Average time in seconds that visitors spend on a site per session.
+    category: Traffic Metrics
+
+  - term: global_rank
+    label: Global Rank
+    definition: >-
+      A website's worldwide position calculated from a combined measure
+      of unique visitors and total pageviews across desktop and mobile.
+    category: Rankings
+
+  - term: country_rank
+    label: Country Rank
+    definition: >-
+      A website's rank within a specific country based on local traffic.
+    category: Rankings
+
+  - term: industry_rank
+    label: Industry Rank
+    definition: >-
+      A website's rank within its assigned SimilarWeb industry category.
+    category: Rankings
+
+  # Traffic sources
+  - term: traffic_source
+    label: Traffic Source
+    definition: >-
+      The marketing channel through which visitors arrive at a website.
+      SimilarWeb classifies traffic into Direct, Organic Search,
+      Paid Search, Social, Referrals, Mail, and Display Ads.
+    category: Traffic Sources
+
+  - term: organic_search
+    label: Organic Search
+    definition: >-
+      Traffic originating from unpaid search engine results pages (SERPs).
+    category: Traffic Sources
+
+  - term: paid_search
+    label: Paid Search
+    definition: >-
+      Traffic originating from paid search advertising (PPC) campaigns.
+    category: Traffic Sources
+
+  - term: referrals
+    label: Referrals
+    definition: >-
+      Traffic arriving from links on other websites (excluding search
+      engines, social networks, and email clients).
+    category: Traffic Sources
+
+  - term: direct
+    label: Direct
+    definition: >-
+      Traffic where no referrer is recorded, typically indicating
+      direct URL entry, bookmarks, or dark social sharing.
+    category: Traffic Sources
+
+  - term: social
+    label: Social
+    definition: >-
+      Traffic originating from social media platforms.
+    category: Traffic Sources
+
+  - term: display_ads
+    label: Display Ads
+    definition: >-
+      Traffic arriving via display advertising placements on third-party
+      publisher sites.
+    category: Traffic Sources
+
+  # Geography
+  - term: traffic_by_country
+    label: Traffic by Country
+    definition: >-
+      Distribution of website visits segmented by visitor country of
+      origin, including visit share, engagement metrics, and country rank.
+    category: Geography
+
+  # Keywords
+  - term: keyword
+    label: Keyword
+    definition: >-
+      A search query term that drives traffic to a website through
+      organic or paid search channels.
+    category: Keywords
+
+  - term: traffic_share
+    label: Traffic Share
+    definition: >-
+      The proportion of a website's total traffic attributable to a
+      specific keyword.
+    category: Keywords
+
+  - term: keyword_difficulty
+    label: Keyword Difficulty
+    definition: >-
+      A score (0–100) estimating how competitive it is to rank for
+      a keyword in organic search results.
+    category: Keywords
+
+  - term: cpc
+    label: Cost Per Click
+    definition: >-
+      The average cost in USD that advertisers pay per click for a
+      keyword in paid search auctions.
+    category: Keywords
+
+  - term: serp_features
+    label: SERP Features
+    definition: >-
+      Special result types appearing on a search engine results page
+      such as Featured Snippets, Image Packs, Local Packs, or
+      Knowledge Panels.
+    category: Keywords
+
+  # App intelligence
+  - term: app_id
+    label: App ID
+    definition: >-
+      A unique identifier for a mobile application. For Android apps
+      this is the package name (e.g., com.whatsapp). For iOS apps
+      this is the bundle ID.
+    category: App Intelligence
+
+  - term: mau
+    label: Monthly Active Users (MAU)
+    definition: >-
+      Estimated count of unique users who opened a mobile app at least
+      once in a given calendar month.
+    category: App Intelligence
+
+  - term: dau
+    label: Daily Active Users (DAU)
+    definition: >-
+      Estimated count of unique users who opened a mobile app on a
+      given day.
+    category: App Intelligence
+
+  - term: wau
+    label: Weekly Active Users (WAU)
+    definition: >-
+      Estimated count of unique users who opened a mobile app at least
+      once in a given week.
+    category: App Intelligence
+
+  - term: install_penetration
+    label: Install Penetration
+    definition: >-
+      The percentage of devices in a market that have a specific app
+      installed at a point in time.
+    category: App Intelligence
+
+  # Lead enrichment and firmographics
+  - term: employee_range
+    label: Employee Range
+    definition: >-
+      A band describing the estimated number of employees at a company
+      (e.g., "51-200", "1001-5000").
+    category: Lead Enrichment
+
+  - term: estimated_revenue
+    label: Estimated Revenue
+    definition: >-
+      An estimated annual revenue band in millions of USD for a company
+      derived from web traffic signals and firmographic modeling.
+    category: Lead Enrichment
+
+  # Batch API
+  - term: vtable
+    label: Virtual Table
+    definition: >-
+      A named Batch API dataset identifier representing a specific
+      data product (e.g., similarweb_websites_traffic,
+      similarweb_apps_downloads).
+    category: Batch API
+
+  - term: report_id
+    label: Report ID
+    definition: >-
+      A UUID returned after submitting a Batch API request, used to
+      poll for status and retrieve completed report data.
+    category: Batch API
+
+  - term: delivery_method
+    label: Delivery Method
+    definition: >-
+      The output mechanism for a Batch API report: download_link
+      (temporary URL), bucket_access (Amazon S3 or Google Cloud
+      Storage), or snowflake (Snowflake table).
+    category: Batch API
+
+  - term: granularity
+    label: Granularity
+    definition: >-
+      The temporal resolution of time series data. SimilarWeb APIs
+      support daily, weekly, and monthly granularity.
+    category: General
+
+  - term: domain_name
+    label: Domain Name
+    definition: >-
+      A website's root domain without the 'www.' prefix (e.g.,
+      example.com). Used as the primary identifier for website-level
+      queries.
+    category: General
+
+  - term: main_domain_only
+    label: Main Domain Only
+    definition: >-
+      A boolean filter that when set to true restricts data to the
+      root domain, excluding all subdomains.
+    category: General
+
+  - term: mtd
+    label: Month-to-Date
+    definition: >-
+      A parameter flag that when set to true includes data through the
+      most recently available date in the current month. Only valid
+      with daily granularity.
+    category: General

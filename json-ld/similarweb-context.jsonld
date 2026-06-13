@@ -1,0 +1,207 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "sw": "https://developers.similarweb.com/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "SimilarWebAPI": "sw:SimilarWebAPI",
+    "TrafficMetrics": "sw:TrafficMetrics",
+    "GeographyRecord": "sw:GeographyRecord",
+    "AppMetrics": "sw:AppMetrics",
+    "KeywordRecord": "sw:KeywordRecord",
+    "LeadEnrichment": "sw:LeadEnrichment",
+    "BatchReport": "sw:BatchReport",
+
+    "domain": {
+      "@id": "schema:domainIncludes",
+      "@type": "xsd:string"
+    },
+    "api_key": {
+      "@id": "sw:apiKey",
+      "@type": "xsd:string"
+    },
+    "visits": {
+      "@id": "sw:visits",
+      "@type": "xsd:decimal"
+    },
+    "unique_visitors": {
+      "@id": "sw:uniqueVisitors",
+      "@type": "xsd:decimal"
+    },
+    "bounce_rate": {
+      "@id": "sw:bounceRate",
+      "@type": "xsd:decimal"
+    },
+    "pages_per_visit": {
+      "@id": "sw:pagesPerVisit",
+      "@type": "xsd:decimal"
+    },
+    "avg_visit_duration": {
+      "@id": "sw:avgVisitDuration",
+      "@type": "xsd:decimal"
+    },
+    "global_rank": {
+      "@id": "sw:globalRank",
+      "@type": "xsd:integer"
+    },
+    "country_rank": {
+      "@id": "sw:countryRank",
+      "@type": "xsd:integer"
+    },
+    "industry_rank": {
+      "@id": "sw:industryRank",
+      "@type": "xsd:integer"
+    },
+    "country": {
+      "@id": "schema:addressCountry"
+    },
+    "country_name": {
+      "@id": "schema:name"
+    },
+    "share": {
+      "@id": "sw:trafficShare",
+      "@type": "xsd:decimal"
+    },
+    "average_time": {
+      "@id": "sw:averageTimeOnSite",
+      "@type": "xsd:decimal"
+    },
+    "rank": {
+      "@id": "sw:rank",
+      "@type": "xsd:integer"
+    },
+    "keyword": {
+      "@id": "sw:keyword",
+      "@type": "xsd:string"
+    },
+    "clicks": {
+      "@id": "sw:clicks",
+      "@type": "xsd:decimal"
+    },
+    "traffic_share": {
+      "@id": "sw:keywordTrafficShare",
+      "@type": "xsd:decimal"
+    },
+    "difficulty": {
+      "@id": "sw:keywordDifficulty",
+      "@type": "xsd:decimal"
+    },
+    "cpc": {
+      "@id": "sw:costPerClick",
+      "@type": "xsd:decimal"
+    },
+    "volume": {
+      "@id": "sw:searchVolume",
+      "@type": "xsd:decimal"
+    },
+    "position": {
+      "@id": "sw:serpPosition",
+      "@type": "xsd:decimal"
+    },
+    "serp_features": {
+      "@id": "sw:serpFeatures",
+      "@container": "@list"
+    },
+    "downloads": {
+      "@id": "sw:appDownloads",
+      "@type": "xsd:integer"
+    },
+    "app_id": {
+      "@id": "sw:appId",
+      "@type": "xsd:string"
+    },
+    "company_name": {
+      "@id": "schema:legalName"
+    },
+    "employee_range": {
+      "@id": "sw:employeeRange",
+      "@type": "xsd:string"
+    },
+    "estimated_revenue_in_million_usd": {
+      "@id": "sw:estimatedRevenueMillionUSD",
+      "@type": "xsd:string"
+    },
+    "headquarters": {
+      "@id": "schema:location"
+    },
+    "site_type": {
+      "@id": "sw:siteType",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "sw:siteCategory",
+      "@type": "xsd:string"
+    },
+    "report_id": {
+      "@id": "sw:reportId",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "sw:requestStatus",
+      "@type": "xsd:string"
+    },
+    "vtable": {
+      "@id": "sw:virtualTable",
+      "@type": "xsd:string"
+    },
+    "granularity": {
+      "@id": "sw:granularity",
+      "@type": "xsd:string"
+    },
+    "start_date": {
+      "@id": "sw:startDate",
+      "@type": "xsd:string"
+    },
+    "end_date": {
+      "@id": "sw:endDate",
+      "@type": "xsd:string"
+    },
+    "delivery_method": {
+      "@id": "sw:deliveryMethod",
+      "@type": "xsd:string"
+    },
+    "credits": {
+      "@id": "sw:dataCredits",
+      "@type": "xsd:integer"
+    },
+    "last_updated": {
+      "@id": "sw:lastUpdated",
+      "@type": "xsd:date"
+    },
+    "date": {
+      "@id": "sw:dataPointDate",
+      "@type": "xsd:date"
+    },
+    "meta": {
+      "@id": "sw:responseMeta"
+    },
+    "request": {
+      "@id": "sw:requestEcho"
+    },
+    "source_type": {
+      "@id": "sw:trafficSourceType",
+      "@type": "xsd:string"
+    },
+    "organic": {
+      "@id": "sw:organicVisits",
+      "@type": "xsd:decimal"
+    },
+    "paid": {
+      "@id": "sw:paidVisits",
+      "@type": "xsd:decimal"
+    },
+    "similar_sites": {
+      "@id": "sw:similarSites",
+      "@container": "@list"
+    },
+    "score": {
+      "@id": "sw:similarityScore",
+      "@type": "xsd:decimal"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "xsd:string"
+    }
+  }
+}
