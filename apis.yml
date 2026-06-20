@@ -9,7 +9,7 @@ description: >-
   enabling developers to integrate market intelligence into applications,
   dashboards, and data pipelines.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/similarweb/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -36,7 +36,7 @@ apis:
       intelligence, mobile app performance, technographic data, e-commerce shopper
       behavior, company firmographics, and rank tracking. Authentication is via
       API key and usage is metered on a data credit model.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.similarweb.com/
     baseURL: https://api.similarweb.com
     tags:
@@ -69,7 +69,7 @@ apis:
       asynchronously to cloud storage destinations including Amazon S3, Google
       Cloud Storage, and Snowflake. It is ideal for historical analysis, data
       warehouse ingestion, and large-scale competitive research workflows.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.similarweb.com/
     baseURL: https://api.similarweb.com
     tags:
