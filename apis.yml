@@ -89,6 +89,10 @@ apis:
         email: ''
 
 common:
+  - type: DomainSecurity
+    url: security/similarweb-domain-security.yml
+  - type: Authentication
+    url: authentication/similarweb-authentication.yml
   - type: Website
     url: https://www.similarweb.com/
   - type: Documentation

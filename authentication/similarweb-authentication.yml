@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/similarweb-batch-api-openapi.yml, openapi/similarweb-rest-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: api-key
+  description: SimilarWeb API key passed as a request header
+  sources:
+  - openapi/similarweb-batch-api-openapi.yml
+  - openapi/similarweb-rest-api-openapi.yml
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: SimilarWeb API key passed as a query parameter
+  sources:
+  - openapi/similarweb-rest-api-openapi.yml
