@@ -89,6 +89,8 @@ apis:
         email: ''
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/similarweb-agentic-access.yml
   - type: DomainSecurity
     url: security/similarweb-domain-security.yml
   - type: Authentication

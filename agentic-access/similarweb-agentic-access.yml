@@ -1,0 +1,334 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/similarweb-batch-api-openapi.yml, openapi/similarweb-rest-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 27
+  by_action_class:
+    connected: 19
+    acting: 8
+  by_consequence:
+    read: 19
+    write: 8
+  human_in_the_loop_required: 0
+operations:
+- path: /v3/batch/credits
+  method: get
+  operationId: getBatchCredits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /batch/v4/request-report
+  method: post
+  operationId: requestReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /batch/v4/request-status
+  method: get
+  operationId: getRequestStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /batch/v4/request-validate
+  method: post
+  operationId: validateRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /batch/v4/report-history
+  method: get
+  operationId: getReportHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /batch/v4/retry-request
+  method: post
+  operationId: retryRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /batch/v4/tables-describe
+  method: get
+  operationId: describeTables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /batch/v4/s3-integration
+  method: post
+  operationId: createS3Integration
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /batch/v4/gcs-integration
+  method: post
+  operationId: createGcsIntegration
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /batch/v4/integrations
+  method: get
+  operationId: getAllIntegrations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /batch/v4/webhooks/subscribe
+  method: post
+  operationId: subscribeWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /batch/v4/webhooks/list
+  method: get
+  operationId: listWebhookSubscriptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /batch/v4/webhooks/unsubscribe
+  method: delete
+  operationId: unsubscribeWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /batch/v4/webhooks/test
+  method: post
+  operationId: testWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/batch/credits
+  method: get
+  operationId: getCredits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/website/{domain_name}/capabilities
+  method: get
+  operationId: checkCapabilities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/website/{domain_name}/traffic-and-engagement/visits
+  method: get
+  operationId: getVisitsDesktop
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/website/{domain_name}/traffic-and-engagement/bounce-rate
+  method: get
+  operationId: getBounceRateDesktop
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/website/{domain_name}/traffic-sources/overview-share
+  method: get
+  operationId: getTrafficSourcesOverview
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/website/{domain_name}/geo/traffic-by-country
+  method: get
+  operationId: getGeographyDesktop
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/website/{domain_name}/global-rank/global-rank
+  method: get
+  operationId: getGlobalRank
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/website-analysis/keywords
+  method: get
+  operationId: getWebsiteKeywords
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/website/{domain_name}/lead-enrichment/all
+  method: get
+  operationId: getLeadEnrichment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v5/apps/google/downloads
+  method: get
+  operationId: getAppDownloadsAndroid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v5/apps/apple/downloads
+  method: get
+  operationId: getAppDownloadsIos
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/website/{domain_name}/similar-sites
+  method: get
+  operationId: getSimilarSites
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v4/rank-tracker/{campaign_id}/reports/overview-report/performanceOverTime
+  method: get
+  operationId: getRankTrackingCampaignOverview
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
