@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account App Intelligence API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: App Intelligence
+  description: Mobile app downloads, active users, sessions, and demographics
+paths:
+  /v5/apps/google/downloads:
+    get:
+      operationId: getAppDownloadsAndroid
+      summary: App Downloads (Android) - New
+      description: Retrieve Android app download estimates. Supports daily, weekly, and monthly granularity.
+      tags:
+      - App Intelligence
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/apiKeyQuery'
+      - name: app_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Android app package name (e.g., com.whatsapp)
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/granularity'
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/mtd'
+      responses:
+        '200':
+          description: App downloads time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDownloadsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v5/apps/apple/downloads:
+    get:
+      operationId: getAppDownloadsIos
+      summary: App Downloads (iOS) - New
+      description: Retrieve iOS app download estimates. Supports daily, weekly, and monthly granularity.
+      tags:
+      - App Intelligence
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/apiKeyQuery'
+      - name: app_id
+        in: query
+        required: true
+        schema:
+          type: string
+        description: iOS app bundle ID
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/granularity'
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/mtd'
+      responses:
+        '200':
+          description: App downloads time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDownloadsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  parameters:
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-01
+      description: Start month in YYYY-MM format
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-06
+      description: End month in YYYY-MM format
+    mtd:
+      name: mtd
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+      description: Month-to-date mode; use with daily granularity
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Response format
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+    country:
+      name: country
+      in: query
+      required: false
+      schema:
+        type: string
+        example: us
+      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
+    granularity:
+      name: granularity
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - daily
+        - weekly
+        - monthly
+      description: Temporal resolution for time series data
+  schemas:
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+    AppDownloadsResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        downloads:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              downloads:
+                type: integer
+                description: Estimated download count for the period
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md

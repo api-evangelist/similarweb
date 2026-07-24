@@ -1,0 +1,261 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account Traffic and Engagement API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: Traffic and Engagement
+  description: Website traffic visits, bounce rate, pages per visit, visit duration
+paths:
+  /v1/website/{domain_name}/traffic-and-engagement/visits:
+    get:
+      operationId: getVisitsDesktop
+      summary: Visits - Desktop
+      description: Retrieve estimated desktop website visits over time. Supports daily, weekly, and monthly granularity with up to 37 months of history.
+      tags:
+      - Traffic and Engagement
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/domainName'
+      - $ref: '#/components/parameters/apiKeyQuery'
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/granularity'
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - $ref: '#/components/parameters/mainDomainOnly'
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/mtd'
+      - $ref: '#/components/parameters/state'
+      responses:
+        '200':
+          description: Visit time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /v1/website/{domain_name}/traffic-and-engagement/bounce-rate:
+    get:
+      operationId: getBounceRateDesktop
+      summary: Bounce Rate - Desktop
+      description: Retrieve desktop bounce rate time series for a given domain.
+      tags:
+      - Traffic and Engagement
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/domainName'
+      - $ref: '#/components/parameters/apiKeyQuery'
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/granularity'
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - $ref: '#/components/parameters/mainDomainOnly'
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/mtd'
+      - $ref: '#/components/parameters/state'
+      - name: show_verified
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+        description: Display shared Google Analytics verified data
+      responses:
+        '200':
+          description: Bounce rate time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BounceRateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  parameters:
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-01
+      description: Start month in YYYY-MM format
+    mainDomainOnly:
+      name: main_domain_only
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        default: 'false'
+      description: Return main domain only (true) or include subdomains (false)
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-06
+      description: End month in YYYY-MM format
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    mtd:
+      name: mtd
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+      description: Month-to-date mode; use with daily granularity
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Response format
+    state:
+      name: state
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - az
+        - ca
+        - ga
+        - fl
+        - il
+        - ma
+        - mi
+        - nj
+        - ny
+        - nc
+        - oh
+        - pa
+        - tx
+        - va
+        - wa
+      description: US state filter
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+    country:
+      name: country
+      in: query
+      required: false
+      schema:
+        type: string
+        example: us
+      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
+    granularity:
+      name: granularity
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - daily
+        - weekly
+        - monthly
+      description: Temporal resolution for time series data
+  schemas:
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+    BounceRateResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        bounce_rate:
+          type: array
+          description: Time series of bounce rate values
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              bounce_rate:
+                type: number
+                description: Bounce rate as a decimal (0-1)
+    VisitsResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        visits:
+          type: array
+          description: Time series of visit estimates
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+                description: Date of the data point
+              visits:
+                type: number
+                description: Estimated number of visits
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md

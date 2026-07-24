@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account Geography API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: Geography
+  description: Geographic distribution of website traffic
+paths:
+  /v4/website/{domain_name}/geo/traffic-by-country:
+    get:
+      operationId: getGeographyDesktop
+      summary: Geography - Desktop
+      description: Retrieve desktop traffic distribution by country for a given domain, including visit share, engagement metrics, and rank per country.
+      tags:
+      - Geography
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/domainName'
+      - $ref: '#/components/parameters/apiKeyQuery'
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - $ref: '#/components/parameters/mainDomainOnly'
+      - $ref: '#/components/parameters/format'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/asc'
+      responses:
+        '200':
+          description: Geographic traffic breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeographyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  parameters:
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-01
+      description: Start month in YYYY-MM format
+    asc:
+      name: asc
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        default: 'true'
+      description: Sort ascending (true) or descending (false)
+    mainDomainOnly:
+      name: main_domain_only
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        default: 'false'
+      description: Return main domain only (true) or include subdomains (false)
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-06
+      description: End month in YYYY-MM format
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 100
+      description: Maximum number of results to return
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Response format
+    sort:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Metric name to sort results by
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+    offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+      description: Starting position for paginated results
+  schemas:
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+    GeographyRecord:
+      type: object
+      properties:
+        country:
+          type: integer
+          description: ISO 3166-1 numeric country code
+        country_name:
+          type: string
+        share:
+          type: number
+          description: Share of traffic from this country (0-1)
+        visits:
+          type: number
+          description: Estimated visits from this country
+        pages_per_visit:
+          type: number
+        average_time:
+          type: number
+          description: Average time on site in seconds
+        bounce_rate:
+          type: number
+        rank:
+          type: integer
+          description: Country rank of the domain
+    GeographyResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographyRecord'
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md

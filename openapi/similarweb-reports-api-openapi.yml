@@ -1,0 +1,425 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account Reports API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: Reports
+  description: Submit, track, and retrieve bulk data report requests
+paths:
+  /batch/v4/request-report:
+    post:
+      operationId: requestReport
+      summary: Request Report
+      description: Submit a batch data extraction request specifying tables, filters, date ranges, metrics, and a delivery method (download link, Amazon S3, Google Cloud Storage, or Snowflake). Returns a report_id for tracking.
+      tags:
+      - Reports
+      security:
+      - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+            example:
+              report_query:
+                tables:
+                - vtable: similarweb_websites_traffic
+                  granularity: monthly
+                  start_date: 2024-01
+                  end_date: 2024-06
+                  metrics:
+                  - visits
+                  - bounce_rate
+              delivery_information:
+                delivery_method: download_link
+                response_format: json
+      responses:
+        '200':
+          description: Report request submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSubmitResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /batch/v4/request-status:
+    get:
+      operationId: getRequestStatus
+      summary: Request Status
+      description: Retrieve the current status of a previously submitted batch report request.
+      tags:
+      - Reports
+      security:
+      - apiKeyHeader: []
+      parameters:
+      - name: report_id
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Report ID returned by the request-report endpoint
+      responses:
+        '200':
+          description: Report status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportStatusResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /batch/v4/request-validate:
+    post:
+      operationId: validateRequest
+      summary: Request Validate
+      description: Validate a batch request and estimate its data credit cost before submission. Uses the same request body as request-report.
+      tags:
+      - Reports
+      security:
+      - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '200':
+          description: Validation result with estimated cost
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /batch/v4/report-history:
+    get:
+      operationId: getReportHistory
+      summary: Report History
+      description: Retrieve a paginated history of past batch report requests.
+      tags:
+      - Reports
+      security:
+      - apiKeyHeader: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+        description: Starting position
+      responses:
+        '200':
+          description: Report history list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReportStatusResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /batch/v4/retry-request:
+    post:
+      operationId: retryRequest
+      summary: Retry Request
+      description: Retry a failed batch report request. Requests can be retried up to 3 times.
+      tags:
+      - Reports
+      security:
+      - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - report_id
+              properties:
+                report_id:
+                  type: string
+                  format: uuid
+                  description: ID of the failed report to retry
+      responses:
+        '200':
+          description: Retry submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSubmitResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /batch/v4/tables-describe:
+    get:
+      operationId: describeTables
+      summary: Describe Available Tables
+      description: List all queryable Batch API tables with their available metrics, filters, and date range constraints.
+      tags:
+      - Reports
+      security:
+      - apiKeyHeader: []
+      responses:
+        '200':
+          description: Table descriptions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tables:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TableDescription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    TableQuery:
+      type: object
+      required:
+      - vtable
+      - granularity
+      properties:
+        vtable:
+          type: string
+          description: Table identifier (e.g., similarweb_websites_traffic)
+        granularity:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - monthly
+          description: Temporal resolution for the data
+        start_date:
+          type: string
+          description: Start date in YYYY-MM-DD or YYYY-MM format
+        end_date:
+          type: string
+          description: End date in YYYY-MM-DD or YYYY-MM format
+        latest:
+          type: boolean
+          description: Override end_date to the latest available date
+        all_history:
+          type: boolean
+          description: Use the complete available date range
+        window_size:
+          type: string
+          description: Relative period (e.g., "3m" for 3 months, "1y" for 1 year)
+        filters:
+          type: object
+          description: Key-value filter criteria (e.g., country, domain list)
+        metrics:
+          type: array
+          items:
+            type: string
+          description: Specific column names to include in the output
+        paging:
+          $ref: '#/components/schemas/PagingConfig'
+    ValidateResponse:
+      type: object
+      properties:
+        valid:
+          type: boolean
+          description: Whether the request is valid
+        estimated_cost:
+          type: integer
+          description: Estimated data credit cost
+        errors:
+          type: array
+          items:
+            type: string
+          description: Validation errors if request is invalid
+    ReportSubmitResponse:
+      type: object
+      properties:
+        report_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the submitted report
+        status:
+          type: string
+          example: pending
+          description: Current status of the report
+    ReportStatusResponse:
+      type: object
+      properties:
+        report_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          description: Current processing status
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        download_url:
+          type: string
+          format: uri
+          description: Download URL (populated when delivery_method is download_link)
+        error_message:
+          type: string
+          description: Error details if status is failed
+    ReportRequest:
+      type: object
+      required:
+      - report_query
+      - delivery_information
+      properties:
+        report_query:
+          $ref: '#/components/schemas/ReportQuery'
+        delivery_information:
+          $ref: '#/components/schemas/DeliveryInformation'
+    DeliveryMethodParams:
+      type: object
+      properties:
+        integration_name:
+          type: string
+          description: Integration name when multiple integrations exist
+        table_name:
+          type: string
+          description: Target table name for Snowflake delivery
+        retention_days:
+          type: integer
+          enum:
+          - 1
+          - 30
+          - 60
+          - 180
+          - 365
+          description: File retention period in days
+        num_of_files:
+          type: string
+          description: Number of output files for bucket_access delivery
+        write_mode:
+          type: string
+          enum:
+          - overwrite
+          description: Write mode for S3 operations
+    PagingConfig:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Results per page
+        offset:
+          type: integer
+          default: 0
+          description: Starting position
+        sort:
+          type: string
+          description: Metric to sort by
+        sort_asc:
+          type: string
+          description: Sort ascending (default false - descending)
+          default: 'false'
+    ReportQuery:
+      type: object
+      required:
+      - tables
+      properties:
+        tables:
+          type: array
+          description: Array of table queries to execute
+          items:
+            $ref: '#/components/schemas/TableQuery'
+    TableDescription:
+      type: object
+      properties:
+        vtable:
+          type: string
+          description: Table identifier
+        description:
+          type: string
+          description: Human-readable description of the table
+        metrics:
+          type: array
+          items:
+            type: string
+          description: Available metric columns
+        filters:
+          type: array
+          items:
+            type: string
+          description: Supported filter dimensions
+        min_date:
+          type: string
+          description: Earliest available data date
+        granularities:
+          type: array
+          items:
+            type: string
+          description: Supported granularity levels
+    DeliveryInformation:
+      type: object
+      required:
+      - delivery_method
+      properties:
+        delivery_method:
+          type: string
+          enum:
+          - download_link
+          - bucket_access
+          - snowflake
+          description: Output destination type
+        response_format:
+          type: string
+          enum:
+          - json
+          - csv
+          - parquet
+          - orc
+          description: Output file format (required for bucket_access)
+        webhook_url:
+          type: string
+          format: uri
+          description: Optional webhook URL to notify when report is ready
+        delivery_method_params:
+          $ref: '#/components/schemas/DeliveryMethodParams'
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md

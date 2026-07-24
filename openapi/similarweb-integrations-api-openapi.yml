@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account Integrations API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: Integrations
+  description: Manage cloud storage integrations (S3, GCS, Snowflake)
+paths:
+  /batch/v4/s3-integration:
+    post:
+      operationId: createS3Integration
+      summary: S3 Integration
+      description: Create a new Amazon S3 integration for batch report delivery.
+      tags:
+      - Integrations
+      security:
+      - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/S3IntegrationRequest'
+      responses:
+        '200':
+          description: Integration created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /batch/v4/gcs-integration:
+    post:
+      operationId: createGcsIntegration
+      summary: Google Cloud Storage (GCS) Integration
+      description: Create a new Google Cloud Storage integration for batch report delivery.
+      tags:
+      - Integrations
+      security:
+      - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcsIntegrationRequest'
+      responses:
+        '200':
+          description: GCS integration created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /batch/v4/integrations:
+    get:
+      operationId: getAllIntegrations
+      summary: Get All Account Integrations
+      description: Retrieve all cloud storage integrations configured for the account.
+      tags:
+      - Integrations
+      security:
+      - apiKeyHeader: []
+      responses:
+        '200':
+          description: List of integrations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  integrations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IntegrationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+  schemas:
+    IntegrationResponse:
+      type: object
+      properties:
+        integration_name:
+          type: string
+        integration_type:
+          type: string
+          enum:
+          - s3
+          - gcs
+          - snowflake
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    S3IntegrationRequest:
+      type: object
+      required:
+      - bucket_name
+      - integration_name
+      properties:
+        integration_name:
+          type: string
+          description: Name for this integration
+        bucket_name:
+          type: string
+          description: Target Amazon S3 bucket name
+        region:
+          type: string
+          description: AWS region of the bucket
+        prefix:
+          type: string
+          description: Path prefix within the bucket
+    GcsIntegrationRequest:
+      type: object
+      required:
+      - bucket_name
+      - integration_name
+      properties:
+        integration_name:
+          type: string
+          description: Name for this integration
+        bucket_name:
+          type: string
+          description: Target Google Cloud Storage bucket name
+        prefix:
+          type: string
+          description: Path prefix within the bucket
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md

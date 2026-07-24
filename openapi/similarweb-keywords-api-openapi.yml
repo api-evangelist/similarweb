@@ -1,0 +1,213 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account Keywords API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: Keywords
+  description: Keyword analytics including organic and paid keyword data
+paths:
+  /v4/website-analysis/keywords:
+    get:
+      operationId: getWebsiteKeywords
+      summary: Website Keywords
+      description: Retrieve organic and paid keyword data for a domain including traffic share, difficulty, competition, CPC, and SERP features.
+      tags:
+      - Keywords
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/apiKeyQuery'
+      - name: URL
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Domain without 'www.' prefix
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - $ref: '#/components/parameters/country'
+      - name: traffic_source
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Organic
+          - Paid
+          - All
+          default: All
+        description: Filter by traffic source type
+      - name: web_source
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Desktop
+          - MobileWeb
+          - Total
+          default: Total
+        description: Device type filter
+      - name: branded_type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Branded
+          - NonBranded
+          - All
+          default: All
+        description: Filter branded or non-branded keywords
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Keyword data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteKeywordsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  parameters:
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-01
+      description: Start month in YYYY-MM format
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-06
+      description: End month in YYYY-MM format
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+    country:
+      name: country
+      in: query
+      required: false
+      schema:
+        type: string
+        example: us
+      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
+    offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+      description: Starting position for paginated results
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 100
+      description: Maximum number of results to return
+  schemas:
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+    WebsiteKeywordsResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        keywords_count:
+          type: integer
+          description: Total number of keywords available
+        keywords:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeywordRecord'
+    KeywordRecord:
+      type: object
+      properties:
+        keyword:
+          type: string
+        clicks:
+          type: number
+        traffic_share:
+          type: number
+        difficulty:
+          type: number
+        competition:
+          type: number
+        primary_intent:
+          type: string
+        secondary_intent:
+          type: string
+        volume:
+          type: number
+        cpc:
+          type: number
+          description: Average cost-per-click in USD
+        cpc_low_bid:
+          type: number
+        cpc_high_bid:
+          type: number
+        zero_clicks_share:
+          type: number
+        position:
+          type: number
+        serp_features:
+          type: array
+          items:
+            type: string
+        top_url:
+          type: string
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md

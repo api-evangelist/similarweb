@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: Account
+  description: Account credits, capabilities, and usage information
+paths:
+  /v3/batch/credits:
+    get:
+      operationId: getCredits
+      summary: Get Remaining Credits
+      description: Retrieve the current remaining data credits available on the account.
+      tags:
+      - Account
+      security:
+      - apiKeyHeader: []
+      responses:
+        '200':
+          description: Remaining credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/website/{domain_name}/capabilities:
+    get:
+      operationId: checkCapabilities
+      summary: Check Capabilities
+      description: Retrieve account capability overview based on subscription.
+      tags:
+      - Account
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/domainName'
+      - $ref: '#/components/parameters/apiKeyQuery'
+      responses:
+        '200':
+          description: Account capabilities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  capabilities:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad request
+components:
+  parameters:
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+  schemas:
+    CreditsResponse:
+      type: object
+      properties:
+        credits:
+          type: integer
+          description: Remaining data credits on the account
+          example: 1234
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md

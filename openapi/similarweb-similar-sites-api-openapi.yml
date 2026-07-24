@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb Batch Account Similar Sites API
+  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+servers:
+- url: https://api.similarweb.com
+  description: SimilarWeb API server
+tags:
+- name: Similar Sites
+  description: Similar website discovery
+paths:
+  /v2/website/{domain_name}/similar-sites:
+    get:
+      operationId: getSimilarSites
+      summary: Similar Sites
+      description: Retrieve the top 40 similar websites to a given domain with similarity scores.
+      tags:
+      - Similar Sites
+      security:
+      - apiKeyQuery: []
+      parameters:
+      - $ref: '#/components/parameters/domainName'
+      - $ref: '#/components/parameters/apiKeyQuery'
+      - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Similar sites list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimilarSitesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+    SimilarSitesResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        similar_sites:
+          type: array
+          maxItems: 40
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                description: Similar site domain
+              score:
+                type: number
+                description: Similarity score (0-1)
+  parameters:
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Response format
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+externalDocs:
+  description: SimilarWeb Batch API Documentation
+  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md
