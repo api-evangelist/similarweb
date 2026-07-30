@@ -9,7 +9,20 @@ description: >-
   enabling developers to integrate market intelligence into applications,
   dashboards, and data pipelines.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/similarweb.png
 url: https://raw.githubusercontent.com/api-evangelist/similarweb/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -26,68 +39,266 @@ tags:
   - E-commerce
   - SEO
 apis:
-  - aid: similarweb:similarweb-rest-api
-    name: SimilarWeb REST API
-    description: >-
-      The SimilarWeb REST API provides real-time access to digital intelligence
-      data via individual HTTP requests. Endpoints cover website traffic and
-      engagement metrics, traffic source breakdowns (organic search, paid search,
-      referrals, social, display), audience demographics, keyword and search
-      intelligence, mobile app performance, technographic data, e-commerce shopper
-      behavior, company firmographics, and rank tracking. Authentication is via
-      API key and usage is metered on a data credit model.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.similarweb.com/
-    baseURL: https://api.similarweb.com
-    tags:
-      - Web Traffic
-      - Audience Analytics
-      - Keyword Intelligence
-      - App Intelligence
-      - Competitive Benchmarking
-    properties:
-      - type: Documentation
-        url: https://developers.similarweb.com/
-      - type: OpenAPI
-        url: https://developers.similarweb.com/llms.txt
-      - type: GettingStarted
-        url: https://developers.similarweb.com/docs/getting-started
-      - type: Authentication
-        url: https://developers.similarweb.com/docs/authentication
-      - type: RateLimits
-        url: https://developers.similarweb.com/docs/rate-limit
-    contact:
-      - FN: SimilarWeb Support
-        url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
-        email: ''
-
-  - aid: similarweb:similarweb-batch-api
-    name: SimilarWeb Batch API
-    description: >-
-      The SimilarWeb Batch API is optimized for large-scale bulk data extraction,
-      supporting jobs of up to one million domains per request. It delivers data
-      asynchronously to cloud storage destinations including Amazon S3, Google
-      Cloud Storage, and Snowflake. It is ideal for historical analysis, data
-      warehouse ingestion, and large-scale competitive research workflows.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.similarweb.com/
-    baseURL: https://api.similarweb.com
-    tags:
-      - Batch Processing
-      - Bulk Data
-      - Data Export
-      - Snowflake
-      - Amazon S3
-    properties:
-      - type: Documentation
-        url: https://developers.similarweb.com/
-      - type: GettingStarted
-        url: https://developers.similarweb.com/docs/getting-started
-    contact:
-      - FN: SimilarWeb Support
-        url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
-        email: ''
-
+- aid: similarweb:similarweb-batch-api
+  name: SimilarWeb Batch API
+  description: >-
+    The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting jobs of up
+    to one million domains per request. It delivers data asynchronously to cloud storage destinations
+    including Amazon S3, Google Cloud Storage, and Snowflake. It is ideal for historical analysis, data
+    warehouse ingestion, and large-scale competitive research workflows.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Batch Processing
+  - Bulk Data
+  - Data Export
+  - Snowflake
+  - Amazon S3
+  properties:
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  contact:
+  - FN: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+    email: ''
+- aid: similarweb:similarweb-account-api
+  name: SimilarWeb Account API
+  description: Account credits, capabilities, and usage information
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-account-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-app-intelligence-api
+  name: SimilarWeb App Intelligence API
+  description: Mobile app downloads, active users, sessions, and demographics
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - App Intelligence
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-app-intelligence-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-credits-api
+  name: SimilarWeb Credits API
+  description: Batch API credit management
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Credits
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-credits-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-geography-api
+  name: SimilarWeb Geography API
+  description: Geographic distribution of website traffic
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Geography
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-geography-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-integrations-api
+  name: SimilarWeb Integrations API
+  description: Manage cloud storage integrations (S3, GCS, Snowflake)
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-keywords-api
+  name: SimilarWeb Keywords API
+  description: Keyword analytics including organic and paid keyword data
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Keywords
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-keywords-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-lead-enrichment-api
+  name: SimilarWeb Lead Enrichment API
+  description: Lead enrichment combining firmographics and web analytics
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Lead Enrichment
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-lead-enrichment-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-rankings-api
+  name: SimilarWeb Rankings API
+  description: Global, country, and industry rank data
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Rankings
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-rankings-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-reports-api
+  name: SimilarWeb Reports API
+  description: Submit, track, and retrieve bulk data report requests
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-reports-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-similar-sites-api
+  name: SimilarWeb Similar Sites API
+  description: Similar website discovery
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Similar Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-similar-sites-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-traffic-and-engagement-api
+  name: SimilarWeb Traffic and Engagement API
+  description: Website traffic visits, bounce rate, pages per visit, visit duration
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Traffic and Engagement
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-traffic-and-engagement-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-traffic-sources-api
+  name: SimilarWeb Traffic Sources API
+  description: >-
+    Marketing channel traffic breakdown including organic, paid, referral, social, and display
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Traffic Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-traffic-sources-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
+- aid: similarweb:similarweb-webhooks-api
+  name: SimilarWeb Webhooks API
+  description: Webhook subscription management for data-ready notifications
+  humanURL: https://developers.similarweb.com/
+  baseURL: https://api.similarweb.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/similarweb-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.similarweb.com/
+  - type: GettingStarted
+    url: https://developers.similarweb.com/docs/getting-started
+  - type: Authentication
+    url: https://developers.similarweb.com/docs/authentication
+  - type: RateLimits
+    url: https://developers.similarweb.com/docs/rate-limit
 common:
   - type: AgenticAccess
     url: agentic-access/similarweb-agentic-access.yml
