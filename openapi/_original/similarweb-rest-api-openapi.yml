@@ -1,0 +1,1019 @@
+openapi: 3.0.3
+info:
+  title: SimilarWeb REST API
+  description: >-
+    The SimilarWeb REST API provides real-time access to digital intelligence
+    data covering website traffic and engagement metrics, traffic source
+    breakdowns, audience demographics, keyword and search intelligence, mobile
+    app performance, technographic data, e-commerce shopper behavior, company
+    firmographics, and rank tracking. Authentication is via API key and usage
+    is metered on a data credit model.
+  version: 4.0.0
+  termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
+  contact:
+    name: SimilarWeb Support
+    url: https://support.similarweb.com/hc/en-us/articles/22089555897373-REST-API
+  license:
+    name: Proprietary
+    url: https://www.similarweb.com/corp/legal/terms-of-use/
+externalDocs:
+  description: SimilarWeb Developer Documentation
+  url: https://developers.similarweb.com/
+servers:
+  - url: https://api.similarweb.com
+    description: SimilarWeb API server
+tags:
+  - name: Account
+    description: Account credits, capabilities, and usage information
+  - name: Traffic and Engagement
+    description: Website traffic visits, bounce rate, pages per visit, visit duration
+  - name: Traffic Sources
+    description: Marketing channel traffic breakdown including organic, paid, referral, social, and display
+  - name: Geography
+    description: Geographic distribution of website traffic
+  - name: Keywords
+    description: Keyword analytics including organic and paid keyword data
+  - name: App Intelligence
+    description: Mobile app downloads, active users, sessions, and demographics
+  - name: Audience
+    description: Audience demographics, interests, and overlap
+  - name: Rankings
+    description: Global, country, and industry rank data
+  - name: Company
+    description: Company-level firmographic and digital intelligence data
+  - name: Lead Enrichment
+    description: Lead enrichment combining firmographics and web analytics
+  - name: Segments
+    description: Custom and predefined segment analytics
+  - name: Similar Sites
+    description: Similar website discovery
+
+paths:
+
+  # -----------------------------------------------------------------------
+  # Account endpoints
+  # -----------------------------------------------------------------------
+  /v3/batch/credits:
+    get:
+      operationId: getCredits
+      summary: Get Remaining Credits
+      description: Retrieve the current remaining data credits available on the account.
+      tags:
+        - Account
+      security:
+        - apiKeyHeader: []
+      responses:
+        '200':
+          description: Remaining credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /v1/website/{domain_name}/capabilities:
+    get:
+      operationId: checkCapabilities
+      summary: Check Capabilities
+      description: Retrieve account capability overview based on subscription.
+      tags:
+        - Account
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+      responses:
+        '200':
+          description: Account capabilities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  capabilities:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad request
+
+  # -----------------------------------------------------------------------
+  # Traffic and Engagement - Desktop
+  # -----------------------------------------------------------------------
+  /v1/website/{domain_name}/traffic-and-engagement/visits:
+    get:
+      operationId: getVisitsDesktop
+      summary: Visits - Desktop
+      description: >-
+        Retrieve estimated desktop website visits over time. Supports daily,
+        weekly, and monthly granularity with up to 37 months of history.
+      tags:
+        - Traffic and Engagement
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/granularity'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/mainDomainOnly'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/mtd'
+        - $ref: '#/components/parameters/state'
+      responses:
+        '200':
+          description: Visit time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v1/website/{domain_name}/traffic-and-engagement/bounce-rate:
+    get:
+      operationId: getBounceRateDesktop
+      summary: Bounce Rate - Desktop
+      description: >-
+        Retrieve desktop bounce rate time series for a given domain.
+      tags:
+        - Traffic and Engagement
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/granularity'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/mainDomainOnly'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/mtd'
+        - $ref: '#/components/parameters/state'
+        - name: show_verified
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: ['true', 'false']
+          description: Display shared Google Analytics verified data
+      responses:
+        '200':
+          description: Bounce rate time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BounceRateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # Traffic Sources
+  # -----------------------------------------------------------------------
+  /v1/website/{domain_name}/traffic-sources/overview-share:
+    get:
+      operationId: getTrafficSourcesOverview
+      summary: Visits by Marketing Channel - Desktop
+      description: >-
+        Retrieve desktop visits broken down by marketing channel (Search,
+        Social, Mail, Display Ads, Direct, Referrals) including organic
+        and paid splits.
+      tags:
+        - Traffic Sources
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/granularity'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/mainDomainOnly'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/mtd'
+      responses:
+        '200':
+          description: Traffic sources breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrafficSourcesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # Geography
+  # -----------------------------------------------------------------------
+  /v4/website/{domain_name}/geo/traffic-by-country:
+    get:
+      operationId: getGeographyDesktop
+      summary: Geography - Desktop
+      description: >-
+        Retrieve desktop traffic distribution by country for a given domain,
+        including visit share, engagement metrics, and rank per country.
+      tags:
+        - Geography
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/mainDomainOnly'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/asc'
+      responses:
+        '200':
+          description: Geographic traffic breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeographyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # Rankings
+  # -----------------------------------------------------------------------
+  /v1/website/{domain_name}/global-rank/global-rank:
+    get:
+      operationId: getGlobalRank
+      summary: Global Rank - Total (Desktop & Mobile)
+      description: >-
+        Retrieve the global rank for a domain calculated from a mix of unique
+        visitor and pageview estimations across desktop and mobile.
+      tags:
+        - Rankings
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/mainDomainOnly'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Global rank time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalRankResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # Keywords
+  # -----------------------------------------------------------------------
+  /v4/website-analysis/keywords:
+    get:
+      operationId: getWebsiteKeywords
+      summary: Website Keywords
+      description: >-
+        Retrieve organic and paid keyword data for a domain including traffic
+        share, difficulty, competition, CPC, and SERP features.
+      tags:
+        - Keywords
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - name: URL
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Domain without 'www.' prefix
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/country'
+        - name: traffic_source
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [Organic, Paid, All]
+            default: All
+          description: Filter by traffic source type
+        - name: web_source
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [Desktop, MobileWeb, Total]
+            default: Total
+          description: Device type filter
+        - name: branded_type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [Branded, NonBranded, All]
+            default: All
+          description: Filter branded or non-branded keywords
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Keyword data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteKeywordsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # Lead Enrichment
+  # -----------------------------------------------------------------------
+  /v1/website/{domain_name}/lead-enrichment/all:
+    get:
+      operationId: getLeadEnrichment
+      summary: Lead Enrichment
+      description: >-
+        Retrieve combined firmographic and web analytics data for a domain
+        including company name, employee range, revenue, headquarters,
+        traffic metrics, device split, top countries, and traffic sources.
+      tags:
+        - Lead Enrichment
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/mainDomainOnly'
+        - $ref: '#/components/parameters/format'
+        - name: show_verified
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: ['true', 'false']
+          description: Display shared Google Analytics data
+      responses:
+        '200':
+          description: Lead enrichment data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeadEnrichmentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # App Intelligence
+  # -----------------------------------------------------------------------
+  /v5/apps/google/downloads:
+    get:
+      operationId: getAppDownloadsAndroid
+      summary: App Downloads (Android) - New
+      description: >-
+        Retrieve Android app download estimates. Supports daily, weekly,
+        and monthly granularity.
+      tags:
+        - App Intelligence
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - name: app_id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Android app package name (e.g., com.whatsapp)
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/granularity'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/mtd'
+      responses:
+        '200':
+          description: App downloads time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDownloadsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /v5/apps/apple/downloads:
+    get:
+      operationId: getAppDownloadsIos
+      summary: App Downloads (iOS) - New
+      description: >-
+        Retrieve iOS app download estimates. Supports daily, weekly,
+        and monthly granularity.
+      tags:
+        - App Intelligence
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - name: app_id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: iOS app bundle ID
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/granularity'
+        - $ref: '#/components/parameters/format'
+        - $ref: '#/components/parameters/mtd'
+      responses:
+        '200':
+          description: App downloads time series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDownloadsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # Similar Sites
+  # -----------------------------------------------------------------------
+  /v2/website/{domain_name}/similar-sites:
+    get:
+      operationId: getSimilarSites
+      summary: Similar Sites
+      description: >-
+        Retrieve the top 40 similar websites to a given domain with
+        similarity scores.
+      tags:
+        - Similar Sites
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - $ref: '#/components/parameters/domainName'
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          description: Similar sites list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimilarSitesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  # -----------------------------------------------------------------------
+  # Rank Tracking
+  # -----------------------------------------------------------------------
+  /v4/rank-tracker/{campaign_id}/reports/overview-report/performanceOverTime:
+    get:
+      operationId: getRankTrackingCampaignOverview
+      summary: Rank Tracking Campaign Overview
+      description: >-
+        Retrieve aggregate performance metrics for a rank tracking campaign
+        over time, including average position, visibility, and SERP feature
+        coverage.
+      tags:
+        - Rankings
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - name: campaign_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Rank tracking campaign identifier
+        - $ref: '#/components/parameters/apiKeyQuery'
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - name: device
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [Desktop, Mobile]
+          description: Device type filter
+        - name: site
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Site to filter campaign results
+        - name: scraping_configurations
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Scraping configuration ID
+      responses:
+        '200':
+          description: Campaign performance overview
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/MetaObject'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                        avg_position:
+                          type: number
+                        visibility:
+                          type: number
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+components:
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: SimilarWeb API key passed as a query parameter
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: api-key
+      description: SimilarWeb API key passed as a request header
+
+  parameters:
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+    country:
+      name: country
+      in: query
+      required: false
+      schema:
+        type: string
+        example: us
+      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
+    granularity:
+      name: granularity
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [daily, weekly, monthly]
+      description: Temporal resolution for time series data
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{2}$'
+        example: '2024-01'
+      description: Start month in YYYY-MM format
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{2}$'
+        example: '2024-06'
+      description: End month in YYYY-MM format
+    mainDomainOnly:
+      name: main_domain_only
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: ['true', 'false']
+        default: 'false'
+      description: Return main domain only (true) or include subdomains (false)
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [json, xml]
+        default: json
+      description: Response format
+    mtd:
+      name: mtd
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: ['true', 'false']
+      description: Month-to-date mode; use with daily granularity
+    state:
+      name: state
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [az, ca, ga, fl, il, ma, mi, nj, ny, nc, oh, pa, tx, va, wa]
+      description: US state filter
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 100
+      description: Maximum number of results to return
+    offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+      description: Starting position for paginated results
+    sort:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Metric name to sort results by
+    asc:
+      name: asc
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: ['true', 'false']
+        default: 'true'
+      description: Sort ascending (true) or descending (false)
+
+  schemas:
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+
+    CreditsResponse:
+      type: object
+      properties:
+        credits:
+          type: integer
+          description: Remaining data credits on the account
+          example: 1234
+
+    VisitsResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        visits:
+          type: array
+          description: Time series of visit estimates
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+                description: Date of the data point
+              visits:
+                type: number
+                description: Estimated number of visits
+
+    BounceRateResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        bounce_rate:
+          type: array
+          description: Time series of bounce rate values
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              bounce_rate:
+                type: number
+                description: Bounce rate as a decimal (0-1)
+
+    TrafficSourcesResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        visits:
+          type: object
+          description: Domain-keyed object with source type arrays
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                source_type:
+                  type: string
+                  description: Channel name (Search, Social, Mail, Display Ads, Direct, Referrals)
+                visits:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        format: date
+                      organic:
+                        type: number
+                      paid:
+                        type: number
+
+    GeographyResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographyRecord'
+
+    GeographyRecord:
+      type: object
+      properties:
+        country:
+          type: integer
+          description: ISO 3166-1 numeric country code
+        country_name:
+          type: string
+        share:
+          type: number
+          description: Share of traffic from this country (0-1)
+        visits:
+          type: number
+          description: Estimated visits from this country
+        pages_per_visit:
+          type: number
+        average_time:
+          type: number
+          description: Average time on site in seconds
+        bounce_rate:
+          type: number
+        rank:
+          type: integer
+          description: Country rank of the domain
+
+    GlobalRankResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        global_rank:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                pattern: '^\d{4}-\d{2}$'
+                description: Month in YYYY-MM format
+              global_rank:
+                type: integer
+                description: Global rank position
+
+    WebsiteKeywordsResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        keywords_count:
+          type: integer
+          description: Total number of keywords available
+        keywords:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeywordRecord'
+
+    KeywordRecord:
+      type: object
+      properties:
+        keyword:
+          type: string
+        clicks:
+          type: number
+        traffic_share:
+          type: number
+        difficulty:
+          type: number
+        competition:
+          type: number
+        primary_intent:
+          type: string
+        secondary_intent:
+          type: string
+        volume:
+          type: number
+        cpc:
+          type: number
+          description: Average cost-per-click in USD
+        cpc_low_bid:
+          type: number
+        cpc_high_bid:
+          type: number
+        zero_clicks_share:
+          type: number
+        position:
+          type: number
+        serp_features:
+          type: array
+          items:
+            type: string
+        top_url:
+          type: string
+
+    LeadEnrichmentResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        global_rank:
+          type: integer
+        company_name:
+          type: string
+        employee_range:
+          type: string
+          description: Employee count band (e.g., "51-200")
+        estimated_revenue_in_million_usd:
+          type: string
+          description: Revenue estimate range
+        headquarters:
+          type: string
+        site_type:
+          type: string
+        category:
+          type: string
+        visits:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              visits:
+                type: number
+        unique_visitors:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              unique_visitors:
+                type: number
+        pages_per_visit:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              pages_per_visit:
+                type: number
+        bounce_rate:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              bounce_rate:
+                type: number
+        avg_visit_duration:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              avg_visit_duration:
+                type: number
+        desktop_mobile_share:
+          type: object
+          properties:
+            desktop_visit_share:
+              type: number
+            mobile_visit_share:
+              type: number
+        top_countries:
+          type: array
+          items:
+            type: object
+            properties:
+              country:
+                type: integer
+                description: ISO 3166-1 numeric country code
+              share:
+                type: number
+        traffic_sources:
+          type: object
+          properties:
+            search:
+              type: number
+            social:
+              type: number
+            mail:
+              type: number
+            paid_referrals:
+              type: number
+            direct:
+              type: number
+            referrals:
+              type: number
+
+    AppDownloadsResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        downloads:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              downloads:
+                type: integer
+                description: Estimated download count for the period
+
+    SimilarSitesResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        similar_sites:
+          type: array
+          maxItems: 40
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                description: Similar site domain
+              score:
+                type: number
+                description: Similarity score (0-1)
+
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object

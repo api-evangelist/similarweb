@@ -1,0 +1,38 @@
+{
+  "provider": "similarweb",
+  "sources": [
+    "similarweb-account-api-openapi.yml",
+    "similarweb-app-intelligence-api-openapi.yml",
+    "similarweb-credits-api-openapi.yml",
+    "similarweb-geography-api-openapi.yml",
+    "similarweb-integrations-api-openapi.yml",
+    "similarweb-keywords-api-openapi.yml",
+    "similarweb-lead-enrichment-api-openapi.yml",
+    "similarweb-rankings-api-openapi.yml",
+    "similarweb-reports-api-openapi.yml",
+    "similarweb-similar-sites-api-openapi.yml",
+    "similarweb-traffic-and-engagement-api-openapi.yml",
+    "similarweb-traffic-sources-api-openapi.yml",
+    "similarweb-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "similarweb-account-api-openapi.yml",
+    "similarweb-app-intelligence-api-openapi.yml",
+    "similarweb-credits-api-openapi.yml",
+    "similarweb-geography-api-openapi.yml",
+    "similarweb-integrations-api-openapi.yml",
+    "similarweb-keywords-api-openapi.yml",
+    "similarweb-lead-enrichment-api-openapi.yml",
+    "similarweb-rankings-api-openapi.yml",
+    "similarweb-reports-api-openapi.yml",
+    "similarweb-similar-sites-api-openapi.yml",
+    "similarweb-traffic-and-engagement-api-openapi.yml",
+    "similarweb-traffic-sources-api-openapi.yml",
+    "similarweb-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
