@@ -7,7 +7,10 @@ description: >-
   provides real-time and historical data covering traffic sources, search behavior,
   technographics, e-commerce shopper intelligence, and firmographic company data,
   enabling developers to integrate market intelligence into applications,
-  dashboards, and data pipelines.
+  dashboards, and data pipelines. The current generation is API V5, launched March 2026,
+  which unified the REST and Batch API keys, added multi-metric requests, and shipped a
+  first-party hosted MCP server at mcp.similarweb.com for AI agents; legacy v1-v4 REST
+  endpoints carry a published sunset date of 2026-10-06.
 type: Index
 accessModel:
   pricing: paid
@@ -25,7 +28,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/similarweb.png
 url: https://raw.githubusercontent.com/api-evangelist/similarweb/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 tags:
   - Digital Intelligence
@@ -310,8 +313,6 @@ common:
     url: https://www.similarweb.com/
   - type: Documentation
     url: https://developers.similarweb.com/
-  - type: GitHubOrg
-    url: https://github.com/similarweb
   - type: LinkedIn
     url: https://www.linkedin.com/company/similarweb
   - type: Blog
@@ -326,7 +327,75 @@ common:
     url: rate-limits/similarweb-rate-limits.yml
   - type: FinOps
     url: finops/similarweb-finops.yml
+  - type: WellKnown
+    url: well-known/similarweb-well-known.yml
+  - type: MCPServer
+    url: mcp/similarweb-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/similarweb-tool-crosswalk.yml
+  - type: LLMsTxt
+    url: llms/similarweb-llms.txt
+  - type: Packages
+    url: packages/similarweb-packages.yml
+  - type: Conventions
+    url: conventions/similarweb-conventions.yml
+  - type: ErrorCatalog
+    url: errors/similarweb-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/similarweb-lifecycle.yml
+  - type: Deprecation
+    url: https://docs.similarweb.com/api-v5/guides/rest-api-data-version-migration
+  - type: ChangeLog
+    url: changelog/similarweb-changelog.yml
+  - type: Conformance
+    url: conformance/similarweb-conformance.yml
+  - type: Compliance
+    url: https://www.similarweb.com/corp/privacy-security/
+  - type: TrustCenter
+    url: security/similarweb-trust-center.yml
+  - type: OAuthScopes
+    url: scopes/similarweb-scopes.yml
+  - type: DataModel
+    url: data-model/similarweb-data-model.yml
+  - type: Components
+    url: components/similarweb-components.yml
+  - type: Webhooks
+    url: asyncapi/similarweb-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Overlay
+    url: overlays/similarweb-rest-api-overlay.yaml
+  - type: Overlay
+    url: overlays/similarweb-batch-api-overlay.yaml
+  - type: DeveloperPortal
+    url: https://docs.similarweb.com/api-v5/
+  - type: APIReference
+    url: https://docs.similarweb.com/api-v5/api-reference/website-analysis-api
+  - type: GettingStarted
+    url: https://docs.similarweb.com/api-v5/getting-started/making-your-first-request
+  - type: Authentication
+    url: https://docs.similarweb.com/api-v5/getting-started/authentication
+  - type: Support
+    url: https://support.similarweb.com/hc/en-us
+  - type: HelpCenter
+    url: https://developers.similarweb.com/docs/getting-help
+  - type: GitHubOrganization
+    url: https://github.com/similarweb
+  - type: SignUp
+    url: https://account.similarweb.com/standard-api
+  - type: Login
+    url: https://pro.similarweb.com/
+  - type: TermsOfService
+    url: https://www.similarweb.com/corp/legal/terms/
+  - type: PrivacyPolicy
+    url: https://www.similarweb.com/corp/legal/privacy-policy/
 
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1
