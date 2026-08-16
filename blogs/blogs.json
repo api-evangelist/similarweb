@@ -5,7 +5,7 @@
       "source": "https://www.similarweb.com/blog/feed/",
       "feed_url": "https://www.similarweb.com/blog/feed/",
       "title": "",
-      "saved": 0,
+      "saved": 5,
       "method": "feed"
     },
     {
@@ -13,6 +13,6 @@
       "error": "HTTPError"
     }
   ],
-  "fetched": "2026-08-06T14:08:46Z",
-  "post_count": 33
+  "fetched": "2026-08-15T12:11:08Z",
+  "post_count": 38
 }
