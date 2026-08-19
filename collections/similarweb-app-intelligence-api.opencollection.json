@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account App Intelligence API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "App Intelligence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "App Downloads (Android) - New",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v5/apps/google/downloads",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Android app package name (e.g., com.whatsapp)"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start month in YYYY-MM format"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End month in YYYY-MM format"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Temporal resolution for time series data"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "mtd",
+                "value": "",
+                "type": "query",
+                "description": "Month-to-date mode; use with daily granularity"
+              }
+            ]
+          },
+          "docs": "Retrieve Android app download estimates. Supports daily, weekly, and monthly granularity."
+        },
+        {
+          "info": {
+            "name": "App Downloads (iOS) - New",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v5/apps/apple/downloads",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "iOS app bundle ID"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start month in YYYY-MM format"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End month in YYYY-MM format"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Temporal resolution for time series data"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "mtd",
+                "value": "",
+                "type": "query",
+                "description": "Month-to-date mode; use with daily granularity"
+              }
+            ]
+          },
+          "docs": "Retrieve iOS app download estimates. Supports daily, weekly, and monthly granularity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

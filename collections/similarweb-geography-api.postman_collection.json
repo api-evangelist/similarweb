@@ -1,0 +1,301 @@
+{
+  "item": [
+    {
+      "id": "63c2129d-3f6d-4bd0-9b9b-a680833279b5",
+      "name": "Geography",
+      "description": {
+        "content": "Geographic distribution of website traffic",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "07f8acda-c950-45a0-a22c-20f6bf4f113b",
+          "name": "Geography - Desktop",
+          "request": {
+            "name": "Geography - Desktop",
+            "description": {
+              "content": "Retrieve desktop traffic distribution by country for a given domain, including visit share, engagement metrics, and rank per country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "website",
+                ":domain_name",
+                "geo",
+                "traffic-by-country"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "main_domain_only",
+                  "value": "false",
+                  "description": "Return main domain only (true) or include subdomains (false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Starting position for paginated results"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Metric name to sort results by"
+                },
+                {
+                  "disabled": false,
+                  "key": "asc",
+                  "value": "true",
+                  "description": "Sort ascending (true) or descending (false)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) Website domain without 'www.' prefix"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "005beed7-dc62-4bc3-89da-4a7ed9bb815b",
+              "name": "Geographic traffic breakdown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "website",
+                    ":domain_name",
+                    "geo",
+                    "traffic-by-country"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"1980-05-25\"\n  },\n  \"records\": [\n    {\n      \"country\": 9159,\n      \"country_name\": \"string\",\n      \"share\": 6814.748165374816,\n      \"visits\": 4025.7364344704292,\n      \"pages_per_visit\": 6091.243177138111,\n      \"average_time\": 7523.927230582133,\n      \"bounce_rate\": 211.9554203687657,\n      \"rank\": 9784\n    },\n    {\n      \"country\": 3551,\n      \"country_name\": \"string\",\n      \"share\": 3445.0063215503255,\n      \"visits\": 3428.630036256615,\n      \"pages_per_visit\": 6002.540203475476,\n      \"average_time\": 2430.4853069601704,\n      \"bounce_rate\": 6960.963618312663,\n      \"rank\": 2113\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6ea4972-4fc5-4582-852e-ffcde416ae40",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "website",
+                    ":domain_name",
+                    "geo",
+                    "traffic-by-country"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asc",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "634262cd-bba8-4dcf-983b-f37f21c6d6ef",
+    "name": "SimilarWeb Batch Account Geography API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/similarweb-mcp.yml + openapi/*.yml
+description: >-
+  Binds each Similarweb MCP tool to the backing OpenAPI operation(s) captured in this repo.
+  The live MCP tools/list is auth-gated (HTTP 401 anonymous), so tools are mapped by
+  name/semantics against the provider-published tool table, and confidence is set honestly
+  rather than asserted. Two caveats matter when reading the coverage numbers: (1) the
+  OpenAPI in openapi/ covers 27 operations, a subset of the 75+ endpoints Similarweb
+  documents, so several "mcp_only" rows are mcp-only ONLY with respect to the captured
+  spec, not with respect to the product; (2) the REST surface is mid-migration from
+  v1/v3/v4 paths to v5 (legacy endpoints sunset 2026-10-06), so a tool and its REST
+  operation may sit on different API versions.
+
+surfaces:
+  openapi:
+    files: openapi/*.yml
+    operations: 27
+    note: >-
+      Harvested/authored per-tag specs on https://api.similarweb.com. Partial coverage of
+      the documented endpoint catalogue.
+  mcp:
+    url: https://mcp.similarweb.com
+    gated: true
+    note: tools/list returns HTTP 401 without an api-key header or OAuth bearer token.
+  graphql:
+    present: false
+
+crosswalk:
+- tool: Traffic and Engagement
+  category: web
+  rest: [getVisitsDesktop, getBounceRateDesktop]
+  binding: rest
+  confidence: medium
+  note: >-
+    The tool returns eight metrics (visits, average_visit_duration, pages_per_visit,
+    bounce_rate, page_views, unique_visitors, new_users, returning_users); the captured
+    spec exposes only visits and bounce-rate operations, each as a separate desktop call.
+- tool: Traffic Sources
+  category: web
+  rest: [getTrafficSourcesOverview]
+  binding: rest
+  confidence: medium
+  note: >-
+    Maps to GET /v1/website/{domain_name}/traffic-sources/overview-share, which the V5
+    migration guide lists as deprecated in favour of
+    GET /v5/website-analysis/websites/traffic-channels/share.
+- tool: Similar Sites
+  category: web
+  rest: [getSimilarSites]
+  binding: rest
+  confidence: high
+- tool: Geography
+  category: web
+  rest: [getGeographyDesktop]
+  binding: rest
+  confidence: medium
+  note: >-
+    The captured operation is the desktop geography breakdown; the MCP tool is not
+    device-scoped in its published description.
+- tool: Website Rank
+  category: web
+  rest: [getGlobalRank]
+  binding: rest
+  confidence: low
+  note: >-
+    The tool advertises country_rank / category / category_rank; the only rank operation
+    in the captured spec is global-rank. Overlapping capability, not an exact contract.
+
+mcp_only:
+- {tool: Subdomains, reason: no operation in the captured OpenAPI}
+- {tool: Referrals, reason: no operation in the captured OpenAPI; documented as a REST endpoint in the provider reference}
+- {tool: Audience Interests, reason: no operation in the captured OpenAPI}
+- {tool: Audience Overlap, reason: no operation in the captured OpenAPI}
+- {tool: Deduplicated Audience, reason: no operation in the captured OpenAPI}
+- {tool: Leading Folders, reason: no operation in the captured OpenAPI}
+- {tool: Popular Pages, reason: no operation in the captured OpenAPI}
+- {tool: PPC Spend, reason: no operation in the captured OpenAPI}
+- {tool: Segment Traffic and Engagement, reason: no operation in the captured OpenAPI}
+- {tool: Segment Traffic Sources, reason: no operation in the captured OpenAPI}
+- {tool: Ad Networks, reason: no operation in the captured OpenAPI}
+- {tool: Technologies, reason: no operation in the captured OpenAPI}
+- {tool: Demographics, reason: no operation in the captured OpenAPI}
+- {tool: Traffic by Demographics, reason: no operation in the captured OpenAPI}
+- {tool: SERP Players, reason: search-intelligence surface; no operation in the captured OpenAPI}
+- {tool: SERP Clicks, reason: search-intelligence surface; no operation in the captured OpenAPI}
+- {tool: App Install Penetration, reason: no operation in the captured OpenAPI}
+- {tool: App Store Rank, reason: no operation in the captured OpenAPI}
+- {tool: App Details, reason: no operation in the captured OpenAPI}
+
+rest_only:
+- capability: Account and capabilities
+  operations: [getCredits, getBatchCredits, checkCapabilities]
+  reason: account/quota introspection; no MCP tool published
+- capability: App downloads
+  operations: [getAppDownloadsAndroid, getAppDownloadsIos]
+  reason: the MCP app tools cover rank, install penetration and app details, not downloads
+- capability: Keywords
+  operations: [getWebsiteKeywords]
+  reason: no website-keywords MCP tool published
+- capability: Lead enrichment
+  operations: [getLeadEnrichment]
+  reason: sales-intelligence dataset; no MCP tool published
+- capability: Rank tracking campaigns
+  operations: [getRankTrackingCampaignOverview]
+  reason: platform campaign reporting; no MCP tool published
+- capability: Batch reports
+  operations: [requestReport, getRequestStatus, validateRequest, getReportHistory, retryRequest, describeTables]
+  reason: asynchronous bulk extraction; MCP is a synchronous request/response surface
+- capability: Cloud storage integrations
+  operations: [createS3Integration, createGcsIntegration, getAllIntegrations]
+  reason: account configuration, not data retrieval
+- capability: Webhooks
+  operations: [subscribeWebhook, listWebhookSubscriptions, unsubscribeWebhook, testWebhook]
+  reason: event delivery configuration for the Batch API
+
+coverage:
+  tools_named: 24
+  tools_bound: 5
+  mcp_only: 19
+  rest_operations_total: 27
+  rest_operations_with_tool: 6

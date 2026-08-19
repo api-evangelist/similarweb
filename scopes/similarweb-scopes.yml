@@ -1,0 +1,58 @@
+generated: '2026-08-13'
+method: probed
+source: https://mcp.similarweb.com/.well-known/oauth-protected-resource
+description: >-
+  Similarweb's REST and Batch APIs have NO OAuth surface — they authenticate with an
+  `api-key` header and declare no oauth2 securityScheme in any OpenAPI in this repo
+  (derive-oauth-scopes.py found 0 oauth2 schemes across 13 specs). The only OAuth surface
+  Similarweb operates is in front of its hosted MCP server, and it is deliberately
+  minimal: a single `read` scope covering the whole resource. There is no per-dataset or
+  per-endpoint scope model, so an OAuth-issued MCP token is all-or-nothing over whatever
+  the underlying subscription entitles. Entitlement, not scope, is what actually bounds
+  access at Similarweb — countries, datasets and history windows come from the plan and
+  are introspected with the Check Capabilities operation, not from a token claim.
+
+docs: https://docs.similarweb.com/api-v5/similarweb-mcp/mcp-setup
+
+schemes:
+- name: MCP OAuth 2.1
+  applies_to: https://mcp.similarweb.com
+  source: https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server
+  issuer: https://mcp-auth.similarweb.com
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://mcp-auth.similarweb.com/authorize
+    tokenUrl: https://mcp-auth.similarweb.com/token
+    refresh: true
+    pkce: [S256, plain]
+  registration_endpoint: https://mcp-auth.similarweb.com/register
+  revocation_endpoint: https://mcp-auth.similarweb.com/revoke
+  token_endpoint_auth_methods: [client_secret_post, client_secret_basic, none]
+
+scopes:
+- scope: read
+  description: >-
+    Read access to the Similarweb datasets exposed through the MCP server. The only scope
+    advertised by either the protected-resource or the authorization-server metadata.
+  flows: [authorizationCode]
+  sources:
+  - https://mcp.similarweb.com/.well-known/oauth-protected-resource
+  - https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server
+
+scope_count: 1
+
+entitlement_model:
+  note: >-
+    Effective access is bounded by subscription entitlement rather than token scope.
+    Callers should introspect it at runtime.
+  introspection_operation: checkCapabilities
+  introspection_path: /v1/website/{domain_name}/capabilities
+  bounded_by: [countries, datasets, historical date range, data-credit balance]
+  error_on_out_of_scope: 103 Country not available
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: https://mcp.similarweb.com/.well-known/oauth-protected-resource, http_status: 200}
+  - {url: https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server, http_status: 200}
+  - {url: 'https://mcp-auth.similarweb.com/.well-known/openid-configuration', http_status: 404}

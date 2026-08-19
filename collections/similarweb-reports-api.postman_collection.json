@@ -1,0 +1,1025 @@
+{
+  "item": [
+    {
+      "id": "7c3223ad-b922-4bed-a3bc-bbf89c866c1f",
+      "name": "Reports",
+      "description": {
+        "content": "Submit, track, and retrieve bulk data report requests",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e08dd250-c58c-4a83-b254-f5556bf378f6",
+          "name": "Request Report",
+          "request": {
+            "name": "Request Report",
+            "description": {
+              "content": "Submit a batch data extraction request specifying tables, filters, date ranges, metrics, and a delivery method (download link, Amazon S3, Google Cloud Storage, or Snowflake). Returns a report_id for tracking.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "request-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"report_query\": {\n    \"tables\": [\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      },\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      }\n    ]\n  },\n  \"delivery_information\": {\n    \"delivery_method\": \"<string>\",\n    \"response_format\": \"<string>\",\n    \"webhook_url\": \"<uri>\",\n    \"delivery_method_params\": {\n      \"integration_name\": \"<string>\",\n      \"table_name\": \"<string>\",\n      \"retention_days\": \"<integer>\",\n      \"num_of_files\": \"<string>\",\n      \"write_mode\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f15724f1-9d18-4567-8726-7c9458866ec5",
+              "name": "Report request submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "request-report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"report_query\": {\n    \"tables\": [\n      {\n        \"vtable\": \"similarweb_websites_traffic\",\n        \"granularity\": \"monthly\",\n        \"start_date\": \"2024-01\",\n        \"end_date\": \"2024-06\",\n        \"metrics\": [\n          \"visits\",\n          \"bounce_rate\"\n        ]\n      }\n    ]\n  },\n  \"delivery_information\": {\n    \"delivery_method\": \"download_link\",\n    \"response_format\": \"json\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_id\": \"77d1bad7-5f10-2d5e-79e2-d217f79db534\",\n  \"status\": \"pending\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a78b85a2-366e-481d-8d2c-d90d3187bdb0",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "request-report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"report_query\": {\n    \"tables\": [\n      {\n        \"vtable\": \"similarweb_websites_traffic\",\n        \"granularity\": \"monthly\",\n        \"start_date\": \"2024-01\",\n        \"end_date\": \"2024-06\",\n        \"metrics\": [\n          \"visits\",\n          \"bounce_rate\"\n        ]\n      }\n    ]\n  },\n  \"delivery_information\": {\n    \"delivery_method\": \"download_link\",\n    \"response_format\": \"json\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6706edc5-b13f-475c-9a23-5ecac1555e31",
+          "name": "Request Status",
+          "request": {
+            "name": "Request Status",
+            "description": {
+              "content": "Retrieve the current status of a previously submitted batch report request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "request-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "report_id",
+                  "value": "<uuid>",
+                  "description": "(Required) Report ID returned by the request-report endpoint"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "096f06d5-1692-4fbc-ac4f-a0095cf3fe31",
+              "name": "Report status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "request-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "report_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_id\": \"dbc6ae0f-310d-0d22-d55f-ddc45f171368\",\n  \"status\": \"in_progress\",\n  \"created_at\": \"1978-06-04T12:09:24.797Z\",\n  \"completed_at\": \"2004-12-23T11:54:36.649Z\",\n  \"download_url\": \"http://KSLvxFiDUwnc.buSpLO.9SJgeWu+kQ.Q5-+aaLe,wpWop80UIm9kUpkTpUbvC6C\",\n  \"error_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "759e891e-3b32-4474-ae90-99a2493a5f4e",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "request-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "report_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df9ce13f-f4fc-430d-ae56-50c285dc4cd1",
+          "name": "Request Validate",
+          "request": {
+            "name": "Request Validate",
+            "description": {
+              "content": "Validate a batch request and estimate its data credit cost before submission. Uses the same request body as request-report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "request-validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"report_query\": {\n    \"tables\": [\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      },\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      }\n    ]\n  },\n  \"delivery_information\": {\n    \"delivery_method\": \"<string>\",\n    \"response_format\": \"<string>\",\n    \"webhook_url\": \"<uri>\",\n    \"delivery_method_params\": {\n      \"integration_name\": \"<string>\",\n      \"table_name\": \"<string>\",\n      \"retention_days\": \"<integer>\",\n      \"num_of_files\": \"<string>\",\n      \"write_mode\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e7469a9-de93-45ed-8c92-98ea62286fa5",
+              "name": "Validation result with estimated cost",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "request-validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"report_query\": {\n    \"tables\": [\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      },\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      }\n    ]\n  },\n  \"delivery_information\": {\n    \"delivery_method\": \"<string>\",\n    \"response_format\": \"<string>\",\n    \"webhook_url\": \"<uri>\",\n    \"delivery_method_params\": {\n      \"integration_name\": \"<string>\",\n      \"table_name\": \"<string>\",\n      \"retention_days\": \"<integer>\",\n      \"num_of_files\": \"<string>\",\n      \"write_mode\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"valid\": true,\n  \"estimated_cost\": 9519,\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c35d9557-007b-4ec5-827f-9cb21a29434a",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "request-validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"report_query\": {\n    \"tables\": [\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      },\n      {\n        \"vtable\": \"<string>\",\n        \"granularity\": \"<string>\",\n        \"start_date\": \"<string>\",\n        \"end_date\": \"<string>\",\n        \"latest\": \"<boolean>\",\n        \"all_history\": \"<boolean>\",\n        \"window_size\": \"<string>\",\n        \"filters\": \"<object>\",\n        \"metrics\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"paging\": {\n          \"limit\": \"<integer>\",\n          \"offset\": 0,\n          \"sort\": \"<string>\",\n          \"sort_asc\": \"false\"\n        }\n      }\n    ]\n  },\n  \"delivery_information\": {\n    \"delivery_method\": \"<string>\",\n    \"response_format\": \"<string>\",\n    \"webhook_url\": \"<uri>\",\n    \"delivery_method_params\": {\n      \"integration_name\": \"<string>\",\n      \"table_name\": \"<string>\",\n      \"retention_days\": \"<integer>\",\n      \"num_of_files\": \"<string>\",\n      \"write_mode\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bec84113-3ca1-47e8-9079-6af90628d7c1",
+          "name": "Report History",
+          "request": {
+            "name": "Report History",
+            "description": {
+              "content": "Retrieve a paginated history of past batch report requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "report-history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Starting position"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e21d7647-4956-424f-bb19-33f2512e9d96",
+              "name": "Report history list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "report-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reports\": [\n    {\n      \"report_id\": \"6d913b74-dfae-45d2-3281-21fe5eec7cdf\",\n      \"status\": \"in_progress\",\n      \"created_at\": \"1949-12-18T05:13:33.845Z\",\n      \"completed_at\": \"2020-03-18T07:35:47.085Z\",\n      \"download_url\": \"https://JrGOXaDL.rufzs+znU4wR8re4jCrPedx2GbSBFepshUaI\",\n      \"error_message\": \"string\"\n    },\n    {\n      \"report_id\": \"fa67f81f-8c2f-6885-05f2-c7bb6c2be3cc\",\n      \"status\": \"failed\",\n      \"created_at\": \"1953-05-28T19:19:19.783Z\",\n      \"completed_at\": \"1951-02-04T04:29:07.417Z\",\n      \"download_url\": \"http://FSywqoLiiVwFy.gmnBqB3ntlDNqTc6P,Wcf3z2sfJRZuGXqVreJqcd86DeCtTnIcwPxTVsdVLMXFwLq-VyZ-E.b7y\",\n      \"error_message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3904f42e-e73d-4c46-98ec-aa11c6d6da4c",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "report-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "218c59f4-c4fd-463c-9f06-d99637e4e353",
+          "name": "Retry Request",
+          "request": {
+            "name": "Retry Request",
+            "description": {
+              "content": "Retry a failed batch report request. Requests can be retried up to 3 times.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "retry-request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"report_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "101cdd1d-e5ae-44e3-a668-cb6aad33dc61",
+              "name": "Retry submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "retry-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"report_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_id\": \"77d1bad7-5f10-2d5e-79e2-d217f79db534\",\n  \"status\": \"pending\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95bfa2f1-373c-438b-98aa-755d9e54994e",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "retry-request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"report_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2e598a6-9e71-4d68-bacf-bf2d862a85d1",
+          "name": "Describe Available Tables",
+          "request": {
+            "name": "Describe Available Tables",
+            "description": {
+              "content": "List all queryable Batch API tables with their available metrics, filters, and date range constraints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "tables-describe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cdd25bfe-0ee1-43af-a5ec-7e40986972b0",
+              "name": "Table descriptions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "tables-describe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tables\": [\n    {\n      \"vtable\": \"string\",\n      \"description\": \"string\",\n      \"metrics\": [\n        \"string\",\n        \"string\"\n      ],\n      \"filters\": [\n        \"string\",\n        \"string\"\n      ],\n      \"min_date\": \"string\",\n      \"granularities\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"vtable\": \"string\",\n      \"description\": \"string\",\n      \"metrics\": [\n        \"string\",\n        \"string\"\n      ],\n      \"filters\": [\n        \"string\",\n        \"string\"\n      ],\n      \"min_date\": \"string\",\n      \"granularities\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94859707-21bb-4802-9bcf-cef103415b9b",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "tables-describe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8ee3e5fd-83cd-4b50-80ba-14984ea270c2",
+    "name": "SimilarWeb Batch Account Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

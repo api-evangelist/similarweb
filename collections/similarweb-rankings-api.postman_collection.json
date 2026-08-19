@@ -1,0 +1,475 @@
+{
+  "item": [
+    {
+      "id": "4ed843ff-d37d-4de4-92a7-71e4eb23e949",
+      "name": "Rankings",
+      "description": {
+        "content": "Global, country, and industry rank data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89d0e69f-0d66-4502-a36e-7fa1c4f2c49a",
+          "name": "Global Rank - Total (Desktop & Mobile)",
+          "request": {
+            "name": "Global Rank - Total (Desktop & Mobile)",
+            "description": {
+              "content": "Retrieve the global rank for a domain calculated from a mix of unique visitor and pageview estimations across desktop and mobile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "website",
+                ":domain_name",
+                "global-rank",
+                "global-rank"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "main_domain_only",
+                  "value": "false",
+                  "description": "Return main domain only (true) or include subdomains (false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) Website domain without 'www.' prefix"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b17f67a0-3ae0-4d3d-be30-c8c5573da68e",
+              "name": "Global rank time series",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "global-rank",
+                    "global-rank"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"2025-11-09\"\n  },\n  \"global_rank\": [\n    {\n      \"date\": \"7050-96\",\n      \"global_rank\": 4248\n    },\n    {\n      \"date\": \"4080-58\",\n      \"global_rank\": 7497\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2e8d1b9-4657-47a9-b056-47821be3b72b",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "global-rank",
+                    "global-rank"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c86408db-95d2-46c4-b581-c4ff04e57315",
+          "name": "Rank Tracking Campaign Overview",
+          "request": {
+            "name": "Rank Tracking Campaign Overview",
+            "description": {
+              "content": "Retrieve aggregate performance metrics for a rank tracking campaign over time, including average position, visibility, and SERP feature coverage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "rank-tracker",
+                ":campaign_id",
+                "reports",
+                "overview-report",
+                "performanceOverTime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "device",
+                  "value": "<string>",
+                  "description": "Device type filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "site",
+                  "value": "<string>",
+                  "description": "Site to filter campaign results"
+                },
+                {
+                  "disabled": false,
+                  "key": "scraping_configurations",
+                  "value": "<string>",
+                  "description": "Scraping configuration ID"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "campaign_id",
+                  "description": "(Required) Rank tracking campaign identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ddb528d6-fe34-4c99-a64e-ef00bd6e063d",
+              "name": "Campaign performance overview",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "rank-tracker",
+                    ":campaign_id",
+                    "reports",
+                    "overview-report",
+                    "performanceOverTime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "device",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "site",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scraping_configurations",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaign_id",
+                      "description": "(Required) Rank tracking campaign identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"2003-07-04\"\n  },\n  \"data\": [\n    {\n      \"date\": \"1968-09-17\",\n      \"avg_position\": 6590.328278792313,\n      \"visibility\": 5349.9970440427805\n    },\n    {\n      \"date\": \"1957-11-09\",\n      \"avg_position\": 2843.8633729073626,\n      \"visibility\": 8687.475598077075\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35794cae-1e97-4237-a6aa-9ea09607601f",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "rank-tracker",
+                    ":campaign_id",
+                    "reports",
+                    "overview-report",
+                    "performanceOverTime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "device",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "site",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scraping_configurations",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaign_id",
+                      "description": "(Required) Rank tracking campaign identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5feede32-7dd0-4469-a615-241f50c13f6f",
+    "name": "SimilarWeb Batch Account Rankings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

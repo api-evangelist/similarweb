@@ -1,0 +1,683 @@
+{
+  "item": [
+    {
+      "id": "371bc059-fa67-4f29-99f9-ef63e3a8648b",
+      "name": "Webhooks",
+      "description": {
+        "content": "Webhook subscription management for data-ready notifications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b589e9c-3f3b-438d-af72-2c635befcd13",
+          "name": "Subscribe to Webhook Events",
+          "request": {
+            "name": "Subscribe to Webhook Events",
+            "description": {
+              "content": "Subscribe to event notifications to stay updated on data releases and report completions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "webhooks",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhook_url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "493c31dd-fd26-42ea-a626-4eceb6fda40c",
+              "name": "Subscription created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhook_id\": \"string\",\n  \"webhook_url\": \"http://yFsDMuthsdKlQswUJdIK.piuunqXuaOQ-L38d,KWZG7\",\n  \"events\": [\n    \"string\",\n    \"string\"\n  ],\n  \"created_at\": \"1965-10-10T12:13:37.420Z\",\n  \"status\": \"inactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6bfb0af-804e-417b-bb0b-0b795111e54a",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7e3fc90-bd83-4a39-ae10-6b36bddf53a4",
+          "name": "List Webhook Subscriptions",
+          "request": {
+            "name": "List Webhook Subscriptions",
+            "description": {
+              "content": "Retrieve all active webhook subscriptions for the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "webhooks",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e1cf1ba9-5d92-4cc7-abd3-14231d7bdda1",
+              "name": "List of webhook subscriptions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscriptions\": [\n    {\n      \"webhook_id\": \"string\",\n      \"webhook_url\": \"https://pPvpxVtVQa.kbimp8fMoCH8OjU5MIxHE\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1951-10-24T06:09:59.053Z\",\n      \"status\": \"active\"\n    },\n    {\n      \"webhook_id\": \"string\",\n      \"webhook_url\": \"https://fxizhQZCzhBAkkWJTV.lyqnXg8qatDELep,X,ZcpllytfudDJHHTYgnCVqQUDis.4\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"2009-06-18T13:56:13.622Z\",\n      \"status\": \"active\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d53dc975-6b26-4c2f-84de-f55e0b74f065",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa3ee50e-0e2c-4cea-b402-8655f2a88c34",
+          "name": "Unsubscribe from Webhook Events",
+          "request": {
+            "name": "Unsubscribe from Webhook Events",
+            "description": {
+              "content": "Remove a webhook subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "webhooks",
+                "unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "webhook_id",
+                  "value": "<string>",
+                  "description": "(Required) Webhook subscription ID to remove"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "40987853-ce03-4fbf-ab65-191c0ffc7d60",
+              "name": "Subscription removed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "webhook_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6f2c3d6-4195-49a1-bf8d-b64819b8e815",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "webhook_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81a0b879-c1d6-4011-93bb-f9b4b3bdc77a",
+          "name": "Test Your Webhooks",
+          "request": {
+            "name": "Test Your Webhooks",
+            "description": {
+              "content": "Send a test notification to a webhook URL to verify configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "v4",
+                "webhooks",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhook_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf0a94ce-586b-44cc-9a4f-55a29db4b431",
+              "name": "Test notification sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e960465-51c3-4579-b57e-59bd9bb66194",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "v4",
+                    "webhooks",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff1e89ce-d024-41da-ad12-bd3e3d897174",
+    "name": "SimilarWeb Batch Account Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

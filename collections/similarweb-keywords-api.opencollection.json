@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account Keywords API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Keywords",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Website Keywords",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v4/website-analysis/keywords",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              },
+              {
+                "name": "URL",
+                "value": "",
+                "type": "query",
+                "description": "Domain without 'www.' prefix"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start month in YYYY-MM format"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End month in YYYY-MM format"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+              },
+              {
+                "name": "traffic_source",
+                "value": "",
+                "type": "query",
+                "description": "Filter by traffic source type"
+              },
+              {
+                "name": "web_source",
+                "value": "",
+                "type": "query",
+                "description": "Device type filter"
+              },
+              {
+                "name": "branded_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter branded or non-branded keywords"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting position for paginated results"
+              }
+            ]
+          },
+          "docs": "Retrieve organic and paid keyword data for a domain including traffic share, difficulty, competition, CPC, and SERP features."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

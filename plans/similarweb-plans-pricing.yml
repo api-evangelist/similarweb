@@ -1,3 +1,19 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.similarweb.com/corp/daas/api/
+also_documented_at:
+- https://www.similarweb.com/md/plans-api.md
+- https://docs.similarweb.com/api-v5/guides/data-credits-calculations
+plan_count: 3
+published_prices: false
+publication_note: >-
+  Similarweb publishes NO list price for API access. All three tiers below are named on the
+  provider's own API page and pricing collateral, but every one of them routes to "contact
+  sales" — there is no self-serve API checkout, no published per-credit rate and no
+  published credit allocation. The tier names and their gating (API access is included in
+  Business and Enterprise, or bought as a standalone API package) are the provider's own
+  words, verbatim from the API page FAQ. Any dollar figure in this file is a range
+  observed in the market, not a Similarweb-published price, and is labelled as such.
 name: SimilarWeb API Plans & Pricing
 description: >-
   SimilarWeb API pricing is based on a data credit model — customers pay for
@@ -86,5 +102,26 @@ notes:
   - Use the Request Validate endpoint to estimate credit cost before executing large queries.
   - No credits are charged for rate-limit errors (HTTP 429).
   - Credit quotas reset monthly.
-  - Pricing ranges from approximately $500/month for entry-level to $20,000+/month for high-volume enterprise use.
+  - >-
+    UNPUBLISHED PRICE. A commonly cited range of roughly $500/month at entry level to
+    $20,000+/month for high-volume enterprise use is a market observation, NOT a
+    Similarweb-published figure. Similarweb lists no price for API access anywhere on its
+    site.
   - All plans require contacting the SimilarWeb sales team for a custom quote.
+  - >-
+    Credit cost formula published by the provider: number of domains x endpoint price x
+    granularity x number of country filters x historical range x number of results
+    requested.
+  - >-
+    Up to 7 years of historical data is available across all data types, with the exact
+    range set by the subscription; confirm it per account with the Check Capabilities
+    operation.
+  - MCP server calls draw on the same data credits as REST calls.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+    - url: https://www.similarweb.com/corp/daas/api/
+      http_status: 200
+    - url: https://www.similarweb.com/md/plans-api.md
+      http_status: 200

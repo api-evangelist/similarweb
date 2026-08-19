@@ -1,0 +1,273 @@
+{
+  "item": [
+    {
+      "id": "2a3f02db-9259-4fee-9a5e-642c3d8d1d1a",
+      "name": "Lead Enrichment",
+      "description": {
+        "content": "Lead enrichment combining firmographics and web analytics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e3c9586-2714-4f1c-8851-4c25c3925492",
+          "name": "Lead Enrichment",
+          "request": {
+            "name": "Lead Enrichment",
+            "description": {
+              "content": "Retrieve combined firmographic and web analytics data for a domain including company name, employee range, revenue, headquarters, traffic metrics, device split, top countries, and traffic sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "website",
+                ":domain_name",
+                "lead-enrichment",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+                },
+                {
+                  "disabled": false,
+                  "key": "main_domain_only",
+                  "value": "false",
+                  "description": "Return main domain only (true) or include subdomains (false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_verified",
+                  "value": "<string>",
+                  "description": "Display shared Google Analytics data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) Website domain without 'www.' prefix"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "d41d5de7-dddc-4cbd-8c74-31311a0c5377",
+              "name": "Lead enrichment data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "lead-enrichment",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show_verified",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"2017-07-14\"\n  },\n  \"global_rank\": 2680,\n  \"company_name\": \"string\",\n  \"employee_range\": \"string\",\n  \"estimated_revenue_in_million_usd\": \"string\",\n  \"headquarters\": \"string\",\n  \"site_type\": \"string\",\n  \"category\": \"string\",\n  \"visits\": [\n    {\n      \"date\": \"2019-01-09\",\n      \"visits\": 2442.5016253088925\n    },\n    {\n      \"date\": \"1998-03-08\",\n      \"visits\": 8812.96910222757\n    }\n  ],\n  \"unique_visitors\": [\n    {\n      \"date\": \"1958-04-12\",\n      \"unique_visitors\": 1685.5749945327202\n    },\n    {\n      \"date\": \"1962-06-15\",\n      \"unique_visitors\": 4648.5526340083625\n    }\n  ],\n  \"pages_per_visit\": [\n    {\n      \"date\": \"1954-09-24\",\n      \"pages_per_visit\": 9327.172288111859\n    },\n    {\n      \"date\": \"1958-08-18\",\n      \"pages_per_visit\": 8846.317395368354\n    }\n  ],\n  \"bounce_rate\": [\n    {\n      \"date\": \"1956-01-30\",\n      \"bounce_rate\": 1176.3799113337736\n    },\n    {\n      \"date\": \"1948-02-02\",\n      \"bounce_rate\": 2829.3202219034374\n    }\n  ],\n  \"avg_visit_duration\": [\n    {\n      \"date\": \"1992-07-25\",\n      \"avg_visit_duration\": 3484.4879616197322\n    },\n    {\n      \"date\": \"1969-10-27\",\n      \"avg_visit_duration\": 1381.5728217804647\n    }\n  ],\n  \"desktop_mobile_share\": {\n    \"desktop_visit_share\": 9718.700732701085,\n    \"mobile_visit_share\": 2294.180231199785\n  },\n  \"top_countries\": [\n    {\n      \"country\": 8257,\n      \"share\": 9881.375778035506\n    },\n    {\n      \"country\": 2842,\n      \"share\": 3476.638390799466\n    }\n  ],\n  \"traffic_sources\": {\n    \"search\": 1461.8119173369591,\n    \"social\": 6097.960869806893,\n    \"mail\": 2716.838963656534,\n    \"paid_referrals\": 1542.1605339710832,\n    \"direct\": 3785.4553867074437,\n    \"referrals\": 7672.974748281483\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "319a42bf-0b25-477d-a8cf-aef09cc438e6",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "lead-enrichment",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "show_verified",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9e0fcb7d-78d8-4354-b740-9ef76d0cdfa5",
+    "name": "SimilarWeb Batch Account Lead Enrichment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

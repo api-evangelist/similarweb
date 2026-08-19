@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account Reports API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.similarweb.com/batch/v4/request-report",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Submit a batch data extraction request specifying tables, filters, date ranges, metrics, and a delivery method (download link, Amazon S3, Google Cloud Storage, or Snowflake). Returns a report_id for tracking."
+        },
+        {
+          "info": {
+            "name": "Request Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/batch/v4/request-status",
+            "params": [
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "query",
+                "description": "Report ID returned by the request-report endpoint"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the current status of a previously submitted batch report request."
+        },
+        {
+          "info": {
+            "name": "Request Validate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.similarweb.com/batch/v4/request-validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Validate a batch request and estimate its data credit cost before submission. Uses the same request body as request-report."
+        },
+        {
+          "info": {
+            "name": "Report History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/batch/v4/report-history",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting position"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a paginated history of past batch report requests."
+        },
+        {
+          "info": {
+            "name": "Retry Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.similarweb.com/batch/v4/retry-request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retry a failed batch report request. Requests can be retried up to 3 times."
+        },
+        {
+          "info": {
+            "name": "Describe Available Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/batch/v4/tables-describe",
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all queryable Batch API tables with their available metrics, filters, and date range constraints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

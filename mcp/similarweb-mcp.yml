@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: searched
+status: published
+source: https://docs.similarweb.com/api-v5/similarweb-mcp/mcp-setup
+docs:
+- https://docs.similarweb.com/api-v5/similarweb-mcp/mcp-setup
+- https://developers.similarweb.com/docs/similarweb-mcp
+- https://www.similarweb.com/corp/ai/mcp/
+description: >-
+  Similarweb operates a first-party hosted (remote) MCP server at https://mcp.similarweb.com
+  that exposes its Web, Search and App intelligence datasets as MCP tools. It is not an npm
+  or PyPI package — there is nothing to install; an MCP client POSTs directly to the HTTPS
+  endpoint. Access requires an active Similarweb subscription that includes API access
+  (API-only, Business or Enterprise) and an API key generated from Settings > Account in the
+  Similarweb platform. Similarweb is also listed as an official connector in Claude's
+  Connectors Directory.
+
+deployment:
+  mode: remote
+  endpoint: https://mcp.similarweb.com
+  auth: api-key
+  verified: probed
+  note: >-
+    Endpoint taken verbatim from the provider's MCP setup guide, then probed. An anonymous
+    POST of tools/list returns HTTP 401 with
+    {"error":"invalid_request","error_description":"Authentication required. Provide either
+    'api-key' header or 'Authorization: Bearer <token>' header."} — so the server is live and
+    auth-gated. Two credential paths are supported: a Similarweb API key in an `api-key`
+    header, or an OAuth 2.1 bearer token issued by https://mcp-auth.similarweb.com (see
+    well-known/similarweb-oauth-protected-resource.json). No stdio/npx package is published.
+
+transport:
+  type: http
+  url: https://mcp.similarweb.com
+  probe:
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    http_status: 401
+    result: auth-gated
+    date: '2026-08-13'
+
+authorization:
+  api_key:
+    header: api-key
+    obtained_from: https://account.similarweb.com/standard-api
+  oauth2:
+    protected_resource_metadata: https://mcp.similarweb.com/.well-known/oauth-protected-resource
+    authorization_server: https://mcp-auth.similarweb.com
+    metadata: https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server
+    scopes_supported: [read]
+    grant_types: [authorization_code, refresh_token]
+    pkce: [S256, plain]
+    dynamic_client_registration: https://mcp-auth.similarweb.com/register
+
+clients_documented:
+- Claude (official connector in the Claude Connectors Directory)
+- Cursor
+- Microsoft Copilot Studio
+- Zapier
+- n8n
+
+billing:
+  model: data-credits
+  note: >-
+    MCP calls consume the same data credits as REST API calls; consumption varies with the
+    prompt and which datasets the agent reaches for.
+  source: https://docs.similarweb.com/api-v5/similarweb-mcp/mcp-setup
+
+tools_source: >-
+  tools/list is auth-gated, so the live inputSchema for each tool could not be introspected.
+  The tool list below is transcribed verbatim from the provider-published "Available Metrics"
+  tables in the MCP setup guide (names + descriptions + returned metrics only). Input schemas
+  require authenticated introspection — do not treat the fields below as a parameter contract.
+
+tools:
+- {name: Traffic and Engagement, category: web, description: Get traffic and engagement metrics over time for a specific website, metrics: [visits, average_visit_duration, pages_per_visit, bounce_rate, page_views, unique_visitors, new_users, returning_users]}
+- {name: Traffic Sources, category: web, description: 'Get traffic metrics broken down by marketing channels (direct, display ads, mail, organic search, paid search, referrals, and social)', metrics: [visits, average_visit_duration, pages_per_visit, bounce_rate]}
+- {name: Website Rank, category: web, description: Get website rank over time for a specific website, metrics: [country_rank, category, category_rank]}
+- {name: Subdomains, category: web, description: Get subdomain traffic share data for a website, metrics: [subdomain, share]}
+- {name: Similar Sites, category: web, description: Get similar websites for a specific domain, metrics: [rank, affinity, has_adsense]}
+- {name: Referrals, category: web, description: Get incoming or outgoing referral websites for a specific website, metrics: [share, change]}
+- {name: Audience Interests, category: web, description: Get audience-interests (also-visited websites) for a specific website, metrics: [affinity, overlap, pop_change, has_adsense, domain]}
+- {name: Audience Overlap, category: web, description: Get audience overlap data by comparing between 2 to 5 websites, metrics: [overlap, union]}
+- {name: Deduplicated Audience, category: web, description: Get deduplicated audience metrics for a specific website, metrics: [total_deduplicated_audience, desktop_only_audience_share, desktop_only_audience_visitors, mobile_web_only_audience_share, mobile_web_only_audience_visitors, desktop_and_mobile_web_audience_share, desktop_and_mobile_web_audience_visitors]}
+- {name: Leading Folders, category: web, description: Get leading folders traffic share data for a specific website, metrics: [folder, share, change]}
+- {name: Popular Pages, category: web, description: Get popular pages metrics for a specific website, metrics: [share, change]}
+- {name: PPC Spend, category: web, description: Get money spent monthly on paid search advertising for a specific website, metrics: [ppc_spend]}
+- {name: Segment Traffic and Engagement, category: web, description: Get traffic and engagement metrics over time for a specific segment of a website, metrics: [visits, bounce_rate, page_views, average_visit_duration, pages_per_visit, share, unique_visitors]}
+- {name: Segment Traffic Sources, category: web, description: Get segment traffic and engagement metrics over time for a specific segment of a website broken down by marketing channels, metrics: [visits, bounce_rate, page_views, average_visit_duration, pages_per_visit]}
+- {name: Ad Networks, category: web, description: Get incoming or outgoing ad networks data for a specific website, metrics: [share, visits]}
+- {name: Geography, category: web, description: Get traffic and engagement metrics over time for a specific website broken down by country, metrics: [country, country_name, rank, share, visits, average_visit_duration, pages_per_visit, bounce_rate]}
+- {name: Technologies, category: web, description: Get current technologies used by a specific domain, metrics: [sub_category, pricing_model, description, first_seen_date]}
+- {name: Demographics, category: web, description: Get demographics metrics for a specific website, metrics: [age_18_to_24_share, age_25_to_34_share, age_35_to_44_share, age_45_to_54_share, age_55_to_64_share, age_65_plus_share, male_share, female_share]}
+- {name: Traffic by Demographics, category: web, description: Get traffic metrics for a certain demographics group, metrics: [share, pages_per_visit, bounce_rate, visit_duration]}
+- {name: SERP Players, category: search, description: The top websites driving search traffic for a specified keyword or custom keyword list, metrics: [site, domain_name, clicks, traffic_share, serp_features, position, top_url]}
+- {name: SERP Clicks, category: search, description: Clicks trend over time for each website from the top websites for their keyword or keyword groups, metrics: [site, domain_name, clicks, traffic_share, serp_features, position, top_url]}
+- {name: App Install Penetration, category: app, description: Get the percentage of devices in a specific country with the app installed, metrics: [installs_pct]}
+- {name: App Store Rank, category: app, description: Get app store rank over time for a specific mobile app, metrics: [android_store_rank, ios_store_rank]}
+- {name: App Details, category: app, description: Get detailed information about a mobile app by its ID, metrics: [title, image, publisher, price, main_category, main_category_id, rating]}
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://mcp.similarweb.com (POST tools/list)', http_status: 401}
+  - {url: 'https://mcp.similarweb.com/mcp (POST tools/list)', http_status: 401}
+  - {url: 'https://mcp.similarweb.com/sse (POST tools/list)', http_status: 401}
+  - {url: https://mcp.similarweb.com/.well-known/oauth-protected-resource, http_status: 200}
+  - {url: https://docs.similarweb.com/api-v5/similarweb-mcp/mcp-setup.md, http_status: 200}

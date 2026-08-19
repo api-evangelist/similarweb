@@ -1,0 +1,81 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Similarweb REST API
+  version: 1.0.0
+extends: openapi/_original/similarweb-rest-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Derived from the artifacts in this repo (conventions/, errors/, lifecycle/, rate-limits/,
+  conformance/, mcp/) against the harvested REST specification. Applies our annotations
+  without mutating the original document.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-08-13'
+    x-api-version-generation: v5
+    x-legacy-sunset: '2026-10-06'
+    x-error-catalog: errors/similarweb-problem-types.yml
+    x-conventions: conventions/similarweb-conventions.yml
+    x-lifecycle: lifecycle/similarweb-lifecycle.yml
+    x-data-model: data-model/similarweb-data-model.yml
+
+- target: $.info
+  description: >-
+    Record the metering model, which is not expressible in OpenAPI but is the dominant cost
+    consideration for every call in this document.
+  update:
+    x-metering:
+      model: data-credits
+      formula: domains x endpoint price x granularity x country filters x historical range x results requested
+      docs: https://docs.similarweb.com/api-v5/guides/data-credits-calculations
+      dry_run_operation: validateRequest
+
+- target: $
+  description: >-
+    Rate limiting is documented in prose only and is not signalled in any response header.
+    Recorded at the document root so a client generator can surface it.
+  update:
+    x-rate-limit:
+      requests_per_second: 10
+      scope: api-key
+      status_on_exhaustion: 429
+      response_headers: []
+      credits_consumed_on_429: false
+      docs: https://developers.similarweb.com/docs/rate-limit
+
+- target: $
+  description: >-
+    The agent surface Similarweb ships alongside this REST API. Not part of the OpenAPI
+    contract, but it is what an agent will reach for first.
+  update:
+    x-mcp-server:
+      url: https://mcp.similarweb.com
+      mode: remote
+      auth: [api-key, oauth2]
+      manifest: mcp/similarweb-mcp.yml
+      crosswalk: mcp/similarweb-tool-crosswalk.yml
+
+- target: $.components.securitySchemes.apiKeyHeader
+  description: >-
+    Annotate how the key is obtained and governed, which the docs publish and the spec
+    does not.
+  update:
+    x-key-management:
+      issued_by: account administrators only
+      console: https://account.similarweb.com/standard-api
+      max_active_keys_per_user: 3
+      expiry: none
+      activation_required: true
+      shared_across: [rest, batch]
+      note: >-
+        As of API V5 one key works for both REST and Batch; V4 required separate keys.
+
+- target: $.paths.*.*.responses
+  description: >-
+    Every operation in this document declares only 200 and 400, but the provider documents
+    401, 403 and 429 across the whole REST surface. Recorded as an annotation rather than
+    injected responses, so the original contract is not misrepresented.
+  update:
+    x-undeclared-statuses: [401, 403, 429]
+    x-error-catalog: errors/similarweb-problem-types.yml

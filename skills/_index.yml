@@ -1,0 +1,33 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/_original/similarweb-rest-api-openapi.yml,
+  openapi/_original/similarweb-batch-api-openapi.yml,
+  conventions/similarweb-conventions.yml, errors/similarweb-problem-types.yml,
+  lifecycle/similarweb-lifecycle.yml, asyncapi/similarweb-webhooks.yml
+description: >-
+  Packaged Agent Skills for the Similarweb API, one per marquee flow. Every step is grounded
+  in an operationId that exists verbatim in the OpenAPI in this repo. Similarweb publishes no
+  AGENTS.md or skill files of its own (probed 2026-08-13; docs.similarweb.com/AGENTS.md
+  returns HTTP 200 but the body is the docs application shell, not a document), so these are
+  generated rather than harvested.
+
+skills:
+- file: similarweb-competitive-traffic-snapshot.md
+  name: Competitive traffic snapshot for a domain
+  api: openapi/_original/similarweb-rest-api-openapi.yml
+  operations: [checkCapabilities, getVisitsDesktop, getBounceRateDesktop, getTrafficSourcesOverview, getGeographyDesktop, getGlobalRank, getSimilarSites]
+- file: similarweb-bulk-report-to-cloud-storage.md
+  name: Run a bulk Similarweb report into cloud storage
+  api: openapi/_original/similarweb-batch-api-openapi.yml
+  operations: [describeTables, getBatchCredits, createS3Integration, createGcsIntegration, getAllIntegrations, validateRequest, requestReport, getRequestStatus, getReportHistory, retryRequest]
+- file: similarweb-webhook-driven-report-delivery.md
+  name: Get notified when a Similarweb report is ready
+  api: openapi/_original/similarweb-batch-api-openapi.yml
+  operations: [testWebhook, subscribeWebhook, listWebhookSubscriptions, unsubscribeWebhook, requestReport, getRequestStatus]
+- file: similarweb-enrich-a-company-lead.md
+  name: Enrich a company lead from its domain
+  api: openapi/_original/similarweb-rest-api-openapi.yml
+  operations: [getCredits, checkCapabilities, getLeadEnrichment, getWebsiteKeywords, getGlobalRank, getAppDownloadsAndroid, getAppDownloadsIos]
+
+skill_count: 4

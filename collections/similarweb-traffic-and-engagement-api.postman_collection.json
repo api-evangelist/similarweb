@@ -1,0 +1,584 @@
+{
+  "item": [
+    {
+      "id": "aa74a468-e297-4dd4-89c8-37de4792427d",
+      "name": "Traffic and Engagement",
+      "description": {
+        "content": "Website traffic visits, bounce rate, pages per visit, visit duration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e701eff-cd03-4117-8e4c-c0828a9f890c",
+          "name": "Visits - Desktop",
+          "request": {
+            "name": "Visits - Desktop",
+            "description": {
+              "content": "Retrieve estimated desktop website visits over time. Supports daily, weekly, and monthly granularity with up to 37 months of history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "website",
+                ":domain_name",
+                "traffic-and-engagement",
+                "visits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>",
+                  "description": "Temporal resolution for time series data"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "main_domain_only",
+                  "value": "false",
+                  "description": "Return main domain only (true) or include subdomains (false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "mtd",
+                  "value": "<string>",
+                  "description": "Month-to-date mode; use with daily granularity"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "US state filter"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) Website domain without 'www.' prefix"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6da03a03-cfe6-4f8d-b9ec-9d432bea62d5",
+              "name": "Visit time series",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "traffic-and-engagement",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "mtd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"1955-02-10\"\n  },\n  \"visits\": [\n    {\n      \"date\": \"1988-11-29\",\n      \"visits\": 9708.435417214458\n    },\n    {\n      \"date\": \"1961-02-20\",\n      \"visits\": 3611.8721140803746\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99333c03-3f1a-4733-9492-96827966636a",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "traffic-and-engagement",
+                    "visits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "mtd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4eef04d8-769c-482b-be41-6e2c7021cfc7",
+          "name": "Bounce Rate - Desktop",
+          "request": {
+            "name": "Bounce Rate - Desktop",
+            "description": {
+              "content": "Retrieve desktop bounce rate time series for a given domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "website",
+                ":domain_name",
+                "traffic-and-engagement",
+                "bounce-rate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>",
+                  "description": "Temporal resolution for time series data"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "main_domain_only",
+                  "value": "false",
+                  "description": "Return main domain only (true) or include subdomains (false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "mtd",
+                  "value": "<string>",
+                  "description": "Month-to-date mode; use with daily granularity"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "US state filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_verified",
+                  "value": "<string>",
+                  "description": "Display shared Google Analytics verified data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) Website domain without 'www.' prefix"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "cfaa1807-4932-4b8f-8dc9-035caeb8952f",
+              "name": "Bounce rate time series",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "traffic-and-engagement",
+                    "bounce-rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "mtd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_verified",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"1959-03-31\"\n  },\n  \"bounce_rate\": [\n    {\n      \"date\": \"1965-10-07\",\n      \"bounce_rate\": 372.96585624028376\n    },\n    {\n      \"date\": \"2023-01-19\",\n      \"bounce_rate\": 6063.625254287163\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cce0b212-734b-4538-bccd-7b402291795c",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "traffic-and-engagement",
+                    "bounce-rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "mtd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_verified",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c9eb2f30-41fc-4d1c-9433-ad2814d34e21",
+    "name": "SimilarWeb Batch Account Traffic and Engagement API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

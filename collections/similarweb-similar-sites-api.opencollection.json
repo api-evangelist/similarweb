@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account Similar Sites API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Similar Sites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Similar Sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v2/website/:domain_name/similar-sites",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path",
+                "description": "Website domain without 'www.' prefix"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve the top 40 similar websites to a given domain with similarity scores."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

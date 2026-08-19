@@ -1,0 +1,78 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.similarweb.com/changelog.rss
+description: >-
+  Similarweb publishes a dated developer changelog on its ReadMe docs host, with a machine-
+  readable RSS feed. As of the V5 launch the changelog is moving to the new GitBook docs
+  host (docs.similarweb.com/changelog/similarweb/api-v5), which the V5 release note calls
+  an "automatic changelog". The recent window below is transcribed from the RSS feed; dates
+  are the feed's pubDate values.
+
+feeds:
+  rss: https://developers.similarweb.com/changelog.rss
+  html: https://developers.similarweb.com/changelog
+  successor: https://docs.similarweb.com/changelog/similarweb/api-v5
+
+versioning_scheme: uri-path
+current_version: v5
+
+entries:
+- version: v5
+  date: '2026-03-03'
+  title: Similarweb API V5 is now live!
+  breaking: true
+  highlights:
+  - Multi-metric requests in a single API call
+  - One API key for both REST and Batch endpoints (V4 required separate keys)
+  - Standardized response formats and error handling across every endpoint
+  - Full MCP and AI-agent support
+  - Legacy REST endpoints scheduled for sunset on 2026-10-06
+  url: https://developers.similarweb.com/changelog/similarweb-api-v5-is-now-live
+- date: '2025-05-08'
+  title: Google Cloud Storage (GCS) Integration
+  breaking: false
+  additions: [Batch API delivery to Google Cloud Storage]
+  url: https://developers.similarweb.com/changelog/google-cloud-storage-gcs-integration
+- date: '2025-04-10'
+  title: New Endpoint - New vs. Returning (All Traffic) REST and Batch API
+  breaking: false
+  additions: [new-vs-returning visitors metric on REST and Batch]
+  url: https://developers.similarweb.com/changelog/new-endpoint-new-vs-returning-total
+- date: '2025-03-21'
+  title: New Endpoint - Android App Downloads
+  breaking: false
+  additions: [Android app downloads endpoint]
+- date: '2025-03-21'
+  title: New Endpoint - iOS App Downloads
+  breaking: false
+  additions: [iOS app downloads endpoint]
+- date: '2025-03-17'
+  title: New Endpoint - Segment Marketing Channels (All Traffic)
+  breaking: false
+  additions: [segment-level marketing channel breakdown]
+- date: '2025-03-13'
+  title: New Endpoint - Landing Pages
+  breaking: false
+  additions: [landing pages endpoint]
+- date: '2025-03-13'
+  title: New Endpoint - Website Overview - Branded Distribution by Clicks
+  breaking: false
+  additions: [branded distribution by clicks]
+- date: '2024-12-31'
+  title: Demographics 1.0 endpoints will be deprecated on 01.01.25
+  breaking: true
+  deprecations: [Demographics 1.0 endpoints]
+  url: https://developers.similarweb.com/changelog/demographics-10-endpoints-will-be-deprecated-on-010125
+- date: '2024-12-05'
+  title: 'New Keyword Research Endpoints: SERP Players, Website Keywords, and Keywords Overview'
+  breaking: false
+  additions: [SERP Players, Website Keywords, Keywords Overview]
+  url: https://developers.similarweb.com/changelog/serp-players-and-website-keywords
+
+entry_count: 10
+window: 2024-12-05 to 2026-03-03
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: https://developers.similarweb.com/changelog.rss, http_status: 200}

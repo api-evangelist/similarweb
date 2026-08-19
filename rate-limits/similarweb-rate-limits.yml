@@ -1,3 +1,9 @@
+generated: '2026-08-13'
+method: searched
+source: https://developers.similarweb.com/docs/rate-limit
+also_documented_at:
+- https://docs.similarweb.com/api-v5/guides/error-handling-and-troubleshooting
+limit_count: 3
 name: SimilarWeb API Rate Limits
 description: >-
   SimilarWeb enforces rate limits on the REST API to ensure platform stability
@@ -57,9 +63,43 @@ limits:
       - Snowflake
 
 headers:
-  - name: HTTP 429
-    description: Returned when the 10 requests-per-second limit is exceeded.
-    action: Implement request throttling; retry after a brief back-off period.
+  published: []
+  retry_after: false
+  observed_response_headers:
+    - date
+    - server
+    - strict-transport-security
+    - x-cache
+    - via
+    - x-amz-cf-id
+    - x-amz-cf-pop
+  note: >-
+    Similarweb emits NO rate-limit response headers. There is no X-RateLimit-Limit,
+    X-RateLimit-Remaining, X-RateLimit-Reset, no RFC 9239-style RateLimit-* header, and no
+    Retry-After on a 429. Verified against the docs and against a live unauthenticated
+    request to api.similarweb.com on 2026-08-13, whose response carried only the headers
+    listed above (CloudFront edge headers plus HSTS). This is the practical gap for an
+    agent: the limit is knowable only from documentation, never from the runtime response,
+    so a client must count requests itself and cannot discover its remaining budget.
+  statuses:
+    - name: HTTP 429
+      description: Returned when the 10 requests-per-second limit is exceeded (REST).
+      action: Implement client-side throttling; retry after a brief back-off period.
+      credits_consumed: false
+    - name: HTTP 429 (Batch)
+      description: >-
+        On the Batch API, 429 means the account exceeded its limit of allowed PENDING
+        requests — a concurrency limit on in-flight jobs, not a per-second limit.
+      action: Let queued jobs complete before submitting more; do not simply slow the request rate.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+    - url: https://developers.similarweb.com/docs/rate-limit.md
+      http_status: 200
+    - url: 'https://api.similarweb.com/v1/website/cnn.com/total-traffic-and-engagement/visits (invalid key)'
+      http_status: 401
+      rate_limit_headers_present: false
 
 bestPractices:
   - Implement client-side throttling to stay at or below 10 requests per second.

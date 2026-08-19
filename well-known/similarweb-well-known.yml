@@ -1,0 +1,93 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every apis.yml + OpenAPI servers[] host
+description: >-
+  Well-known discovery probe across every Similarweb host named in apis.yml and in the
+  OpenAPI servers[] blocks, plus the MCP server host published in the developer docs.
+  The REST API host (api.similarweb.com), the ReadMe docs host (developers.similarweb.com)
+  and the marketing host (www.similarweb.com) serve nothing at any /.well-known/ path.
+  The MCP host (mcp.similarweb.com) DOES serve a real RFC 9728 OAuth protected-resource
+  document, which points at a separate authorization server (mcp-auth.similarweb.com)
+  that serves a real RFC 8414 authorization-server metadata document.
+
+hosts:
+- host: https://api.similarweb.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://developers.similarweb.com
+  note: >-
+    ReadMe-hosted docs site. Returns an HTML application shell with HTTP 404 for
+    several /.well-known/ paths; an HTML body is not a document, so every path is a miss.
+  documents:
+  - {path: /.well-known/security.txt, status: 404, body: html-shell}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent-card.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent.json, status: 404, body: html-shell}
+- host: https://www.similarweb.com
+  note: >-
+    Marketing site. Every /.well-known/ path returns HTTP 404 with the site's HTML
+    404 page. No security.txt is served.
+  documents:
+  - {path: /.well-known/security.txt, status: 404, body: html-shell}
+  - {path: /.well-known/openid-configuration, status: 404, body: html-shell}
+  - {path: /.well-known/oauth-authorization-server, status: 404, body: html-shell}
+  - {path: /.well-known/oauth-protected-resource, status: 404, body: html-shell}
+  - {path: /.well-known/api-catalog, status: 404, body: html-shell}
+  - {path: /.well-known/ai-plugin.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent-card.json, status: 404, body: html-shell}
+  - {path: /.well-known/agent.json, status: 404, body: html-shell}
+- host: https://mcp.similarweb.com
+  note: >-
+    Similarweb's hosted MCP server, published at
+    https://docs.similarweb.com/api-v5/similarweb-mcp/mcp-setup
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    spec: RFC 9728
+    file: similarweb-oauth-protected-resource.json
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://mcp-auth.similarweb.com
+  note: >-
+    Authorization server named by the MCP protected-resource document above.
+    Discovered by following authorization_servers[0], not guessed.
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    spec: RFC 8414
+    file: similarweb-oauth-authorization-server.json
+  - {path: /.well-known/openid-configuration, status: 404}
+
+summary:
+  paths_probed: 42
+  documents_found: 2
+  security_txt: false
+  agent_card: false
+  api_catalog: false
+  oauth_metadata: true
+
+x-evidence:
+  fetched: '2026-08-13'
+  hits:
+  - url: https://mcp.similarweb.com/.well-known/oauth-protected-resource
+    http_status: 200
+  - url: https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server
+    http_status: 200

@@ -1,0 +1,287 @@
+{
+  "item": [
+    {
+      "id": "88e7256e-73f7-4a65-b60b-645cad6ed150",
+      "name": "Traffic Sources",
+      "description": {
+        "content": "Marketing channel traffic breakdown including organic, paid, referral, social, and display",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0ff6c335-b37d-4fa8-84a0-a03ea2b1a499",
+          "name": "Visits by Marketing Channel - Desktop",
+          "request": {
+            "name": "Visits by Marketing Channel - Desktop",
+            "description": {
+              "content": "Retrieve desktop visits broken down by marketing channel (Search, Social, Mail, Display Ads, Direct, Referrals) including organic and paid splits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "website",
+                ":domain_name",
+                "traffic-sources",
+                "overview-share"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>",
+                  "description": "Temporal resolution for time series data"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "main_domain_only",
+                  "value": "false",
+                  "description": "Return main domain only (true) or include subdomains (false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "mtd",
+                  "value": "<string>",
+                  "description": "Month-to-date mode; use with daily granularity"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) Website domain without 'www.' prefix"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6acfbd2c-9f06-4196-8518-8fa1d48b1d1a",
+              "name": "Traffic sources breakdown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "traffic-sources",
+                    "overview-share"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "mtd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"1992-09-07\"\n  },\n  \"visits\": {\n    \"key_0\": [\n      {\n        \"source_type\": \"string\",\n        \"visits\": [\n          {\n            \"date\": \"1996-01-21\",\n            \"organic\": 2374.730554985971,\n            \"paid\": 445.1282962786141\n          },\n          {\n            \"date\": \"1996-08-05\",\n            \"organic\": 1720.6070836204478,\n            \"paid\": 1756.187653690797\n          }\n        ]\n      },\n      {\n        \"source_type\": \"string\",\n        \"visits\": [\n          {\n            \"date\": \"2017-04-04\",\n            \"organic\": 534.7051114556533,\n            \"paid\": 8640.751845522882\n          },\n          {\n            \"date\": \"2020-05-02\",\n            \"organic\": 2860.980209631473,\n            \"paid\": 739.3645657205983\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b7732f8-d1c8-46ff-a7d4-6a4fabf401ed",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "website",
+                    ":domain_name",
+                    "traffic-sources",
+                    "overview-share"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "main_domain_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "mtd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) Website domain without 'www.' prefix"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "740fa035-0fa6-46d1-8028-4b5c35ce9229",
+    "name": "SimilarWeb Batch Account Traffic Sources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

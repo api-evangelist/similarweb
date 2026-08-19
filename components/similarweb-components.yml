@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://www.similarweb.com/corp/daas/integrations/,
+  https://www.similarweb.com/md/daas-integrations.md,
+  https://docs.similarweb.com/api-v5/batch-api-general/batch-api-integrations/
+description: >-
+  Similarweb ships no embeddable web components or JavaScript element library. What it
+  ships instead — and what fills the gap left by the absence of any first-party SDK — is a
+  set of prebuilt destination connectors and spreadsheet/BI add-ins that consume the same
+  API key and the same data credits. They are grouped below by family. This is a
+  no-code/low-code surface, not a client-side UI kit, and it is recorded as such.
+
+component_families:
+- family: Spreadsheet add-ins
+  description: Prebuilt add-ins that pull Similarweb datasets into a spreadsheet
+  components:
+  - {name: Microsoft Excel plugin, url: 'https://www.similarweb.com/corp/daas/integrations/excel/', requires: subscription with API access}
+  - {name: Google Sheets add-on, requires: subscription with API access}
+
+- family: BI and visualization connectors
+  description: Native connectors for business-intelligence tools
+  components:
+  - {name: Google Looker Studio connector}
+  - {name: Tableau}
+  - {name: Microsoft Power BI}
+
+- family: CRM connectors
+  description: Enrich CRM records with Similarweb firmographic and technographic data
+  components:
+  - {name: HubSpot connector}
+  - {name: Salesforce integration, docs: 'https://docs.similarweb.com/api-v5/batch-api-general/batch-api-integrations/salesforce-connector'}
+
+- family: Cloud and data-platform destinations
+  description: >-
+    Batch API delivery targets. These are configured through the Integrations operations in
+    openapi/similarweb-integrations-api-openapi.yml, so unlike the rest of this file they
+    have a machine-readable contract.
+  components:
+  - {name: Amazon S3, operation: createS3Integration, docs: 'https://docs.similarweb.com/api-v5/batch-api-general/batch-api-integrations/amazon-s3-integration'}
+  - {name: Google Cloud Storage, operation: createGcsIntegration, docs: 'https://docs.similarweb.com/api-v5/batch-api-general/batch-api-integrations/google-cloud-storage-gcs-post'}
+  - {name: Snowflake, docs: 'https://docs.similarweb.com/api-v5/batch-api-general/batch-api-integrations/snowflake-api-integration'}
+  - {name: Databricks}
+
+- family: Browser extension
+  description: Consumer/analyst surface, not a developer component
+  components:
+  - {name: Similarweb Browser Extension, url: 'https://www.similarweb.com/corp/browser-extension/'}
+
+web_components: []
+loader_libraries: []
+note: >-
+  No web-component library, no embeddable dashboard SDK, and no hosted iframe/embed product
+  was found in the developer docs or the marketing site.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: https://www.similarweb.com/md/daas-integrations.md, http_status: 200}

@@ -1,0 +1,78 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.similarweb.com/api-v5/batch-api-general/webhook-endpoints,
+  openapi/similarweb-webhooks-api-openapi.yml
+spec_type: Webhooks
+asyncapi_published: false
+description: >-
+  Similarweb publishes no AsyncAPI document — searched the developer docs, the
+  docs.similarweb.com/api-v5 llms.txt index, the github.com/similarweb organisation and
+  /asyncapi.yaml on every host; nothing. It does, however, document a real webhook surface
+  for the Batch API, captured here. The event surface is narrow by design: webhooks exist
+  only to signal that an asynchronous bulk report changed state, so a consumer stops
+  polling getRequestStatus. There is no event stream for the REST measurement data.
+
+transport:
+  style: outbound-http-post
+  direction: similarweb -> subscriber
+  content_type: application/json
+  timeout_seconds: 5
+  timeout_behaviour: >-
+    A subscriber that does not respond within 5 seconds is treated as a failure.
+  retries: not documented
+  signature_verification:
+    supported: partial
+    note: >-
+      The subscribe request schema (WebhookSubscribeRequest) carries a `secret` field, but
+      the docs describe no signature header or verification algorithm, so a subscriber has
+      no documented way to authenticate an inbound delivery.
+
+setup_flow:
+- step: Create an HTTPS endpoint in your application that accepts POST
+- step: Validate it with the test operation (testWebhook, POST /v3/batch/webhooks/test) and confirm you receive the test_webhook_endpoint event
+- step: Include the validated webhook_url in the report request body (requestReport) or subscribe it (subscribeWebhook)
+- step: Similarweb POSTs to the URL when the report status changes
+
+events:
+- name: test_webhook_endpoint
+  description: >-
+    Sent immediately when the test operation is called; confirms end-to-end delivery.
+  payload_example: |
+    {
+      "event_type": "test_webhook_endpoint",
+      "payload": "Webhook Integration with Similarweb is successful!"
+    }
+  trigger_operation: testWebhook
+  verbatim: true
+- name: report status change
+  description: >-
+    Sent when a Batch report transitions state. The docs enumerate the possible report
+    statuses but do not publish the delivered payload schema for this event, so it is NOT
+    reproduced here.
+  statuses: [processing, complete, internal_error]
+  trigger_operation: requestReport
+  payload_documented: false
+
+operations:
+  source: openapi/similarweb-webhooks-api-openapi.yml
+  entries:
+  - {operationId: subscribeWebhook, method: POST, path: /batch/v4/webhooks/subscribe}
+  - {operationId: listWebhookSubscriptions, method: GET, path: /batch/v4/webhooks/list}
+  - {operationId: unsubscribeWebhook, method: DELETE, path: /batch/v4/webhooks/unsubscribe}
+  - {operationId: testWebhook, method: POST, path: /batch/v4/webhooks/test}
+  version_note: >-
+    The captured spec uses /batch/v4/webhooks/*; the V5 documentation shows the test
+    operation at /v3/batch/webhooks/test. Both path generations appear in provider
+    documentation — recorded as observed rather than reconciled.
+
+gaps:
+- No AsyncAPI or CloudEvents document is published
+- The report-status event payload schema is not documented
+- No signature header or verification procedure is documented for the `secret`
+- No delivery-retry policy is documented
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: https://docs.similarweb.com/api-v5/batch-api-general/webhook-endpoints.md, http_status: 200}

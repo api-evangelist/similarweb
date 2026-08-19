@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account Integrations API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "S3 Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.similarweb.com/batch/v4/s3-integration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new Amazon S3 integration for batch report delivery."
+        },
+        {
+          "info": {
+            "name": "Google Cloud Storage (GCS) Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.similarweb.com/batch/v4/gcs-integration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new Google Cloud Storage integration for batch report delivery."
+        },
+        {
+          "info": {
+            "name": "Get All Account Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/batch/v4/integrations",
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve all cloud storage integrations configured for the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

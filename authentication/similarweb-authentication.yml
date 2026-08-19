@@ -1,25 +1,96 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/similarweb-batch-api-openapi.yml, openapi/similarweb-rest-api-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/*.yml
+docs: https://docs.similarweb.com/api-v5/getting-started/authentication
+also_documented_at:
+- https://developers.similarweb.com/docs/authentication
+- https://docs.similarweb.com/api-v5/similarweb-mcp/mcp-setup
+description: >-
+  Similarweb authenticates its REST and Batch APIs with a single long-lived API key — no
+  OAuth, no OIDC, no mTLS. The hosted MCP server is the one exception: it accepts the same
+  API key in an `api-key` header OR an OAuth 2.1 bearer token from its own authorization
+  server. Derived from the OpenAPI securitySchemes and upgraded from the provider's
+  authentication guide, which documents the key lifecycle the specs cannot express.
+
 summary:
-  types:
-  - apiKey
-  api_key_in:
-  - header
-  - query
+  types: [apiKey, http]
+  api_key_in: [header, query]
+  oauth2_flows: [authorizationCode]
+  oauth2_scope: MCP surface only
+
 schemes:
 - name: apiKeyHeader
   type: apiKey
   in: header
   parameter: api-key
-  description: SimilarWeb API key passed as a request header
+  description: Similarweb API key passed as a request header. The form used in every doc example.
+  applies_to: [rest, batch, mcp]
   sources:
-  - openapi/similarweb-batch-api-openapi.yml
-  - openapi/similarweb-rest-api-openapi.yml
+  - openapi/similarweb-account-api-openapi.yml
+  - openapi/similarweb-app-intelligence-api-openapi.yml
+  - openapi/similarweb-credits-api-openapi.yml
+  - openapi/similarweb-geography-api-openapi.yml
+  - openapi/similarweb-integrations-api-openapi.yml
+  - openapi/similarweb-keywords-api-openapi.yml
+  - openapi/similarweb-lead-enrichment-api-openapi.yml
+  - openapi/similarweb-rankings-api-openapi.yml
+  - openapi/similarweb-reports-api-openapi.yml
+  - openapi/similarweb-similar-sites-api-openapi.yml
+  - openapi/similarweb-traffic-and-engagement-api-openapi.yml
+  - openapi/similarweb-traffic-sources-api-openapi.yml
+  - openapi/similarweb-webhooks-api-openapi.yml
 - name: apiKeyQuery
   type: apiKey
   in: query
   parameter: api_key
-  description: SimilarWeb API key passed as a query parameter
-  sources:
-  - openapi/similarweb-rest-api-openapi.yml
+  description: >-
+    Similarweb API key passed as a query parameter. Accepted, but it puts the credential in
+    URLs, logs and referrers — prefer the header.
+  applies_to: [rest]
+  sources: [openapi/_original/similarweb-rest-api-openapi.yml]
+- name: mcpBearer
+  type: http
+  scheme: bearer
+  description: >-
+    OAuth 2.1 bearer token accepted by the hosted MCP server as an alternative to the
+    api-key header. Issued by https://mcp-auth.similarweb.com.
+  applies_to: [mcp]
+  sources: [well-known/similarweb-oauth-protected-resource.json]
+
+key_lifecycle:
+  issued_by: account administrators only
+  console: https://account.similarweb.com/standard-api
+  platform_path: Settings > Account > Data Tools > REST API / Batch API
+  max_active_keys_per_user: 3
+  expiry: none
+  activation_required: true
+  activation_note: >-
+    A newly created key must have its Activation toggle switched on. An inactive key returns
+    "Invalid API key" errors, which reads identically to a wrong key.
+  scoped_key: false
+  unified_key: >-
+    As of API V5, ONE key works across both REST and Batch. API V4 required separate keys
+    for the two surfaces — a migration detail that breaks V4-era integrations silently.
+  credit_limits: >-
+    Admins can set per-user credit limits per API (for example 10K on REST and 10K on
+    Batch). Limits are per user, not per key.
+  revocation: >-
+    Removing a user from the account revokes their keys; keys can also be transferred to
+    another active user or disabled individually.
+
+failure_modes:
+- {status: 401, meaning: 'invalid or inactive key (observed body: `invalid API key`) — also returned for a malformed domain'}
+- {status: 403, meaning: invalid API key or exhausted data credits (REST, per the error guide)}
+
+gaps:
+- No OAuth, OIDC or mTLS on the REST/Batch surface
+- No key rotation API — keys are managed only through the platform UI
+- No scoping: a key carries the whole subscription entitlement
+- 401 is overloaded across authentication failure and data-not-found
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: https://docs.similarweb.com/api-v5/getting-started/authentication.md, http_status: 200}
+  - {url: https://developers.similarweb.com/docs/authentication.md, http_status: 200}
+  - {url: 'https://api.similarweb.com/v1/website/cnn.com/total-traffic-and-engagement/visits (invalid key)', http_status: 401}

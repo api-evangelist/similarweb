@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account Geography API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geography",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Geography - Desktop",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v4/website/:domain_name/geo/traffic-by-country",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path",
+                "description": "Website domain without 'www.' prefix"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start month in YYYY-MM format"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End month in YYYY-MM format"
+              },
+              {
+                "name": "main_domain_only",
+                "value": "",
+                "type": "query",
+                "description": "Return main domain only (true) or include subdomains (false)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting position for paginated results"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Metric name to sort results by"
+              },
+              {
+                "name": "asc",
+                "value": "",
+                "type": "query",
+                "description": "Sort ascending (true) or descending (false)"
+              }
+            ]
+          },
+          "docs": "Retrieve desktop traffic distribution by country for a given domain, including visit share, engagement metrics, and rank per country."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

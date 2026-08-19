@@ -1,0 +1,67 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Similarweb Batch API
+  version: 1.0.0
+extends: openapi/_original/similarweb-batch-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Derived from the artifacts in this repo (asyncapi/, conventions/, errors/, data-model/)
+  against the harvested Batch specification. Applies our annotations without mutating the
+  original document.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-08-13'
+    x-async-pattern: submit-poll-or-webhook
+    x-webhook-catalog: asyncapi/similarweb-webhooks.yml
+    x-error-catalog: errors/similarweb-problem-types.yml
+    x-data-model: data-model/similarweb-data-model.yml
+
+- target: $
+  description: >-
+    The asynchronous execution contract, which the path-level spec does not express.
+  update:
+    x-job-lifecycle:
+      submit: requestReport
+      price_first: validateRequest
+      poll: getRequestStatus
+      history: getReportHistory
+      retry: retryRequest
+      notify: subscribeWebhook
+      statuses: [processing, complete, internal_error]
+      max_domains_per_job: 1000000
+      delivery_targets: [Amazon S3, Google Cloud Storage, Snowflake]
+
+- target: $
+  description: >-
+    The Batch 429 is a limit on PENDING jobs, not the REST 10-requests-per-second limit.
+    Conflating the two is the most likely integration error on this surface.
+  update:
+    x-rate-limit:
+      kind: pending-job-concurrency
+      status_on_exhaustion: 429
+      distinct_from: the REST 10 rps limit
+      docs: https://docs.similarweb.com/api-v5/guides/error-handling-and-troubleshooting
+
+- target: $.components.schemas.WebhookSubscribeRequest
+  description: >-
+    The `secret` field has no documented signature header or verification algorithm, so a
+    subscriber cannot authenticate an inbound delivery. Flagged rather than fabricated.
+  update:
+    x-signature-verification:
+      documented: false
+      note: >-
+        A shared secret is accepted at subscribe time but no signing scheme is published.
+
+- target: $.components.schemas.ValidateResponse
+  description: Clarify the unit of estimated_cost.
+  update:
+    x-cost-unit: data-credits
+
+- target: $.components.schemas.TableDescription
+  description: >-
+    vtable is the dataset discovery key for the entire Batch surface.
+  update:
+    x-discovery-key: vtable
+    x-discovery-operation: describeTables

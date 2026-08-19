@@ -1,0 +1,238 @@
+# Similarweb API Documentation
+
+> Need Similarweb data fast and at scale? Similarweb API allows you to query up to 1 million domains at once, and have them delivered directly to your data warehouse.
+
+## Guides
+- [Welcome to the Similarweb API Documentation](https://developers.similarweb.com/docs/similarweb-web-traffic-api.md): Simplify decision-making by integrating Similarweb data directly into your workflows.
+- [Getting Started](https://developers.similarweb.com/docs/getting-started.md): This section will help you get started with Similarweb API. You'll be up and running in a few minutes!
+- [Get Help and Support](https://developers.similarweb.com/docs/getting-help.md): Got stuck? We’d love to help.
+- [Authentication](https://developers.similarweb.com/docs/authentication.md): Get your Similarweb API key in a few easy steps.
+- [Check Credit Balance](https://developers.similarweb.com/docs/check-your-balance.md): How to check how many data crdits you have remaining.
+- [Popular Use Cases](https://developers.similarweb.com/docs/popular-use-cases.md)
+- [What are Data Credits?](https://developers.similarweb.com/docs/data-credits-unpublished-whats-new-in-v40.md): Learn what's new in Similarweb's latest API, version 4.0.
+- [Similarweb MCP Overview](https://developers.similarweb.com/docs/similarweb-mcp.md): Plug Similarweb data directly into your AI workflows
+- [Claude MCP Integration](https://developers.similarweb.com/docs/claude-mcp-integration.md): Step-by-step guide for connecting Similarweb’s MCP server to Claude
+- [Cursor MCP Integration](https://developers.similarweb.com/docs/cursor-mcp-integration.md): Step-by-step guide for connecting Similarweb’s MCP server to Cursor
+- [Copilot Studio MCP Integration](https://developers.similarweb.com/docs/copilot-mcp-integration.md): Step-by-step guide for connecting Similarweb’s MCP server to Microsoft Copilot Studio
+- [Set up your Batch API](https://developers.similarweb.com/docs/set-up-your-batch-api.md): Step by step guide to set up your Similarweb Batch API
+- [Report Endpoints](https://developers.similarweb.com/docs/report-endpoints.md)
+- [API Discovery endpoints](https://developers.similarweb.com/docs/api-discovery-endpoints.md)
+- [Webhook Endpoints](https://developers.similarweb.com/docs/webhooks.md): Webhooks provide a way for notifications to be delivered to an external web server whenever certain events occur on Similarweb's API.
+- [Error Codes](https://developers.similarweb.com/docs/error-codes-batch.md): Here are the various HTML responses you may receive when using Similarweb Batch API.
+- [Country Codes](https://developers.similarweb.com/docs/country-codes.md)
+- [Intro to the Batch API Datasets](https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md)
+- [Websites Dataset](https://developers.similarweb.com/docs/websites-dataset.md): The Batch API Websites Dataset provides comprehensive web analytics across desktop and mobile platforms, enabling you to analyze website performance, user engagement, traffic sources, and competitive positioning. Access detailed metrics on visits, page views, bounce rates, marketing channels, and audience behavior.
+- [Websites Audience & Demographics Dataset](https://developers.similarweb.com/docs/websites-audience-analysis-dataset.md): Analyze the overlapping audiences across multiple websites and gain valuable insights into the demographics and interests of visitors to your website, your competitors' websites, and your industry.
+- [Search Dataset](https://developers.similarweb.com/docs/search-dataset.md): Discover the website keywords driving traffic to uncover search opportunities and help build your winning digital marketing strategy. Keyword Analysis provides a deep-dive into any keyword on the web to discover the competitive landscape for any search term.
+- [On-Site Search Dataset](https://developers.similarweb.com/docs/on-site-search-batch-api.md): Discover the phrases consumers use when searching on specific websites and segments. This dataset helps identify trends in consumer behavior by analyzing search phrases across domains and segments.
+- [Apps Dataset](https://developers.similarweb.com/docs/apps-dataset.md): The Batch API Apps Dataset provides comprehensive app intelligence across iOS and Android platforms, enabling you to analyze app performance, user behavior, competitive positioning, and technology adoption. Access detailed metrics on downloads, user engagement, demographics, retention, rankings, and cross-platform usage patterns.
+- [App Technographics - Supported SDKs](https://developers.similarweb.com/docs/app-technographics-supported-sdks.md): Similarweb's App Technographics dataset tracks over **2,100 mobile SDKs** across iOS and Android platforms, providing comprehensive insights into the technology stacks powering mobile applications. This intelligence helps you understand competitive landscapes, identify partnership opportunities, and analyze technology adoption trends
+- [How to find App IDs?](https://developers.similarweb.com/docs/how-to-find-app-ids.md): App IDs are unique identifiers that allow Similarweb's APIs to locate and return data for specific mobile applications. Every app on iOS and Android has a distinct identifier that serves as its "address" in our system.
+- [Company Dataset](https://developers.similarweb.com/docs/company-firmographics.md): Gain visibility to a business firmographics, size, and performance.
+- [Technologies Dataset](https://developers.similarweb.com/docs/website-technologies-dataset.md): Our Technologies dataset offers comprehensive insights into more than 5,000 diverse technologies used across the web. Updated daily, this dataset provides valuable data on the adoption, utilization, and trends of various technologies. It's an indispensable tool for generating new leads, conducting competitive analysis, and performing general market research.
+- [Ecommerce Dataset (Shopper Intelligence)](https://developers.similarweb.com/docs/ecommerce-dataset.md): This Batch API dataset helps companies monitor consumer demand, analyze shopper behavior, and optimize search strategies to win in the Ecommerce world.
+- [Set Up Shopper Intelligence API](https://developers.similarweb.com/docs/shopper-api-setup.md): AKA Shoppers intelligence
+- [Conversion Analysis (Site level) - All Traffic](https://developers.similarweb.com/docs/conversion-analysis-all-traffic.md)
+- [Snowflake API Integration](https://developers.similarweb.com/docs/snowflake.md): Integrate Similarweb Batch API reports into your Snowflake account.
+- [Amazon S3 Integration](https://developers.similarweb.com/docs/s3-bucket.md): Access your Similarweb Batch API reports via Amazon S3.
+- [Salesforce Connector](https://developers.similarweb.com/docs/salesforce-connector-1.md): Use the Similarweb Salesforce Connector to automatically enrich your accounts, contacts, and leads, strengthening the quality of your pipeline and increasing sales efficiency.  The connector includes 17 vital metrics, including traffic, web category, HQ location, engagement metrics, and many more.
+- [Google Looker Studio Connector](https://developers.similarweb.com/docs/google-looker-studio-integration.md): Step-by-Step guide for integrating Similarweb Website Traffic and Engagement data with Google Looker Studio
+- [Google Sheets Add-on Guide](https://developers.similarweb.com/docs/google-sheets-add-on-guide.md): The Similarweb Google Sheets Add-on (Updated July 2025) brings Similarweb’s digital intelligence directly into your spreadsheets. Use custom formulas to pull real-time web traffic, engagement, keyword, and geographic data—no code required.
+- [Microsoft Excel Add-on Guide](https://developers.similarweb.com/docs/microsoft-excel.md): The Similarweb Microsoft Excel Add-on (Updated June 2025) brings Similarweb’s digital intelligence directly into your spreadsheets. Use custom formulas to pull real-time web traffic, engagement, keyword, and geographic data—no code required.
+- [What's New in V.4.0?](https://developers.similarweb.com/docs/api-v40.md): Learn what's new in Similarweb's latest API, version 4.0.
+- [Rate Limit](https://developers.similarweb.com/docs/rate-limit.md)
+- [Error Codes](https://developers.similarweb.com/docs/error-codes-rest.md): Here are the various HTML responses you may receive when using Similarweb REST API.
+- [Check Capabilities](https://developers.similarweb.com/docs/check-capabilities.md): This endpoint provides a detailed overview of your account's current capabilities based on your subscription package.
+- [Check User Usage](https://developers.similarweb.com/docs/check-user-usage.md): Returns the remaining data credits for users with an allocated allowance.
+- [List Categories](https://developers.similarweb.com/docs/list-categories.md): Returns a list of all Similarweb website categories.
+- [Data Notifications via Webhooks](https://developers.similarweb.com/docs/how-to-subscribe-to-webhook-notifications.md): Subscribe to event notifications via the API to be instantly updated when new daily and monthly website data is released.
+- [Subscribe to webhook events](https://developers.similarweb.com/docs/subscribe.md): Subscribe to event notifications to stay updated on the release of new daily or monthly website data. Each event type allows only one subscription. Ensure that the subscription URL does not exceed 255 characters.
+- [Unsubscribe from Webhook Events](https://developers.similarweb.com/docs/unsubscribe.md): Unsubscribe from a specific webhook event using the subscription ID. This action requires a PUT request to the provided endpoint.
+- [List Webhook Subscriptions](https://developers.similarweb.com/docs/list.md): Retrieve a list of your existing webhook subscriptions.
+- [Authorize Webhooks](https://developers.similarweb.com/docs/authorize.md): This endpoint allows you to authenticate that your endpoint was triggered by a trusted source (i.e., Similarweb).
+- [When do hits get refreshed?](https://developers.similarweb.com/docs/when-do-data-credits-get-refreshed.md)
+- [Why does data have decimal places?](https://developers.similarweb.com/docs/why-does-data-have-decimal-places.md)
+- [Why does the API return exact values for small sites?](https://developers.similarweb.com/docs/why-does-the-api-return-exact-values-for-small-sites.md)
+- [How can I see if new daily data is available?](https://developers.similarweb.com/docs/how-can-i-see-if-new-daily-data-is-available.md)
+- [Sales Signals API Guide](https://developers.similarweb.com/docs/sales-signals-api-user-manual.md)
+- [API Endpoints](https://developers.similarweb.com/docs/json-schema-reference-api-endpoints.md)
+- [Tips & Best Practices](https://developers.similarweb.com/docs/common-pitfalls-recommendations.md)
+- [Introduction](https://developers.similarweb.com/docs/rank-tracking-api-introduction.md)
+- [Available Endpoints](https://developers.similarweb.com/docs/rank-tracking-api-available-endpoints.md)
+- [Setting Up Your Campaigns](https://developers.similarweb.com/docs/rank-tracking-api-setting-up-your-campaigns.md)
+- [Getting Your API Key](https://developers.similarweb.com/docs/rank-tracking-api-get-your-api-key.md)
+- [Campaign and Scraping Configuration IDs](https://developers.similarweb.com/docs/rank-tracking-api-campaign-and-scraping-configuration-ids.md)
+- [Keywords Snapshot API](https://developers.similarweb.com/docs/rank-tracking-keywords-snapshot-api.md): https://api.similarweb.com/v4/rank-tracker/{campaign_id}/reports/keywords-report/table?api_key={{API_KEY}}&start_date=2023-12-01&end_date=2024-01-01&device=Desktop&site={{SITE}}&scraping_configurations={{SCRAPING CONFIG ID}}
+- [Keywords Position Trend API](https://developers.similarweb.com/docs/rank-tracking-keywords-position-trend-api.md): https://api.similarweb.com/v4/rank-tracker/{campaign_id}/reports/keywords-report/trend?site={{SITE}}&start_date=2024-01-12&end_date=2024-02-12&sort=cpc&asc=false&scraping_configurations={{SCRAPING_CONFIG_ID}}&api_key={{API_KEY}}
+- [Campaign Overview API](https://developers.similarweb.com/docs/rank-tracking-campaign-overview-api.md): https://api.similarweb.com/v4/rank-tracker/{campaign_id}/reports/overview-report/performanceOverTime?api_key={{API_KEY}}&start_date=2023-12-01&end_date=2024-01-01&device=Desktop&site={{SITE}}&scraping_configurations={{SCRAPING CONFIG ID}}
+
+## API Reference
+- [Visits - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/visits.md): Returns the estimated number of all visits to a given domain: desktop and mobile visits combined. Historical data goes back 37 months, depending on your subscription.
+- [Pages Per Visit - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/pages-per-visit.md): Returns the average number of page views per visit for a given domain. Historical data goes back 37 months, depending on your subscription.
+- [Average Visit Duration - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/average-visit-duration-all-traffic.md): Returns the average visit duration for a given domain (in seconds). Historical data goes back 37 months, depending on your subscription.
+- [Bounce Rate - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/bounce-rate.md): Returns the bounce rate for a given domain. Historical data goes back 37 months, depending on your subscription.
+- [Page Views - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/page-views.md): Returns the estimated number of page views for a domain. Historical data goes back 37 months, depending on your subscription.
+- [Desktop vs. Mobile Split - (Desktop & Mobile)](https://developers.similarweb.com/reference/desktop-vs-mobile-split.md): Returns the desktop vs. mobile web traffic share split for the selected time period (1 month minimum).
+- [Deduplicated Audience - (Desktop & Mobile)](https://developers.similarweb.com/reference/deduplicated-audience.md): Returns the number of individuals visiting a domain across devices monthly (deduplicated across devices).
+- [Global Rank - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/global-rank.md): Returns Similarweb's Global Rank for a given domain. Global Rank is calculated based on a mix of our estimations of a site's monthly unique visitors and monthly pageviews across desktop and mobile traffic.
+- [Country Rank - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/country-rank.md): Returns Similarweb's monthly Country Rank for a given domain.
+- [Industry Rank - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/industry-rank.md): Returns the industry (formerly named 'category') of a domain and its Industry Rank within its industry worldwide.
+- [Geography - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/geography-total.md): Returns the total traffic share, visits, pages per visit, average time, bounce rate and rank broken down by country, between the selected dates (min. 1 month).
+- [Visits - Desktop](https://developers.similarweb.com/reference/visits-desktop.md): Returns the estimated number of desktop visits to a domain. Historical data goes back 37 months, depending on your subscription.
+- [Pages Per Visit - Desktop](https://developers.similarweb.com/reference/pages-per-visit-desktop.md): Returns the average page views per desktop visit for a given domain. Historical data goes back 37 months, depending on your subscription.
+- [Average Visit Duration - Desktop](https://developers.similarweb.com/reference/average-visit-duration.md): Returns the average desktop visit duration on a given domain (in seconds). Historical data goes back 37 months, depending on your subscription.
+- [Bounce Rate - Desktop](https://developers.similarweb.com/reference/bounce-rate-desktop.md): Returns the bounce rate on desktop devices for a given domain. Historical data goes back 37 months, depending on your subscription.
+- [Pageviews - Desktop](https://developers.similarweb.com/reference/pageviews.md): Returns the estimated number of pageviews for a domain on desktop devices. Historical data goes back 37 months, depending on your subscription.
+- [Unique Visitors - Desktop](https://developers.similarweb.com/reference/unique-visitors.md): Returns the daily or monthly unique visitors to a domain on desktop devices. Historical data goes back 37 months, depending on your subscription.
+- [Geography - Desktop](https://developers.similarweb.com/reference/geography.md): Returns the desktop traffic share, visits, pages per visit, average time, bounce rate and rank broken down by country, between the selected dates (min. 1 month).
+- [Visits - Mobile Web](https://developers.similarweb.com/reference/visits-2.md): Returns the estimated number of mobile web visits to a domain. Historical data goes back 37 months, depending on your subscription.
+- [Pages Per Visit - Mobile Web](https://developers.similarweb.com/reference/pages-per-visit-1.md): Returns the average pageviews per visit for a given domain, on mobile web. Historical data goes back 37 months, depending on your subscription.
+- [Average Visit Duration - Mobile Web](https://developers.similarweb.com/reference/average-visit-duration-1.md): Returns the average mobile web visit duration on a given domain (in seconds). Historical data goes back 37 months, depending on your subscription.
+- [Bounce Rate - Mobile Web](https://developers.similarweb.com/reference/bounce-rate-2.md): Returns the mobile web bounce rate for a given domain. Historical data goes back 37 months, depending on your subscription.
+- [Pageviews - Mobile Web](https://developers.similarweb.com/reference/pageviews-1.md): Returns the mobile web page views for a given domain. Historical data goes back 37 months, depending on your subscription.
+- [Unique Visitors - Mobile Web](https://developers.similarweb.com/reference/unique-visitors-1.md): Returns the daily or monthly unique visitors to a domain on mobile web. Historical data goes back 37 months, depending on your subscription.
+- [Geography - Mobile](https://developers.similarweb.com/reference/geography-mobile.md): Returns the mobile traffic share, visits, pages per visit, average time, bounce rate and rank broken down by country, between the selected dates (min. 1 month).
+- [Visits by Marketing Channel - Desktop](https://developers.similarweb.com/reference/traffic-sources-overview.md): Returns the estimated desktop visits by marketing channel (Organic Search, Paid Search, Direct, Display Ads, E-Mail, Referrals and Social) on desktop devices.
+- [Pages Per Visit by Marketing Channel - Desktop](https://developers.similarweb.com/reference/pages-per-visit-desktop-traffic-sources.md): Returns the estimated pages per visit by marketing channel (Organic Search, Paid Search, Direct, Display Ads, E-Mail, Referrals and Social) on desktop devices.
+- [Average Visit Duration by Marketing Channel - Desktop](https://developers.similarweb.com/reference/average-visit-duration-desktop-traffic-sources.md): Returns the estimated average visit duration by marketing channel (Organic Search, Paid Search, Direct, Display Ads, E-Mail, Referrals and Social) on desktop devices.
+- [Bounce Rate by Marketing Channel - Desktop](https://developers.similarweb.com/reference/bounce-rate-desktop-traffic-channels.md): Returns the estimated bounce rate by marketing channel (Organic Search, Paid Search, Direct, Display Ads, E-Mail, Referrals and Social) on desktop devices.
+- [Referrals - Desktop](https://developers.similarweb.com/reference/referrals-desktop.md): Returns the referring websites for a given domain, traffic share, change per referrer, and # of total referral visits.
+- [Social Referrals - Desktop](https://developers.similarweb.com/reference/social-referrals.md): Returns the leading social networks sending traffic to a domain as well as traffic share per social network and number of social visits.
+- [Ad Networks - Desktop](https://developers.similarweb.com/reference/ad-networks-desktop.md): Returns the top Ad Networks sending traffic to a domain, as well as the traffic share per Ad Network.
+- [Display Publishers - Desktop](https://developers.similarweb.com/reference/display-publishers-desktop.md): Returns the top publishers sending traffic to a given domain and traffic share per publisher.
+- [Publishers Per Ad Network - Desktop](https://developers.similarweb.com/reference/publishers-per-ad-network-desktop.md): Returns the top publishers per ad network for a given domain, and their traffic share.
+- [Organic Keyword Competitors - Desktop](https://developers.similarweb.com/reference/organic-keyword-competitors-desktop.md): Returns a list of websites that are competing for the same organic keywords as the given domain, overlap score and % of shared keywords.
+- [Paid Keyword Competitors - Desktop](https://developers.similarweb.com/reference/paid-keyword-competitors-desktop.md): Returns a list of websites that are competing for the same paid keywords as the given domain, overlap score and % of shared keywords.
+- [Organic Outgoing Links - Desktop](https://developers.similarweb.com/reference/organic-outgoing-links-desktop.md): This endpoint enables you to examine outgoing links from any website by returning the traffic share of all organic outgoing links for a domain and the number of outgoing visits.
+- [Outgoing Ads: Ad Networks - Desktop](https://developers.similarweb.com/reference/outgoing-ads-ad-networks-desktop.md): Returns the traffic share of all Ad Networks receiving traffic from a domain.
+- [Outgoing Ads: Advertisers - Desktop](https://developers.similarweb.com/reference/outgoing-ads-advertisers-desktop.md): Returns the traffic share of all advertisers receiving traffic from a domain.
+- [Traffic Sources by Marketing Channel - Desktop](https://developers.similarweb.com/reference/desktop-marketing-channels-1.md): Returns a list of desktop website traffic sources (domain) by marketing channel (source type) and traffic share for the selected time frame.
+- [PPC Spend - Desktop](https://developers.similarweb.com/reference/ppc-spend-desktop.md): Returns an estimate of a website’s spend on PPC search terms over an analyzed period.
+- [Traffic Sources by Marketing Channel - Mobile Web](https://developers.similarweb.com/reference/traffic-sources-overview-mobile-web.md): Returns the estimated mobile visits by channel: Organic Search, Paid Search, Direct, Display Ads, E-Mail, Referrals and Social.
+- [Referrals - Mobile Web](https://developers.similarweb.com/reference/referrals-mobile-web.md): Returns the referring websites for a given domain on mobile web, traffic share per referrer, and change, as well as the number of incoming mobile visits.
+- [Outgoing Referrals - Mobile Web](https://developers.similarweb.com/reference/outgoing-referrals-mobile-web.md): Returns traffic share and change of all outgoing mobile referral links for a given domain, as well as the number of outgoing mobile visits.
+- [Organic Keyword Competitors - Mobile Web](https://developers.similarweb.com/reference/organic-keyword-competitors-mobile-web-1.md): Returns a list of websites that are competing for the same organic keywords as the given domain, overlap score and keywords share.
+- [Paid Keyword Competitors - Mobile Web](https://developers.similarweb.com/reference/paid-keyword-competitors-mobile-web.md): Returns a list of websites that are competing for the same paid keywords as the given domain, their keywords share and overlap score.
+- [PPC Spend - All Traffic](https://developers.similarweb.com/reference/ppc-spend-all-traffic.md): Returns an estimate of a website’s spend on PPC search terms over an analyzed period
+- [Demographics 2.0: Groups - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/demographics-20-age-gender-groups.md): Returns the unique audience share for a cohort of gender and age group of the selected domain and the engagement metrics associated with this cohort.
+- [Demographics 2.0: Age - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/demographics-age-total.md): Returns a breakdown of the domain's traffic by age group.
+- [Demographics 2.0: Gender - Total (Desktop & Mobile)](https://developers.similarweb.com/reference/demographics-gender-total.md): Returns a breakdown of the domain's traffic by gender.
+- [Audience Interests - All Traffic](https://developers.similarweb.com/reference/audience-interests-all-traffic.md): Returns a list of websites that were frequently visited across desktop and mobile web by the same visitors of a given domain within the browsing session, along with their affinity score and overlap (average % of visitors that visited both sites on the same day).
+- [Audience Interests - Desktop](https://developers.similarweb.com/reference/audience-interests-desktop.md)
+- [Audience Interests - Mobile Web](https://developers.similarweb.com/reference/audience-interests-mobile-web.md)
+- [Audience Overlap - Desktop](https://developers.similarweb.com/reference/audience-overlap.md): Returns the shared unique visitors for up to five competitors, the average unique visitors for each of these domains and the total unique visitors for all of them.
+- [New vs. Returning - All Traffic](https://developers.similarweb.com/reference/new-vs-returning-total.md): Returns the absolute number of the new vs. returning users that visit a website
+- [Subdomains - Desktop](https://developers.similarweb.com/reference/subdomains-desktop.md): Returns a list of subdomains and traffic share per subdomain.
+- [Subdomains - Mobile](https://developers.similarweb.com/reference/subdomains-mobile-web.md): Returns a list of subdomains and traffic share per subdomain.
+- [Folders](https://developers.similarweb.com/reference/folders-total.md): Returns a list of leading folders for a domain and share per folder
+- [Popular Pages](https://developers.similarweb.com/reference/popular-pages-total.md): Returns a list of pages receiving incoming traffic from all devices (desktop and mobile) and traffic share per page.
+- [List Custom Segments](https://developers.similarweb.com/reference/list-segments.md): Returns the IDs of the custom segments associated with your account, as defined on the Similarweb platform.
+- [List Predefined Segments](https://developers.similarweb.com/reference/list-segments-pre-define.md): Returns the IDs of predefined segments associated with your account, as defined on the Similarweb platform.
+- [Segment Traffic and Engagement - Total](https://developers.similarweb.com/reference/segment-traffic-and-engagement-total.md): Returns traffic and engagement metrics for a predefined segment of a website, including visits, traffic share, unique visitors, bounce rate, and more — across both desktop and mobile traffic. Historical data goes back 37 months, depending on your subscription.
+- [Segment Traffic and Engagement - Desktop](https://developers.similarweb.com/reference/segment-traffic-and-engagement.md): Returns the traffic and engagement metrics of a predefined segment of a website on desktop devices. Includes visits, bounce rate, pages per visit, visit duration, pageviews, traffic share, unique visitors and confidence. Historical data goes back 37 months, depending on your subscription.
+- [Segment Marketing Channels - Desktop](https://developers.similarweb.com/reference/segment-marketing-channels.md): Returns traffic and engagement data per traffic channel for a predefined website segment. Desktop devices only. Historical data goes back 37 months, depending on your subscription.
+- [Segment Marketing Channels - All Traffic](https://developers.similarweb.com/reference/segment-marketing-channels-total.md): Returns visits per traffic channel for a website segment. All Traffic devices. Historical data goes back 37 months, depending on your subscription.
+- [Conversion Analysis - Desktop](https://developers.similarweb.com/reference/conversion-analysis-1.md): Returns the conversion rates of predefined conversion segments on desktop devices. Includes visits, converted visits, conversion rate, stickiness and confidence. Historical data goes back 37 months, depending on your subscription.
+- [API Lite](https://developers.similarweb.com/reference/api-lite.md): Returns the exact data set as found in our free tool, for worldwide data.
+- [Website Description](https://developers.similarweb.com/reference/website-description.md): Returns a website's meta description.
+- [Similar Sites](https://developers.similarweb.com/reference/similar-sites.md): Returns the top 40 most similar websites to a domain & their similarity score.
+- [Top SimilarRank Sites - All Traffic](https://developers.similarweb.com/reference/top-similarrank-sites-all-traffic.md): Returns the top-ranked websites globally, on desktop and mobile web. Global rank is based on a website's unique visitors and page views.
+- [Top Sites - Total (Desktop & Mobile Web)](https://developers.similarweb.com/reference/top-sites-all-traffic.md): Returns last month's top websites in a given category. Based on desktop and mobile web traffic.
+- [Top Sites - Desktop](https://developers.similarweb.com/reference/top-sites-desktop.md): Returns last month's top websites in a given category. Based on desktop traffic.
+- [Top Sites - Mobile Web](https://developers.similarweb.com/reference/top-sites-mobile-web.md): Returns last month's top websites in a given category. Based on mobile web traffic.
+- [SERP Players](https://developers.similarweb.com/reference/keyword-analysis-competitors.md): The top websites driving search traffic for a specified keyword or custom keyword list.
+- [SERP players - Clicks over time](https://developers.similarweb.com/reference/serp-players-clicks-over-time.md): Clicks trend over time for each website from the top websites for their keyword or keyword groups
+- [Keywords Overview](https://developers.similarweb.com/reference/keywords-overview.md): Provides an overview of keyword or keyword list performance, offering insights such as search volume, click distribution, competition metrics, and other key indicators.
+- [Keywords Aggregated Overview](https://developers.similarweb.com/reference/keywords-aggregated-overview.md): A top-level view of a keyword or list performance, including key insights such as volume & clicks, competitions metrics, and much more.
+- [Website Keywords](https://developers.similarweb.com/reference/website-analysis-keywords.md): Returns the keywords driving search clicks for a specified domain.
+- [Website Overview - Branded Distribution by Clicks](https://developers.similarweb.com/reference/keywords-website-overview-branded-distribution.md): Returns the share of Branded vs Non-Branded clicks for the selected domain.
+- [Landing Pages](https://developers.similarweb.com/reference/keywords-landing-pages.md): Reveals which pages on the analyzed website receive the most organic search traffic with their traffic share, traffic trend, the number of keywords that the page is getting traffic for, top keywords, and more
+- [App ID Search](https://developers.similarweb.com/reference/app-id.md): This endpoint returns the app IDs related to a requested app with the prefix in their ‘ID', ‘title’, or ‘author’.
+- [Site Related Apps](https://developers.similarweb.com/reference/site-related-apps.md): Returns a list of all mobile apps related to a domain, along with their app ID.
+- [App Details](https://developers.similarweb.com/reference/app-details.md): Returns the title, image, publisher, price, main category, main category ID, and rating for a given app.
+- [App Related Sites](https://developers.similarweb.com/reference/app-related-sites.md): Returns a list of all the websites related to a given app.
+- [App Downloads (Android) - New](https://developers.similarweb.com/reference/app-downloads-android-new.md): Returns the number of times an app was downloaded from the Google Play Store over a given time frame.
+- [App Downloads (iOS) - New](https://developers.similarweb.com/reference/app-downloads-ios-new.md): Returns the number of times an app was downloaded from the Apple App Store over a given time frame.
+- [App Install Penetration](https://developers.similarweb.com/reference/install-penetration.md): Returns the percentage of the devices in a defined market with the app installed.
+- [App Rank](https://developers.similarweb.com/reference/app-rank.md): Returns the iOS app rank from the Apple App Store and the Android app rank from Google Play for a certain app.
+- [App Active Users (Android) - New](https://developers.similarweb.com/reference/apps-active-users-android.md): Returns the estimated Monthly Active Users (MAU), Weekly Active Users (WAU) or Daily Active Users (DAU) for a given app from the respective app store. Historical data goes back 37 months, depending on your subscription.
+- [App Active Users (iOS) - New](https://developers.similarweb.com/reference/apps-active-users-ios.md): Returns the estimated Monthly Active Users (MAU), Weekly Active Users (WAU) or Daily Active Users (DAU) for a given app from the respective app store. Historical data goes back 37 months, depending on your subscription.
+- [App Sessions (Android) - New](https://developers.similarweb.com/reference/apps-session-android.md): Returns the estimated Sessions Per User, Average Session Time, and Total Sessions Time Per User for a given app from the respective app store. Historical data goes back 37 months, depending on your subscription.
+- [App Sessions (iOS) - New](https://developers.similarweb.com/reference/apps-session-ios.md): Returns the estimated Sessions Per User, Average Session Time, and Total Sessions Time Per User for a given app from the respective app store. Historical data goes back 37 months, depending on your subscription.
+- [App User Retention](https://developers.similarweb.com/reference/user-retention.md): Returns the percentage of users that return to use an app within the first 1, 2, 3, 4, 5, 7, 14, or 30 days.
+- [App Demographics: Age](https://developers.similarweb.com/reference/app-demographics-age.md): Returns a breakdown of app demographics by age group. Currently only available for Google (Android).
+- [App Demographics Over Time - Age](https://developers.similarweb.com/reference/app-demographics-over-time-age.md): Returns a breakdown of an app’s user demographics by age, for a given time frame.  Currently only available for Google (Android).
+- [App Demographics: Gender](https://developers.similarweb.com/reference/app-demographics-gender.md): Returns a breakdown of app demographics by gender. Currently only available for Google (Android).
+- [App Demographics Over Time - Gender](https://developers.similarweb.com/reference/app-demographics-over-time-gender.md): Returns a breakdown of an app’s user demographics by gender, for a given time frame Currently only available for Google (Android).
+- [App Audience Interests](https://developers.similarweb.com/reference/app-audience-interests.md): Returns a list of apps used by the same audience as a given app, as well as affinity score. Available for Android apps only.
+- [App Top Charts (Android)](https://developers.similarweb.com/reference/top-android-apps.md): Returns a list of top Android apps sorted by Google Play Store ranking.
+- [App Top Charts (iOS)](https://developers.similarweb.com/reference/top-ios-apps.md): Returns a list of top iOS apps sorted by App Store ranking.
+- [Monthly Active Users (Android and iOS) - Legacy](https://developers.similarweb.com/reference/monthly-active-users.md): Returns the unique monthly active users of a given app.
+- [Weekly Active Users (iOS) - Legacy](https://developers.similarweb.com/reference/ios-weekly-active-users-wau.md): Returns the number of unique weekly active users of a given app on iOS.
+- [Weekly Active Users (Android) - Legacy](https://developers.similarweb.com/reference/android-weekly-active-users-wau.md): Returns the number of unique weekly active users of a given app on Android.
+- [Daily Stickiness (DAU/MAU) - Legacy](https://developers.similarweb.com/reference/app-daily-stickiness.md): Returns the ratio between the average Daily Active Users of a given month and the Monthly Active Users of that month of a given app.
+- [Daily Active Users (iOS) - Legacy](https://developers.similarweb.com/reference/ios-daily-active-users-dau.md): Returns the number of unique daily active users of a given app on iOS.
+- [Daily Active Users (Android) - Legacy](https://developers.similarweb.com/reference/daily-active-users.md): Returns the number of unique daily active users of a given app on Android.
+- [Sessions Per User (Android) - Legacy](https://developers.similarweb.com/reference/android-session-per-user.md): Returns the average number of sessions per user on Android.
+- [Average Session Time per User (Android) - Legacy](https://developers.similarweb.com/reference/android-average-sessions-time-per-user.md)
+- [Total Sessions Time Per User (Android) - Legacy](https://developers.similarweb.com/reference/android-total-sessions-time-per-user.md): Returns the average number of total sessions time per user on Android.
+- [Store Downloads (Unique Installs) - Legacy](https://developers.similarweb.com/reference/unique-installs.md): Returns the number of unique installs of a given app.
+- [App Downloads - Legacy](https://developers.similarweb.com/reference/app-downloads.md): Returns the number of times an app was downloaded from the Google Play/ Apple App store over a given time frame.
+- [Top Android Apps - Usage - Legacy](https://developers.similarweb.com/reference/top-android-apps-usage.md): Returns a list of top Android apps sorted by Similarweb’s app usage ranking
+- [List custom industry entities](https://developers.similarweb.com/reference/list-custom-industry-entities.md): Returns a list of entities (domains/segments) for a given custom industry
+- [Lead Enrichment](https://developers.similarweb.com/reference/lead-enrichment.md): Enrich your leads with a comprehensive set of firmographic, website traffic, and engagement metrics.
+- [Rank Tracking Campaign Overview](https://developers.similarweb.com/reference/rank-tracking-campaign-overview.md): Get the aggregate metrics on a campaign level across all keywords, including weighted average position, weighted visibility, clicks and Share Of Voice.
+- [Rank Tracking Keywords Position Trend](https://developers.similarweb.com/reference/rank-tracking-keywords-position-trend.md): Monitor daily positions of your site or your named competitors’ sites.  Get the position and top url of the queried site per day.
+- [Rank Tracking Keywords Snapshot](https://developers.similarweb.com/reference/rank-tracking-keywords-snapshot.md): Get the core keyword metrics, along with the most up-to-date position within the inputted time frame and position change
+- [Rank Tracker Describe](https://developers.similarweb.com/reference/rank-tracker-describe.md): In order to query the Rank Tracker APIs, you’ll need to get your Campaign IDs and Scraping Configurations.  Start by calling this API to get your campaign meta data
+- [Company Analysis - All Traffic](https://developers.similarweb.com/reference/company-analysis-all-traffic-1.md): Returns the total digital reach and performance at a company level, across desktop and mobile.
+- [Company Analysis - Desktop](https://developers.similarweb.com/reference/company-analysis-desktop.md): Returns the digital reach and performance at a company level, for desktop traffic.
+- [Company Analysis - Mobile Web](https://developers.similarweb.com/reference/company-analysis-mobile-web.md): Returns the digital reach and performance at a company level, for mobile web traffic.
+- [Website Technologies](https://developers.similarweb.com/reference/website-technologies.md): Returns a list of the web plugins or integrations currently installed on a website.
+- [Describe Available Tables](https://developers.similarweb.com/reference/tables-describe.md): This endpoint provides a comprehensive list of all the available tables that can be queried using the Batch API. It is a key resource for understanding what data can be extracted via the request-report endpoint.
+- [Test Your Webhooks](https://developers.similarweb.com/reference/webhook-test.md): This endpoint provides you with the ability to test your webhooks against internal Similarweb services that might want to send you notifications
+- [Get Remaining Credits](https://developers.similarweb.com/reference/get-credits.md): This endpoint provides the ability to get your current remaining account credits
+- [Get Remaining User Credits](https://developers.similarweb.com/reference/get-remaining-user-credits.md): This endpoint provides the ability to get your current remaining user credits
+- [Request Report](https://developers.similarweb.com/reference/request-report.md): This endpoint enables you to make a Batch API request, initiating the batch job.
+- [Request Status](https://developers.similarweb.com/reference/request-status.md): Get the current status of the requested report.
+- [Request Validate](https://developers.similarweb.com/reference/request-validate.md): Validates a request prior to submission and provides an approximate estimate of the report's cost.
+- [Retry Request](https://developers.similarweb.com/reference/retry-request.md): Retry a failed request. Your initial failed request will not affect your quota. You can use this endpoint up to 3 time per report ID
+- [Report History](https://developers.similarweb.com/reference/report-history.md): Get information about all the reports that were requested.
+- [Get Request Query](https://developers.similarweb.com/reference/request-query.md): Get the query that was used to generate a report.
+- [Get All Account Integrations](https://developers.similarweb.com/reference/get-all-integrations.md): This endpoint provides a list of all of the account's integrations (S3 integrations and Snowflake integrations).
+- [S3 Integration](https://developers.similarweb.com/reference/s3-integration.md): This endpoint creates a new S3 integration, and generates an AWS access and secret keys to be used for reading the data written to this integration's folders.
+- [Renew S3 Integration](https://developers.similarweb.com/reference/re-new-s3-integration.md): This endpoint creates a new S3 integration, and generates an AWS access and secret keys to be used for reading the data written to this integration's folders.
+- [Revoke S3 Integration](https://developers.similarweb.com/reference/revoke-s3-integration.md): This endpoint deletes the S3 integration.
+- [Google Cloud Storage (GCS) Integration](https://developers.similarweb.com/reference/gcs-integration.md): Integrate Similarweb's Batch API with your Google Cloud Storage (GCS) environment. This integration allows clients to store and access exported data directly in their own GCS buckets.
+- [Renew GCS Integration](https://developers.similarweb.com/reference/renew-gcs-integration.md): Extends the expiration period of a GCS integration.
+- [Revoke GCS Table](https://developers.similarweb.com/reference/revoke-gcs-table.md): Revoke a table from a destination account.
+- [Revoke GCS Integration](https://developers.similarweb.com/reference/revoke-gcs-integration.md): Deletes the specified GCS integration. All related tables must be revoked before this step.
+- [Snowflake Integration](https://developers.similarweb.com/reference/snowflake-integration.md): This endpoint creates a new Snowflake integration, and generates a Snowflake share.
+- [Get All Snowflake Integration Tables](https://developers.similarweb.com/reference/list-snowflake-integration-tables.md): This endpoint lists all the tables created under a certain Snowflake integration.
+- [Create Table S3 / Snowflake / GCS](https://developers.similarweb.com/reference/create-table.md): Creates a permanent AWS S3 or Snowflake table. Note that before creating a table, you must create an integration.
+- [Get All Integration Tables](https://developers.similarweb.com/reference/list-s3-integration-tables.md): This endpoint lists all the tables created under a certain S3 integration or shared with it.
+- [Revoke Snowflake Integration](https://developers.similarweb.com/reference/revoke-snowflake-integration.md): This endpoint deletes Snowflake integrations.
+- [Revoke S3 Table](https://developers.similarweb.com/reference/revoke-s3-table.md): This endpoint deletes a table created under a certain S3 integration.
+
+## Recipes
+- [Batch API - Geography from REST](https://developers.similarweb.com/recipes/batch-api-geography-from-rest-1.md)
+- [Batch API - Keywords from REST](https://developers.similarweb.com/recipes/batch-api-keywords-from-rest-1.md)
+- [Batch API - Referrals from REST](https://developers.similarweb.com/recipes/batch-api-referrals-from-rest-1.md)
+- [Batch API Request - Step-by-Step Walkthrough](https://developers.similarweb.com/recipes/batch-api-request-step-by-step-walkthrough.md)
+- [Batch API - Segment from REST](https://developers.similarweb.com/recipes/batch-api-segment-from-rest-1.md)
+- [Batch API - Traffic and Engagement from REST](https://developers.similarweb.com/recipes/batch-api-traffic-and-engagement-from-rest.md)
+- [GCS Table Integration](https://developers.similarweb.com/recipes/gcs-table-integration.md)
+- [S3 Table Integration](https://developers.similarweb.com/recipes/s3-table-integration-1.md)
+- [Snowflake Table Integration](https://developers.similarweb.com/recipes/snowflake-table-integration-1.md)
+
+## Changelog
+- [Similarweb API V5 is now live!](https://developers.similarweb.com/changelog/similarweb-api-v5-is-now-live.md)
+- [Google Cloud Storage (GCS) Integration](https://developers.similarweb.com/changelog/google-cloud-storage-gcs-integration.md)
+- [New Endpoint - New vs. Returning (All Traffic) REST and Batch API](https://developers.similarweb.com/changelog/new-endpoint-new-vs-returning-total.md)
+- [New Endpoint - Android App Downloads](https://developers.similarweb.com/changelog/new-endpoint-android-app-downloads.md)
+- [New Endpoint - iOS App Downloads](https://developers.similarweb.com/changelog/new-endpoint-ios-app-downloads.md)
+- [New Endpoint - Segment Marketing Channels (All Traffic)](https://developers.similarweb.com/changelog/new-endpoint-segment-marketing-channels-all-traffic.md)
+- [New Endpoint - Landing Pages](https://developers.similarweb.com/changelog/new-endpoint-landing-pages.md)
+- [New Endpoint - Website Overview - Branded Distribution by Clicks](https://developers.similarweb.com/changelog/new-endpoint-website-overview-branded-distribution-by-clicks.md)
+- [Demographics 1.0 endpoints will be deprecated on 01.01.25](https://developers.similarweb.com/changelog/demographics-10-endpoints-will-be-deprecated-on-010125.md)
+- [New Keyword Research Endpoints: SERP Players, Website Keywords, and Keywords Overview](https://developers.similarweb.com/changelog/serp-players-and-website-keywords.md)

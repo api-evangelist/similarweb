@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "3c13cab3-9bf9-4316-bbe9-d030ebdc680b",
+      "name": "Keywords",
+      "description": {
+        "content": "Keyword analytics including organic and paid keyword data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "acefe4e1-5ee4-4837-b020-0698a6937f68",
+          "name": "Website Keywords",
+          "request": {
+            "name": "Website Keywords",
+            "description": {
+              "content": "Retrieve organic and paid keyword data for a domain including traffic share, difficulty, competition, CPC, and SERP features.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "website-analysis",
+                "keywords"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) SimilarWeb API authentication key"
+                },
+                {
+                  "disabled": false,
+                  "key": "URL",
+                  "value": "<string>",
+                  "description": "(Required) Domain without 'www.' prefix"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Start month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "End month in YYYY-MM format"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "2-letter ISO 3166-1 alpha-2 country code or \"world\""
+                },
+                {
+                  "disabled": false,
+                  "key": "traffic_source",
+                  "value": "All",
+                  "description": "Filter by traffic source type"
+                },
+                {
+                  "disabled": false,
+                  "key": "web_source",
+                  "value": "Total",
+                  "description": "Device type filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "branded_type",
+                  "value": "All",
+                  "description": "Filter branded or non-branded keywords"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Starting position for paginated results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ab1942e7-7c14-4d10-811d-375c072f6635",
+              "name": "Keyword data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "website-analysis",
+                    "keywords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "URL",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "traffic_source",
+                      "value": "All"
+                    },
+                    {
+                      "key": "web_source",
+                      "value": "Total"
+                    },
+                    {
+                      "key": "branded_type",
+                      "value": "All"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"request\": {},\n    \"status\": \"string\",\n    \"last_updated\": \"1962-04-10\"\n  },\n  \"keywords_count\": 6583,\n  \"keywords\": [\n    {\n      \"keyword\": \"string\",\n      \"clicks\": 7288.22869714377,\n      \"traffic_share\": 6059.273607987531,\n      \"difficulty\": 8134.4817626657095,\n      \"competition\": 8109.418756743761,\n      \"primary_intent\": \"string\",\n      \"secondary_intent\": \"string\",\n      \"volume\": 3667.4954497639765,\n      \"cpc\": 2371.0321783722843,\n      \"cpc_low_bid\": 1571.8894393987125,\n      \"cpc_high_bid\": 3928.33806433226,\n      \"zero_clicks_share\": 9075.7218377935,\n      \"position\": 7511.123449933308,\n      \"serp_features\": [\n        \"string\",\n        \"string\"\n      ],\n      \"top_url\": \"string\"\n    },\n    {\n      \"keyword\": \"string\",\n      \"clicks\": 1510.69487591449,\n      \"traffic_share\": 6027.07144879779,\n      \"difficulty\": 8343.430393747925,\n      \"competition\": 5198.156221482671,\n      \"primary_intent\": \"string\",\n      \"secondary_intent\": \"string\",\n      \"volume\": 1343.5881976728415,\n      \"cpc\": 6884.438041991177,\n      \"cpc_low_bid\": 8844.6004086413,\n      \"cpc_high_bid\": 1113.2223691840436,\n      \"zero_clicks_share\": 7267.497606076183,\n      \"position\": 8758.488669950231,\n      \"serp_features\": [\n        \"string\",\n        \"string\"\n      ],\n      \"top_url\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1deb46b7-b943-4256-b8ad-31252df0bc35",
+              "name": "Bad request - invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "website-analysis",
+                    "keywords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "URL",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-06"
+                    },
+                    {
+                      "key": "country",
+                      "value": "us"
+                    },
+                    {
+                      "key": "traffic_source",
+                      "value": "All"
+                    },
+                    {
+                      "key": "web_source",
+                      "value": "Total"
+                    },
+                    {
+                      "key": "branded_type",
+                      "value": "All"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.similarweb.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8f24cf5c-da20-450b-9939-9489b7bc0ef9",
+    "name": "SimilarWeb Batch Account Keywords API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.\n\nContact Support:\n Name: SimilarWeb Support",
+      "type": "text/plain"
+    }
+  }
+}

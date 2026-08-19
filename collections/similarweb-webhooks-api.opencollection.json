@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account Webhooks API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to Webhook Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.similarweb.com/batch/v4/webhooks/subscribe",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Subscribe to event notifications to stay updated on data releases and report completions."
+        },
+        {
+          "info": {
+            "name": "List Webhook Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/batch/v4/webhooks/list",
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve all active webhook subscriptions for the account."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe from Webhook Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.similarweb.com/batch/v4/webhooks/unsubscribe",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "query",
+                "description": "Webhook subscription ID to remove"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Remove a webhook subscription."
+        },
+        {
+          "info": {
+            "name": "Test Your Webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.similarweb.com/batch/v4/webhooks/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Send a test notification to a webhook URL to verify configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

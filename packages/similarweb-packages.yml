@@ -1,0 +1,94 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  npm, PyPI, RubyGems, crates.io, NuGet, pkg.go.dev/proxy.golang.org, Packagist,
+  github.com/similarweb, and the Similarweb developer docs (developers.similarweb.com,
+  docs.similarweb.com/api-v5)
+description: >-
+  Similarweb publishes NO first-party client library for its API in any public package
+  registry. The developer docs contain no SDK page and no install command — the documented
+  integration paths are raw HTTP with an `api-key` header, the hosted MCP server, and the
+  no-code connectors (Excel, Looker Studio, Salesforce, HubSpot) catalogued in
+  components/similarweb-components.yml. The github.com/similarweb organisation was reviewed
+  in full (53 public repositories, 2026-08-13): every repository is internal platform or
+  DevOps tooling (statusbay, finala, bbox, homebrew-tap, linq2fb) or a fork of a third-party
+  library. None is an API client. The entries below are therefore all community-maintained,
+  all unofficial, and all stale — the newest first-party-adjacent thing a developer can
+  install is an n8n community node, and the language clients date to 2016.
+
+official_package_count: 0
+package_count: 4
+
+packages:
+- language: python
+  registry: pypi
+  name: similarweb
+  url: https://pypi.org/project/similarweb/
+  install: pip install similarweb
+  official: false
+  version: 1.0.0
+  published: '2016-03-11'
+  maintainer: Dan Wagner (danwagnerco@gmail.com)
+  repository: https://github.com/danwagnerco/similarweb
+  note: >-
+    Community Python client. Last released 2016-03-11 — predates the v3, v4 and v5 REST
+    surfaces entirely; targets the retired legacy API. Not usable against the current API.
+
+- language: ruby
+  registry: rubygems
+  name: similarweb
+  url: https://rubygems.org/gems/similarweb
+  install: gem install similarweb
+  official: false
+  version: 0.0.3
+  published: '2016-03-02'
+  maintainer: John McLaughlin, Steven Lai
+  repository: http://github.com/johnmcl/similarweb
+  note: >-
+    Community Ruby wrapper. Last released 2016-03-02; same generation as the Python client
+    and equally superseded.
+
+- language: javascript
+  registry: npm
+  name: n8n-nodes-similarweb
+  url: https://www.npmjs.com/package/n8n-nodes-similarweb
+  install: npm install n8n-nodes-similarweb
+  official: false
+  version: 0.1.3
+  published: '2025-10-16'
+  maintainer: bryceyork
+  note: >-
+    Community n8n workflow nodes for the Similarweb API. The most recently maintained
+    third-party package found, but it is an n8n node package rather than a general-purpose
+    client library.
+
+- language: javascript
+  registry: npm
+  name: similarweb
+  url: https://www.npmjs.com/package/similarweb
+  install: npm install similarweb
+  official: false
+  version: 0.1.0
+  published: '2022-09-29'
+  note: >-
+    Community CLI that scrapes Similarweb traffic ranks. Not an API client — it does not
+    use the documented REST API or an API key.
+
+registries_checked:
+- {registry: npm, query: similarweb, first_party_hits: 0}
+- {registry: pypi, packages_probed: [similarweb, similarweb-api, pysimilarweb, similarweb-client], first_party_hits: 0}
+- {registry: rubygems, first_party_hits: 0}
+- {registry: crates.io, status: 404, first_party_hits: 0}
+- {registry: nuget, status: 404, first_party_hits: 0}
+- {registry: proxy.golang.org, status: 404, first_party_hits: 0}
+- {registry: packagist, status: 404, first_party_hits: 0}
+- {registry: github.com/similarweb, repositories: 53, api_client_repositories: 0}
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://registry.npmjs.org/-/v1/search?text=similarweb', http_status: 200}
+  - {url: https://pypi.org/pypi/similarweb/json, http_status: 200}
+  - {url: https://rubygems.org/api/v1/gems/similarweb.json, http_status: 200}
+  - {url: https://crates.io/api/v1/crates/similarweb, http_status: 404}
+  - {url: 'https://api.github.com/orgs/similarweb/repos?per_page=100', http_status: 200}

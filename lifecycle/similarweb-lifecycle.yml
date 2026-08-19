@@ -1,0 +1,76 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.similarweb.com/api-v5/guides/rest-api-data-version-migration,
+  https://docs.similarweb.com/api-v5/getting-started/what-s-new-in-v5,
+  https://developers.similarweb.com/changelog.rss
+description: >-
+  Similarweb is mid-generation: API V5 went live 2026-03-03 and the legacy v1/v3/v4 REST
+  endpoints carry a published, dated sunset of 2026-10-06 with a one-to-one migration table
+  from every old path to its V5 replacement. That is a real deprecation practice with a
+  date attached, which is more than most providers publish. What is missing is a public
+  status page — no status.similarweb.com, no statuspage.io tenant, and no uptime/SLA page
+  was found on any Similarweb host.
+
+versioning:
+  scheme: uri-path
+  current: v5
+  released: '2026-03-03'
+  live_versions: [v1, v2, v3, v4, v5]
+  docs: https://docs.similarweb.com/api-v5/getting-started/what-s-new-in-v5
+  note: >-
+    The version segment is per-endpoint, not per-API, so several generations are callable
+    at once. V5 unifies response formats, error handling and request patterns across every
+    endpoint, and replaces the V4 split where REST and Batch required separate API keys.
+
+deprecation:
+  policy_url: https://docs.similarweb.com/api-v5/guides/rest-api-data-version-migration
+  sunset_date: '2026-10-06'
+  sunset_header: false
+  deprecation_header: false
+  mechanism: >-
+    Published migration table mapping each legacy REST endpoint to its V5 replacement,
+    plus a dated deprecation notice in the guide. Delivery is documentation-only —
+    Similarweb does not emit RFC 8594 Sunset or Deprecation response headers, so a running
+    client gets no runtime signal that it is calling a sunsetting endpoint.
+  examples:
+  - {old: 'GET /v1/website/{domain}/traffic-sources/overview-share', new: 'GET /v5/website-analysis/websites/traffic-channels/share?web_source=desktop'}
+  - {old: 'GET /v4/website/{domain}/traffic-sources/overview', new: 'GET /v5/website-analysis/websites/traffic-channels/share?web_source=desktop'}
+  - {old: 'GET /v4/website/{domain}/traffic-sources/referrals', new: 'GET /v5/website-analysis/websites/traffic-referrals/incoming?web_source=desktop'}
+  - {old: 'GET /v4/website/{domain}/traffic-sources/outgoing-referrals', new: 'GET /v5/website-analysis/websites/traffic-referrals/outgoing?web_source=desktop'}
+  prior_deprecations:
+  - {what: Demographics 1.0 endpoints, announced: '2024-12-31', effective: '2025-01-01', source: 'https://developers.similarweb.com/changelog/demographics-10-endpoints-will-be-deprecated-on-010125'}
+
+deprecated_operations:
+  note: >-
+    No operation in openapi/ carries `deprecated: true`, but the V5 migration table lists
+    several of the captured paths as sunsetting on 2026-10-06.
+  by_migration_table:
+  - openapi/similarweb-traffic-sources-api-openapi.yml#getTrafficSourcesOverview
+  spec_flagged: []
+
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment page was found. Enterprise agreements are described
+    as negotiated ("Enterprise SLA and support" appears in plan collateral) but nothing is
+    published.
+
+status_page: null
+status_page_note: >-
+  Probed https://status.similarweb.com/ (DNS does not resolve) and searched the docs,
+  support and marketing surfaces. Similarweb publishes no public status page, so an agent
+  or integrator has no incident feed to subscribe to.
+
+support:
+  help_center: https://support.similarweb.com/hc/en-us
+  developer_help: https://developers.similarweb.com/docs/getting-help
+  contact: https://www.similarweb.com/corp/contact-support/
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: https://docs.similarweb.com/api-v5/guides/rest-api-data-version-migration.md, http_status: 200}
+  - {url: https://developers.similarweb.com/changelog.rss, http_status: 200}
+  - {url: 'https://status.similarweb.com/', http_status: 0, note: DNS does not resolve}

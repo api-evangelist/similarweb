@@ -1,0 +1,189 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/similarweb-rest-api-openapi.yml, openapi/_original/similarweb-batch-api-openapi.yml
+description: >-
+  Entity-relationship graph derived from the 28 component schemas across the two Similarweb
+  OpenAPI documents. The shape is unusual and worth stating plainly: the REST API is not a
+  resource API. It has no persisted entities, no ids and no CRUD — every REST response is a
+  measurement of an EXTERNAL subject (a domain, a keyword, an app, a country) wrapped in a
+  common `meta` envelope. The only real stateful entities Similarweb owns live on the Batch
+  side: Report, Integration and WebhookSubscription, each with its own identifier.
+
+domains:
+- name: measurement
+  description: >-
+    Read-only analytics projections. The "primary key" is the request itself (subject +
+    date range + granularity + filters), echoed back in meta.request. Nothing is stored on
+    the caller's behalf.
+  surface: REST
+- name: batch
+  description: Stateful, caller-owned resources for asynchronous bulk extraction.
+  surface: Batch
+
+entities:
+- name: MetaObject
+  domain: measurement
+  fields: [request, status, last_updated]
+  description: >-
+    The response envelope shared by every REST measurement. `request` echoes the query,
+    making it the closest thing this API has to an identifier.
+  identifier: null
+
+- name: VisitsResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, visits]
+  operations: [getVisitsDesktop]
+
+- name: BounceRateResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, bounce_rate]
+  operations: [getBounceRateDesktop]
+
+- name: TrafficSourcesResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, visits]
+  operations: [getTrafficSourcesOverview]
+
+- name: GeographyResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, records]
+  operations: [getGeographyDesktop]
+
+- name: GeographyRecord
+  domain: measurement
+  subject: country
+  fields: [country, country_name, share, visits, pages_per_visit, average_time, bounce_rate, rank]
+
+- name: GlobalRankResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, global_rank]
+  operations: [getGlobalRank]
+
+- name: SimilarSitesResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, similar_sites]
+  operations: [getSimilarSites]
+
+- name: WebsiteKeywordsResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, keywords_count, keywords]
+  operations: [getWebsiteKeywords]
+
+- name: KeywordRecord
+  domain: measurement
+  subject: keyword
+  fields: [keyword, clicks, traffic_share, difficulty, competition, primary_intent, secondary_intent, volume, cpc, cpc_low_bid, cpc_high_bid, zero_clicks_share, position, serp_features]
+
+- name: AppDownloadsResponse
+  domain: measurement
+  subject: app
+  fields: [meta, downloads]
+  operations: [getAppDownloadsAndroid, getAppDownloadsIos]
+
+- name: LeadEnrichmentResponse
+  domain: measurement
+  subject: domain
+  fields: [meta, global_rank, company_name, employee_range, estimated_revenue_in_million_usd, headquarters, site_type, category, visits, unique_visitors, pages_per_visit, bounce_rate, avg_visit_duration, desktop_mobile_share]
+  operations: [getLeadEnrichment]
+  note: The only REST response that joins firmographics onto web measurement.
+
+- name: CreditsResponse
+  domain: batch
+  fields: [credits]
+  operations: [getCredits, getBatchCredits]
+
+- name: Report
+  domain: batch
+  schemas: [ReportRequest, ReportSubmitResponse, ReportStatusResponse]
+  identifier: report_id
+  fields: [report_id, status, created_at, completed_at, download_url, error_message]
+  states: [processing, complete, internal_error]
+  operations: [requestReport, getRequestStatus, getReportHistory, retryRequest]
+
+- name: ReportQuery
+  domain: batch
+  fields: [tables]
+
+- name: TableQuery
+  domain: batch
+  fields: [vtable, granularity, start_date, end_date, latest, all_history, window_size, filters, metrics, paging]
+
+- name: PagingConfig
+  domain: batch
+  fields: [limit, offset, sort, sort_asc]
+
+- name: DeliveryInformation
+  domain: batch
+  fields: [delivery_method, response_format, webhook_url, delivery_method_params]
+
+- name: DeliveryMethodParams
+  domain: batch
+  fields: [integration_name, table_name, retention_days, num_of_files, write_mode]
+
+- name: ValidateResponse
+  domain: batch
+  fields: [valid, estimated_cost, errors]
+  operations: [validateRequest]
+  note: The dry-run pricing surface — estimated_cost is data credits, not currency.
+
+- name: TableDescription
+  domain: batch
+  identifier: vtable
+  fields: [vtable, description, metrics, filters, min_date, granularities]
+  operations: [describeTables]
+  note: >-
+    The dataset catalogue. `vtable` is the dataset name a TableQuery selects, making this
+    the discovery entity for the whole Batch surface.
+
+- name: Integration
+  domain: batch
+  schemas: [S3IntegrationRequest, GcsIntegrationRequest, IntegrationResponse]
+  identifier: integration_name
+  fields: [integration_name, integration_type, status, created_at, bucket_name, region, prefix]
+  operations: [createS3Integration, createGcsIntegration, getAllIntegrations]
+
+- name: WebhookSubscription
+  domain: batch
+  schemas: [WebhookSubscribeRequest, WebhookSubscription]
+  identifier: webhook_id
+  fields: [webhook_id, webhook_url, events, secret, created_at, status]
+  operations: [subscribeWebhook, listWebhookSubscriptions, unsubscribeWebhook, testWebhook]
+
+relationships:
+- {from: Report, to: ReportQuery, type: has_one, via: report_query}
+- {from: ReportQuery, to: TableQuery, type: has_many, via: tables}
+- {from: TableQuery, to: PagingConfig, type: has_one, via: paging}
+- {from: TableQuery, to: TableDescription, type: belongs_to, via: vtable}
+- {from: Report, to: DeliveryInformation, type: has_one, via: delivery_information}
+- {from: DeliveryInformation, to: DeliveryMethodParams, type: has_one, via: delivery_method_params}
+- {from: DeliveryMethodParams, to: Integration, type: belongs_to, via: integration_name}
+- {from: DeliveryInformation, to: WebhookSubscription, type: references, via: webhook_url}
+- {from: GeographyResponse, to: GeographyRecord, type: has_many, via: records}
+- {from: WebsiteKeywordsResponse, to: KeywordRecord, type: has_many, via: keywords}
+- {from: VisitsResponse, to: MetaObject, type: has_one, via: meta}
+- {from: BounceRateResponse, to: MetaObject, type: has_one, via: meta}
+- {from: TrafficSourcesResponse, to: MetaObject, type: has_one, via: meta}
+- {from: GeographyResponse, to: MetaObject, type: has_one, via: meta}
+- {from: GlobalRankResponse, to: MetaObject, type: has_one, via: meta}
+- {from: SimilarSitesResponse, to: MetaObject, type: has_one, via: meta}
+- {from: WebsiteKeywordsResponse, to: MetaObject, type: has_one, via: meta}
+- {from: AppDownloadsResponse, to: MetaObject, type: has_one, via: meta}
+- {from: LeadEnrichmentResponse, to: MetaObject, type: has_one, via: meta}
+
+id_prefixes: []
+id_note: >-
+  Similarweb uses no prefixed identifiers. Batch identifiers are opaque (`report_id`,
+  `webhook_id`) or caller-chosen (`integration_name`). Measurement subjects are natural
+  keys: a bare lowercase domain, a keyword string, or an app-store app id.
+
+counts:
+  entities: 22
+  relationships: 19
+  schemas_read: 28

@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Remaining Credits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v3/batch/credits",
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the current remaining data credits available on the account."
+        },
+        {
+          "info": {
+            "name": "Check Capabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v1/website/:domain_name/capabilities",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path",
+                "description": "Website domain without 'www.' prefix"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              }
+            ]
+          },
+          "docs": "Retrieve account capability overview based on subscription."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

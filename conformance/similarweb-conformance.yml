@@ -1,0 +1,121 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  openapi/*.yml, well-known/similarweb-well-known.yml,
+  https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server,
+  https://docs.similarweb.com/api-v5/guides/error-handling-and-troubleshooting,
+  https://www.similarweb.com/corp/privacy-security/
+description: >-
+  Which cross-cutting standards the Similarweb surface actually conforms to. The notable
+  split: the REST/Batch API conforms to almost nothing beyond OpenAPI-describable HTTP —
+  no OAuth, no RFC 9457, no RFC 8594, no security.txt — while the MCP surface is a
+  standards-clean implementation with RFC 9728 protected-resource metadata, RFC 8414
+  authorization-server metadata, PKCE and RFC 7591 dynamic client registration.
+
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: 13 OpenAPI 3.0.3 documents in openapi/ describing 27 operations on api.similarweb.com
+
+- id: oauth2
+  conforms: true
+  scope: MCP surface only
+  evidence: >-
+    https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server declares
+    authorization_code + refresh_token grants, response_type code, and scopes_supported [read].
+    The REST API uses an api-key header only and declares no oauth2 securityScheme.
+
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: 'HTTP 200 JSON at https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server'
+
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: 'HTTP 200 JSON at https://mcp.similarweb.com/.well-known/oauth-protected-resource'
+
+- id: rfc7636-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [S256, plain]'
+  note: '`plain` is still advertised alongside S256, which OAuth 2.1 discourages.'
+
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: 'registration_endpoint: https://mcp-auth.similarweb.com/register'
+
+- id: rfc7009-token-revocation
+  conforms: true
+  evidence: 'revocation_endpoint: https://mcp-auth.similarweb.com/revoke'
+
+- id: openid-connect
+  conforms: false
+  evidence: '/.well-known/openid-configuration returns 404 on every host including mcp-auth.similarweb.com'
+
+- id: mcp
+  conforms: true
+  evidence: >-
+    Hosted MCP server at https://mcp.similarweb.com; JSON-RPC tools/list returns a
+    structured 401 auth challenge rather than an HTML error, and the server publishes
+    OAuth protected-resource metadata as the MCP authorization spec requires.
+
+- id: a2a
+  conforms: false
+  evidence: 'No agent card at /.well-known/agent-card.json or /.well-known/agent.json on any host (all 404)'
+
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are not application/problem+json. A live 401 returned the plain-text body
+    `invalid API key`. Documented errors mix HTTP statuses with bare numeric codes
+    (101/102/103).
+
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: >-
+    A dated deprecation (2026-10-06) is published in documentation only; no Sunset or
+    Deprecation response headers are emitted.
+
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: '/.well-known/security.txt returns 404 on api., developers., www. and mcp. hosts'
+
+- id: ietf-ratelimit-headers
+  conforms: false
+  evidence: >-
+    A 10 rps limit is documented in prose; no X-RateLimit-*, RateLimit-* or Retry-After
+    headers are documented or were observed on a live response.
+
+- id: llmstxt
+  conforms: true
+  evidence: >-
+    /llms.txt served at 200 on developers.similarweb.com (227 links), www.similarweb.com,
+    and docs.similarweb.com/api-v5/. Every documentation page is additionally addressable
+    as `.md`, and the marketing site publishes `/md/*.md` twins.
+
+- id: rest-uri-versioning
+  conforms: true
+  evidence: 'Version is a path segment (v1..v5); five generations are simultaneously live.'
+
+- id: hsts
+  conforms: true
+  evidence: >-
+    strict-transport-security max-age=31536000; includeSubDomains; preload observed on a
+    live api.similarweb.com response.
+
+compliance_programs:
+- id: soc2-type-ii
+  published: true
+  evidence: https://www.similarweb.com/corp/privacy-security/
+- id: iso-27001
+  published: true
+  evidence: https://www.similarweb.com/corp/privacy-security/
+- id: gdpr
+  published: true
+  evidence: https://www.similarweb.com/corp/legal/privacy-policy/
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: https://mcp-auth.similarweb.com/.well-known/oauth-authorization-server, http_status: 200}
+  - {url: https://mcp.similarweb.com/.well-known/oauth-protected-resource, http_status: 200}
+  - {url: https://www.similarweb.com/corp/privacy-security/, http_status: 200}
+  - {url: https://developers.similarweb.com/llms.txt, http_status: 200}

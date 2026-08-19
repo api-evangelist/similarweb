@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SimilarWeb Batch Account Rankings API",
+    "version": "4.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rankings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Global Rank - Total (Desktop & Mobile)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v1/website/:domain_name/global-rank/global-rank",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path",
+                "description": "Website domain without 'www.' prefix"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start month in YYYY-MM format"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End month in YYYY-MM format"
+              },
+              {
+                "name": "main_domain_only",
+                "value": "",
+                "type": "query",
+                "description": "Return main domain only (true) or include subdomains (false)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve the global rank for a domain calculated from a mix of unique visitor and pageview estimations across desktop and mobile."
+        },
+        {
+          "info": {
+            "name": "Rank Tracking Campaign Overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.similarweb.com/v4/rank-tracker/:campaign_id/reports/overview-report/performanceOverTime",
+            "params": [
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "Rank tracking campaign identifier"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "SimilarWeb API authentication key"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start month in YYYY-MM format"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End month in YYYY-MM format"
+              },
+              {
+                "name": "device",
+                "value": "",
+                "type": "query",
+                "description": "Device type filter"
+              },
+              {
+                "name": "site",
+                "value": "",
+                "type": "query",
+                "description": "Site to filter campaign results"
+              },
+              {
+                "name": "scraping_configurations",
+                "value": "",
+                "type": "query",
+                "description": "Scraping configuration ID"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregate performance metrics for a rank tracking campaign over time, including average position, visibility, and SERP feature coverage."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.similarweb.com/api-v5/guides/error-handling-and-troubleshooting
+derived_from: openapi/*.yml
+format: non-standard
+description: >-
+  Similarweb's published error reference, captured verbatim from the V5 Error Handling &
+  Troubleshooting guide and reconciled against the 4xx responses declared in the OpenAPI in
+  this repo. Errors are NOT RFC 9457 problem+json: a live unauthenticated call to
+  api.similarweb.com returned HTTP 401 with the plain-text body `invalid API key`. The REST
+  and Batch surfaces use DIFFERENT error vocabularies for the same status codes — 401 means
+  "data not found" on REST but "unauthorized" on Batch — which is a real interoperability
+  hazard for an agent handling both.
+
+envelope:
+  content_type: text/plain (observed on 401), application/json on documented error bodies
+  rfc9457: false
+  fields_documented: [code, message]
+  observed_401_body: invalid API key
+
+surfaces:
+- surface: rest
+  base: https://api.similarweb.com
+  problems:
+  - status: 401
+    title: Data not found
+    description: >-
+      Returned when the requested data cannot be found — commonly a malformed or
+      mis-cased domain (e.g. 'CNN.COM' or 'fsdfsdfdsf.com' instead of 'cnn.com').
+    remediation: >-
+      Send the domain lowercase, with no scheme and no path segment (no '/sports').
+    note: >-
+      Non-standard use of 401. Observed live: an invalid API key ALSO returns 401 with the
+      body `invalid API key`, so 401 is overloaded across authentication and not-found.
+  - status: 403
+    title: Invalid API key / No credits
+    description: The API key is invalid or the account has exhausted its data credits.
+    remediation: >-
+      Verify the key and remaining credits at https://account.similarweb.com/standard-api;
+      confirm the key's Activation toggle is enabled.
+  - status: 429
+    title: Too many requests
+    description: The account exceeded the permitted requests-per-second limit (10 rps).
+    remediation: Throttle client-side to 10 rps; back off and retry. No data credits are consumed.
+  - status: 101
+    title: Dates not in range
+    kind: application-code
+    description: The requested date range falls outside the range available to the subscription.
+    remediation: Read the available dates from the error message and adjust the request.
+  - status: 102
+    title: Granularity not supported
+    kind: application-code
+    description: The requested granularity level is not supported by the endpoint.
+    remediation: Check the supported granularity levels in the endpoint reference.
+  - status: 103
+    title: Country not available
+    kind: application-code
+    description: >-
+      Data was requested for a country not included in the subscription package.
+    remediation: >-
+      Call the Check Capabilities operation (checkCapabilities) to confirm which countries
+      the package covers before requesting.
+
+- surface: batch
+  base: https://api.similarweb.com
+  problems:
+  - status: 400
+    title: Bad request
+    description: >-
+      One or more request parameters are incorrect or missing — for example a start date
+      earlier than the available history for the requested granularity.
+    remediation: Correct the parameters; the message names the earliest available period.
+    source_operations: [requestReport, validateRequest, getRequestStatus, getReportHistory, retryRequest, describeTables, createS3Integration, createGcsIntegration, getAllIntegrations, subscribeWebhook, listWebhookSubscriptions, unsubscribeWebhook, testWebhook]
+  - status: 401
+    title: Unauthorized access
+    description: The API key is invalid or the Similarweb account is not active.
+    remediation: Verify the key and account status; contact support if it persists.
+  - status: 429
+    title: Too many requests
+    description: The account exceeded the limit of allowed PENDING batch requests.
+    remediation: >-
+      Reduce submission frequency or upgrade for higher limits. Note this is a concurrency
+      limit on pending jobs, not the REST 10-rps limit.
+  - status: 500
+    title: Internal error
+    description: Unexpected server-side failure.
+    remediation: >-
+      Implement a retry policy; resubmit manually or use the retry operation
+      (retryRequest). Contact support if it persists.
+
+derived_from_openapi:
+  note: >-
+    Every one of the 27 operations in openapi/ declares exactly two responses — 200 and 400.
+    The specs do not declare 401, 403, 429 or 500 even though the provider documents all of
+    them, so the spec understates the real error surface. Captured here rather than patched
+    into the spec.
+  operations_with_4xx: 27
+  status_codes_in_spec: [400]
+  status_codes_documented: [400, 401, 403, 429, 500, 101, 102, 103]
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://api.similarweb.com/v1/website/cnn.com/total-traffic-and-engagement/visits (invalid key)', http_status: 401, body: invalid API key}
+  - {url: https://docs.similarweb.com/api-v5/guides/error-handling-and-troubleshooting.md, http_status: 200}

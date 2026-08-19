@@ -1,0 +1,55 @@
+generated: '2026-08-13'
+method: searched
+probe: true
+url: https://trustcenter.similarweb.com/
+description: >-
+  Similarweb operates a dedicated trust center at trustcenter.similarweb.com, linked from
+  its Privacy and Security page. The trust center host itself is behind a Cloudflare
+  interstitial and returned HTTP 403 ("Just a moment...") to an automated fetch, so the
+  certifications below are read from the provider's own Privacy and Security page, which
+  returned 200 and states them in prose.
+
+certifications:
+- SOC 2 Type II
+- ISO 27001
+
+compliance:
+- id: gdpr
+  evidence: https://www.similarweb.com/corp/legal/privacy-policy/
+- id: ccpa
+  evidence: https://www.similarweb.com/corp/legal/privacy-policy/
+
+program:
+  described_at: https://www.similarweb.com/corp/privacy-security/
+  practices:
+  - Enterprise information-security policies, technical standards and procedures
+  - Ongoing risk assessments of the corporate network and cloud environments
+  - Third-party/supplier security review via a dedicated risk-assessment platform
+  - Maintained and regularly tested disaster-recovery and business-continuity plans
+  - Documented security incident response process
+  quote: >-
+    "We're dedicated to customer data security and hold an independently validated SOC2 and
+    ISO 27001 certification."
+
+legal:
+  privacy_policy: https://www.similarweb.com/corp/legal/privacy-policy/
+  terms: https://www.similarweb.com/corp/legal/terms/
+  contact: legal@similarweb.com
+
+gaps:
+  security_txt: false
+  vulnerability_disclosure_policy: false
+  bug_bounty: false
+  note: >-
+    No /.well-known/security.txt on any host, no responsible-disclosure page, and no
+    HackerOne or Bugcrowd program (both /similarweb handles return 404). A researcher has
+    no published channel for reporting a vulnerability, which is the single clearest gap
+    in an otherwise well-documented security posture. No `Security` pointer is emitted,
+    because none is earned.
+
+evidence:
+- {source: https://www.similarweb.com/corp/privacy-security/, http_status: 200, keywords: [SOC2 Type II, ISO 27001, trust center, incident response, risk assessment]}
+- {source: https://trustcenter.similarweb.com/, http_status: 403, note: Cloudflare bot challenge}
+- {source: https://hackerone.com/similarweb, http_status: 404}
+- {source: https://bugcrowd.com/similarweb, http_status: 404}
+- {source: https://www.similarweb.com/.well-known/security.txt, http_status: 404}
