@@ -39,6 +39,17 @@ tags:
   - Audience Demographics
   - App Intelligence
   - Market Research
+  - E-Commerce
+  - SEO
+tags_raw:
+  - Digital Intelligence
+  - Web Analytics
+  - Traffic Analytics
+  - Competitive Intelligence
+  - Keyword Analytics
+  - Audience Demographics
+  - App Intelligence
+  - Market Research
   - E-commerce
   - SEO
 apis:
@@ -145,6 +156,8 @@ apis:
   humanURL: https://developers.similarweb.com/
   baseURL: https://api.similarweb.com
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -290,6 +303,8 @@ apis:
   humanURL: https://developers.similarweb.com/
   baseURL: https://api.similarweb.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
