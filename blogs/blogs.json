@@ -3,19 +3,13 @@
   "feeds": [
     {
       "source": "https://www.similarweb.com/blog/feed/",
-      "feed_url": "https://www.similarweb.com/blog/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
+      "error": "HTTPError"
     },
     {
       "source": "https://www.linkedin.com/company/similarweb",
-      "feed_url": "https://www.linkedin.com/company/similarweb",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-08-22T20:20:02Z",
+  "fetched": "2026-08-30T22:33:40Z",
   "post_count": 46
 }
