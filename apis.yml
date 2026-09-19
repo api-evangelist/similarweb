@@ -132,6 +132,8 @@ apis:
   humanURL: https://developers.similarweb.com/
   baseURL: https://api.similarweb.com
   tags:
+  - Credit
+  tags_raw:
   - Credits
   properties:
   - type: OpenAPI
