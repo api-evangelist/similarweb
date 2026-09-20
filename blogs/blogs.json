@@ -3,10 +3,13 @@
   "feeds": [
     {
       "source": "https://www.linkedin.com/company/similarweb",
-      "error": "HTTPError"
+      "feed_url": "https://www.linkedin.com/company/similarweb",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-09-13T13:00:00Z",
+  "fetched": "2026-09-19T20:17:39Z",
   "post_count": 46,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
