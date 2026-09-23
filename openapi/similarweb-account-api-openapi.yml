@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SimilarWeb Batch Account API
-  description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
+  title: SimilarWeb REST Account API
+  description: The SimilarWeb REST API provides real-time access to digital intelligence data covering website traffic and engagement metrics, traffic source breakdowns, audience demographics, keyword and search intelligence, mobile app performance, technographic data, e-commerce shopper behavior, company firmographics, and rank tracking. Authentication is via API key and usage is metered on a data credit model.
   version: 4.0.0
   termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
   contact:
@@ -66,6 +66,14 @@ paths:
         '400':
           description: Bad request
 components:
+  schemas:
+    CreditsResponse:
+      type: object
+      properties:
+        credits:
+          type: integer
+          description: Remaining data credits on the account
+          example: 1234
   parameters:
     domainName:
       name: domain_name
@@ -82,20 +90,17 @@ components:
       schema:
         type: string
       description: SimilarWeb API authentication key
-  schemas:
-    CreditsResponse:
-      type: object
-      properties:
-        credits:
-          type: integer
-          description: Remaining data credits on the account
-          example: 1234
   securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: SimilarWeb API key passed as a query parameter
     apiKeyHeader:
       type: apiKey
       in: header
       name: api-key
       description: SimilarWeb API key passed as a request header
 externalDocs:
-  description: SimilarWeb Batch API Documentation
-  url: https://developers.similarweb.com/docs/intro-to-the-batch-api-datasets.md
+  description: SimilarWeb Developer Documentation
+  url: https://developers.similarweb.com/

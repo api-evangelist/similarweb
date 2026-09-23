@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SimilarWeb Batch Account Integrations API
+  title: SimilarWeb Batch Integrations API
   description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
   version: 4.0.0
   termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
@@ -97,22 +97,21 @@ components:
           schema:
             type: object
   schemas:
-    IntegrationResponse:
+    GcsIntegrationRequest:
       type: object
+      required:
+      - bucket_name
+      - integration_name
       properties:
         integration_name:
           type: string
-        integration_type:
+          description: Name for this integration
+        bucket_name:
           type: string
-          enum:
-          - s3
-          - gcs
-          - snowflake
-        status:
+          description: Target Google Cloud Storage bucket name
+        prefix:
           type: string
-        created_at:
-          type: string
-          format: date-time
+          description: Path prefix within the bucket
     S3IntegrationRequest:
       type: object
       required:
@@ -131,21 +130,22 @@ components:
         prefix:
           type: string
           description: Path prefix within the bucket
-    GcsIntegrationRequest:
+    IntegrationResponse:
       type: object
-      required:
-      - bucket_name
-      - integration_name
       properties:
         integration_name:
           type: string
-          description: Name for this integration
-        bucket_name:
+        integration_type:
           type: string
-          description: Target Google Cloud Storage bucket name
-        prefix:
+          enum:
+          - s3
+          - gcs
+          - snowflake
+        status:
           type: string
-          description: Path prefix within the bucket
+        created_at:
+          type: string
+          format: date-time
   securitySchemes:
     apiKeyHeader:
       type: apiKey

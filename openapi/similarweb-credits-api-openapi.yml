@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SimilarWeb Batch Account Credits API
+  title: SimilarWeb Batch Credits API
   description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
   version: 4.0.0
   termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SimilarWeb Batch Account Webhooks API
+  title: SimilarWeb Batch Webhooks API
   description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
   version: 4.0.0
   termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
@@ -121,6 +121,24 @@ components:
           schema:
             type: object
   schemas:
+    WebhookSubscribeRequest:
+      type: object
+      required:
+      - webhook_url
+      - events
+      properties:
+        webhook_url:
+          type: string
+          format: uri
+          description: URL to receive event notifications
+        events:
+          type: array
+          items:
+            type: string
+          description: Event types to subscribe to (e.g., data_release, report_complete)
+        secret:
+          type: string
+          description: Optional secret for webhook signature verification
     WebhookSubscription:
       type: object
       properties:
@@ -142,24 +160,6 @@ components:
           enum:
           - active
           - inactive
-    WebhookSubscribeRequest:
-      type: object
-      required:
-      - webhook_url
-      - events
-      properties:
-        webhook_url:
-          type: string
-          format: uri
-          description: URL to receive event notifications
-        events:
-          type: array
-          items:
-            type: string
-          description: Event types to subscribe to (e.g., data_release, report_complete)
-        secret:
-          type: string
-          description: Optional secret for webhook signature verification
   securitySchemes:
     apiKeyHeader:
       type: apiKey

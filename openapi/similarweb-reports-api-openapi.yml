@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SimilarWeb Batch Account Reports API
+  title: SimilarWeb Batch Reports API
   description: The SimilarWeb Batch API is optimized for large-scale bulk data extraction, supporting asynchronous jobs of up to one million domains per request. It delivers data to cloud storage destinations including Amazon S3, Google Cloud Storage, and Snowflake. The API covers website traffic, keywords, referrals, geography, segments, apps, companies, e-commerce, and technographics datasets.
   version: 4.0.0
   termsOfService: https://www.similarweb.com/corp/legal/terms-of-use/
@@ -198,6 +198,33 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    TableDescription:
+      type: object
+      properties:
+        vtable:
+          type: string
+          description: Table identifier
+        description:
+          type: string
+          description: Human-readable description of the table
+        metrics:
+          type: array
+          items:
+            type: string
+          description: Available metric columns
+        filters:
+          type: array
+          items:
+            type: string
+          description: Supported filter dimensions
+        min_date:
+          type: string
+          description: Earliest available data date
+        granularities:
+          type: array
+          items:
+            type: string
+          description: Supported granularity levels
     TableQuery:
       type: object
       required:
@@ -239,6 +266,23 @@ components:
           description: Specific column names to include in the output
         paging:
           $ref: '#/components/schemas/PagingConfig'
+    PagingConfig:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Results per page
+        offset:
+          type: integer
+          default: 0
+          description: Starting position
+        sort:
+          type: string
+          description: Metric to sort by
+        sort_asc:
+          type: string
+          description: Sort ascending (default false - descending)
+          default: 'false'
     ValidateResponse:
       type: object
       properties:
@@ -253,17 +297,16 @@ components:
           items:
             type: string
           description: Validation errors if request is invalid
-    ReportSubmitResponse:
+    ReportRequest:
       type: object
+      required:
+      - report_query
+      - delivery_information
       properties:
-        report_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the submitted report
-        status:
-          type: string
-          example: pending
-          description: Current status of the report
+        report_query:
+          $ref: '#/components/schemas/ReportQuery'
+        delivery_information:
+          $ref: '#/components/schemas/DeliveryInformation'
     ReportStatusResponse:
       type: object
       properties:
@@ -291,16 +334,27 @@ components:
         error_message:
           type: string
           description: Error details if status is failed
-    ReportRequest:
+    ReportSubmitResponse:
+      type: object
+      properties:
+        report_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the submitted report
+        status:
+          type: string
+          example: pending
+          description: Current status of the report
+    ReportQuery:
       type: object
       required:
-      - report_query
-      - delivery_information
+      - tables
       properties:
-        report_query:
-          $ref: '#/components/schemas/ReportQuery'
-        delivery_information:
-          $ref: '#/components/schemas/DeliveryInformation'
+        tables:
+          type: array
+          description: Array of table queries to execute
+          items:
+            $ref: '#/components/schemas/TableQuery'
     DeliveryMethodParams:
       type: object
       properties:
@@ -327,60 +381,6 @@ components:
           enum:
           - overwrite
           description: Write mode for S3 operations
-    PagingConfig:
-      type: object
-      properties:
-        limit:
-          type: integer
-          description: Results per page
-        offset:
-          type: integer
-          default: 0
-          description: Starting position
-        sort:
-          type: string
-          description: Metric to sort by
-        sort_asc:
-          type: string
-          description: Sort ascending (default false - descending)
-          default: 'false'
-    ReportQuery:
-      type: object
-      required:
-      - tables
-      properties:
-        tables:
-          type: array
-          description: Array of table queries to execute
-          items:
-            $ref: '#/components/schemas/TableQuery'
-    TableDescription:
-      type: object
-      properties:
-        vtable:
-          type: string
-          description: Table identifier
-        description:
-          type: string
-          description: Human-readable description of the table
-        metrics:
-          type: array
-          items:
-            type: string
-          description: Available metric columns
-        filters:
-          type: array
-          items:
-            type: string
-          description: Supported filter dimensions
-        min_date:
-          type: string
-          description: Earliest available data date
-        granularities:
-          type: array
-          items:
-            type: string
-          description: Supported granularity levels
     DeliveryInformation:
       type: object
       required:

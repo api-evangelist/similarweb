@@ -1,38 +1,46 @@
 {
   "provider": "similarweb",
   "sources": [
-    "similarweb-account-api-openapi.yml",
-    "similarweb-app-intelligence-api-openapi.yml",
-    "similarweb-credits-api-openapi.yml",
-    "similarweb-geography-api-openapi.yml",
-    "similarweb-integrations-api-openapi.yml",
-    "similarweb-keywords-api-openapi.yml",
-    "similarweb-lead-enrichment-api-openapi.yml",
-    "similarweb-rankings-api-openapi.yml",
-    "similarweb-reports-api-openapi.yml",
-    "similarweb-similar-sites-api-openapi.yml",
-    "similarweb-traffic-and-engagement-api-openapi.yml",
-    "similarweb-traffic-sources-api-openapi.yml",
-    "similarweb-webhooks-api-openapi.yml"
+    "_original/similarweb-batch-api-openapi.yml",
+    "_original/similarweb-rest-api-openapi.yml"
   ],
   "outputs": [
+    "similarweb-credits-api-openapi.yml",
+    "similarweb-integrations-api-openapi.yml",
+    "similarweb-reports-api-openapi.yml",
+    "similarweb-webhooks-api-openapi.yml",
     "similarweb-account-api-openapi.yml",
     "similarweb-app-intelligence-api-openapi.yml",
-    "similarweb-credits-api-openapi.yml",
     "similarweb-geography-api-openapi.yml",
-    "similarweb-integrations-api-openapi.yml",
     "similarweb-keywords-api-openapi.yml",
     "similarweb-lead-enrichment-api-openapi.yml",
     "similarweb-rankings-api-openapi.yml",
-    "similarweb-reports-api-openapi.yml",
     "similarweb-similar-sites-api-openapi.yml",
-    "similarweb-traffic-and-engagement-api-openapi.yml",
     "similarweb-traffic-sources-api-openapi.yml",
-    "similarweb-webhooks-api-openapi.yml"
+    "similarweb-traffic-and-engagement-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "similarweb-batch-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "similarweb-rest-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "similarweb-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-app-intelligence-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-credits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-geography-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-integrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-keywords-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-lead-enrichment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-rankings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-similar-sites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-traffic-and-engagement-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-traffic-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "similarweb-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
