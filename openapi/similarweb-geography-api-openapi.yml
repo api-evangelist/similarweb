@@ -48,24 +48,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   parameters:
-    endDate:
-      name: end_date
-      in: query
-      required: false
-      schema:
-        type: string
-        pattern: ^\d{4}-\d{2}$
-        example: 2024-06
-      description: End month in YYYY-MM format
-    startDate:
-      name: start_date
-      in: query
-      required: false
-      schema:
-        type: string
-        pattern: ^\d{4}-\d{2}$
-        example: 2024-01
-      description: Start month in YYYY-MM format
     mainDomainOnly:
       name: main_domain_only
       in: query
@@ -77,24 +59,6 @@ components:
         - 'false'
         default: 'false'
       description: Return main domain only (true) or include subdomains (false)
-    sort:
-      name: sort
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Metric name to sort results by
-    asc:
-      name: asc
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-        default: 'true'
-      description: Sort ascending (true) or descending (false)
     offset:
       name: offset
       in: query
@@ -103,21 +67,6 @@ components:
         type: integer
         default: 0
       description: Starting position for paginated results
-    limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 100
-      description: Maximum number of results to return
-    apiKeyQuery:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: SimilarWeb API authentication key
     format:
       name: format
       in: query
@@ -137,30 +86,58 @@ components:
         type: string
         example: example.com
       description: Website domain without 'www.' prefix
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 100
+      description: Maximum number of results to return
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-06
+      description: End month in YYYY-MM format
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+    asc:
+      name: asc
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+        default: 'true'
+      description: Sort ascending (true) or descending (false)
+    sort:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Metric name to sort results by
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-01
+      description: Start month in YYYY-MM format
   schemas:
-    MetaObject:
-      type: object
-      description: Standard response metadata
-      properties:
-        request:
-          type: object
-          description: Echo of the original request parameters
-        status:
-          type: string
-          description: Request status (Success or error)
-        last_updated:
-          type: string
-          format: date
-          description: Timestamp of the most recent data update
-    GeographyResponse:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/MetaObject'
-        records:
-          type: array
-          items:
-            $ref: '#/components/schemas/GeographyRecord'
     GeographyRecord:
       type: object
       properties:
@@ -185,6 +162,29 @@ components:
         rank:
           type: integer
           description: Country rank of the domain
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+    GeographyResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/MetaObject'
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographyRecord'
   responses:
     BadRequest:
       description: Bad request - invalid parameters or missing required fields

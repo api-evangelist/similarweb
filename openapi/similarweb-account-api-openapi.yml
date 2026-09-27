@@ -75,6 +75,13 @@ components:
           description: Remaining data credits on the account
           example: 1234
   parameters:
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
     domainName:
       name: domain_name
       in: path
@@ -83,13 +90,6 @@ components:
         type: string
         example: example.com
       description: Website domain without 'www.' prefix
-    apiKeyQuery:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: SimilarWeb API authentication key
   securitySchemes:
     apiKeyQuery:
       type: apiKey

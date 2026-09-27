@@ -113,13 +113,6 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
   schemas:
     WebhookSubscribeRequest:
       type: object
@@ -160,6 +153,13 @@ components:
           enum:
           - active
           - inactive
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
   securitySchemes:
     apiKeyHeader:
       type: apiKey

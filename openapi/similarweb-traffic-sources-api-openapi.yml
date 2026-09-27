@@ -47,43 +47,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   parameters:
-    endDate:
-      name: end_date
-      in: query
-      required: false
-      schema:
-        type: string
-        pattern: ^\d{4}-\d{2}$
-        example: 2024-06
-      description: End month in YYYY-MM format
-    startDate:
-      name: start_date
-      in: query
-      required: false
-      schema:
-        type: string
-        pattern: ^\d{4}-\d{2}$
-        example: 2024-01
-      description: Start month in YYYY-MM format
-    country:
-      name: country
-      in: query
-      required: false
-      schema:
-        type: string
-        example: us
-      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
-    format:
-      name: format
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      description: Response format
     mainDomainOnly:
       name: main_domain_only
       in: query
@@ -95,6 +58,58 @@ components:
         - 'false'
         default: 'false'
       description: Return main domain only (true) or include subdomains (false)
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Response format
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-01
+      description: Start month in YYYY-MM format
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-06
+      description: End month in YYYY-MM format
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
+    country:
+      name: country
+      in: query
+      required: false
+      schema:
+        type: string
+        example: us
+      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
     granularity:
       name: granularity
       in: query
@@ -106,13 +121,6 @@ components:
         - weekly
         - monthly
       description: Temporal resolution for time series data
-    apiKeyQuery:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: SimilarWeb API authentication key
     mtd:
       name: mtd
       in: query
@@ -123,14 +131,6 @@ components:
         - 'true'
         - 'false'
       description: Month-to-date mode; use with daily granularity
-    domainName:
-      name: domain_name
-      in: path
-      required: true
-      schema:
-        type: string
-        example: example.com
-      description: Website domain without 'www.' prefix
   schemas:
     MetaObject:
       type: object

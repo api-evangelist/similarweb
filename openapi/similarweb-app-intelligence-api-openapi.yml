@@ -83,32 +83,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   parameters:
-    endDate:
-      name: end_date
-      in: query
-      required: false
-      schema:
-        type: string
-        pattern: ^\d{4}-\d{2}$
-        example: 2024-06
-      description: End month in YYYY-MM format
-    startDate:
-      name: start_date
-      in: query
-      required: false
-      schema:
-        type: string
-        pattern: ^\d{4}-\d{2}$
-        example: 2024-01
-      description: Start month in YYYY-MM format
-    country:
-      name: country
-      in: query
-      required: false
-      schema:
-        type: string
-        example: us
-      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
     format:
       name: format
       in: query
@@ -120,6 +94,24 @@ components:
         - xml
         default: json
       description: Response format
+    startDate:
+      name: start_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-01
+      description: Start month in YYYY-MM format
+    endDate:
+      name: end_date
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2024-06
+      description: End month in YYYY-MM format
     apiKeyQuery:
       name: api_key
       in: query
@@ -127,16 +119,14 @@ components:
       schema:
         type: string
       description: SimilarWeb API authentication key
-    mtd:
-      name: mtd
+    country:
+      name: country
       in: query
       required: false
       schema:
         type: string
-        enum:
-        - 'true'
-        - 'false'
-      description: Month-to-date mode; use with daily granularity
+        example: us
+      description: 2-letter ISO 3166-1 alpha-2 country code or "world"
     granularity:
       name: granularity
       in: query
@@ -148,21 +138,17 @@ components:
         - weekly
         - monthly
       description: Temporal resolution for time series data
+    mtd:
+      name: mtd
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+      description: Month-to-date mode; use with daily granularity
   schemas:
-    MetaObject:
-      type: object
-      description: Standard response metadata
-      properties:
-        request:
-          type: object
-          description: Echo of the original request parameters
-        status:
-          type: string
-          description: Request status (Success or error)
-        last_updated:
-          type: string
-          format: date
-          description: Timestamp of the most recent data update
     AppDownloadsResponse:
       type: object
       properties:
@@ -179,6 +165,20 @@ components:
               downloads:
                 type: integer
                 description: Estimated download count for the period
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
   responses:
     BadRequest:
       description: Bad request - invalid parameters or missing required fields

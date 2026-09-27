@@ -40,6 +40,33 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  parameters:
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Response format
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
   schemas:
     MetaObject:
       type: object
@@ -79,33 +106,6 @@ components:
         application/json:
           schema:
             type: object
-  parameters:
-    format:
-      name: format
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      description: Response format
-    apiKeyQuery:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: SimilarWeb API authentication key
-    domainName:
-      name: domain_name
-      in: path
-      required: true
-      schema:
-        type: string
-        example: example.com
-      description: Website domain without 'www.' prefix
   securitySchemes:
     apiKeyQuery:
       type: apiKey
