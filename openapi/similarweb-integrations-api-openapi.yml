@@ -97,21 +97,22 @@ components:
           schema:
             type: object
   schemas:
-    GcsIntegrationRequest:
+    IntegrationResponse:
       type: object
-      required:
-      - bucket_name
-      - integration_name
       properties:
         integration_name:
           type: string
-          description: Name for this integration
-        bucket_name:
+        integration_type:
           type: string
-          description: Target Google Cloud Storage bucket name
-        prefix:
+          enum:
+          - s3
+          - gcs
+          - snowflake
+        status:
           type: string
-          description: Path prefix within the bucket
+        created_at:
+          type: string
+          format: date-time
     S3IntegrationRequest:
       type: object
       required:
@@ -130,22 +131,21 @@ components:
         prefix:
           type: string
           description: Path prefix within the bucket
-    IntegrationResponse:
+    GcsIntegrationRequest:
       type: object
+      required:
+      - bucket_name
+      - integration_name
       properties:
         integration_name:
           type: string
-        integration_type:
+          description: Name for this integration
+        bucket_name:
           type: string
-          enum:
-          - s3
-          - gcs
-          - snowflake
-        status:
+          description: Target Google Cloud Storage bucket name
+        prefix:
           type: string
-        created_at:
-          type: string
-          format: date-time
+          description: Path prefix within the bucket
   securitySchemes:
     apiKeyHeader:
       type: apiKey

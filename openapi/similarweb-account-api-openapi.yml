@@ -66,14 +66,6 @@ paths:
         '400':
           description: Bad request
 components:
-  schemas:
-    CreditsResponse:
-      type: object
-      properties:
-        credits:
-          type: integer
-          description: Remaining data credits on the account
-          example: 1234
   parameters:
     apiKeyQuery:
       name: api_key
@@ -90,6 +82,14 @@ components:
         type: string
         example: example.com
       description: Website domain without 'www.' prefix
+  schemas:
+    CreditsResponse:
+      type: object
+      properties:
+        credits:
+          type: integer
+          description: Remaining data credits on the account
+          example: 1234
   securitySchemes:
     apiKeyQuery:
       type: apiKey

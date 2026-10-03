@@ -41,6 +41,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   parameters:
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
     format:
       name: format
       in: query
@@ -60,13 +67,6 @@ components:
         type: string
         example: example.com
       description: Website domain without 'www.' prefix
-    apiKeyQuery:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: SimilarWeb API authentication key
   schemas:
     MetaObject:
       type: object
