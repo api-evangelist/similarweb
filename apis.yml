@@ -332,6 +332,9 @@ apis:
   - type: RateLimits
     url: https://developers.similarweb.com/docs/rate-limit
 common:
+  - type: CapabilityMap
+    url: capabilities/similarweb-capability-edges.yml
+    name: SimilarWeb Business Capability Map
   - type: AgenticAccess
     url: agentic-access/similarweb-agentic-access.yml
   - type: DomainSecurity

@@ -1,0 +1,75 @@
+slug: similarweb
+provider: SimilarWeb
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Similar Sites
+  spec_file: similarweb-similar-sites-api-openapi.yml
+  capability_id: BC-400.30
+  capability_id_l1: BC-400
+  capability_name: Market Intelligence Management
+  confidence: 0.75
+  evidence: GET /v2/website/{domain_name}/similar-sites  getSimilarSites  Similar Sites
+  reason: Identifies competitor/comparable websites for a given domain — competitive intelligence, which
+    sits under Market Intelligence Management.
+- tag: App Intelligence
+  spec_file: similarweb-app-intelligence-api-openapi.yml
+  capability_id: BC-400.30
+  capability_id_l1: BC-400
+  capability_name: Market Intelligence Management
+  confidence: 0.72
+  evidence: 'GET /v5/apps/google/downloads "App Downloads (Android)"; schema AppDownloadsResponse; vendor
+    description: "competitive benchmarking, app intelligence data"'
+  reason: Returns estimated mobile app download volumes for apps on the Android and iOS stores — third-party
+    market and competitive intelligence data consumed for market research, rather than operating the buyer's
+    own product telemetry.
+- tag: Geography
+  spec_file: similarweb-geography-api-openapi.yml
+  capability_id: BC-400.30
+  capability_id_l1: BC-400
+  capability_name: Market Intelligence Management
+  confidence: 0.7
+  evidence: GET /v4/website/{domain_name}/geo/traffic-by-country  getGeographyDesktop  Geography - Desktop
+  reason: Returns third-party estimates of a website's visitor distribution by country — external digital/audience
+    intelligence used for market and competitor insight, i.e. Market Intelligence Management. Not the
+    buyer's own analytics stack.
+- tag: Keywords
+  spec_file: similarweb-keywords-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.7
+  evidence: GET /v4/website-analysis/keywords  getWebsiteKeywords  Website Keywords
+  reason: Search/keyword intelligence for an arbitrary domain, part of 'keyword and search intelligence'
+    in the spec description. Clearly Marketing Management, but evidence does not decide between competitive
+    market intelligence and SEO/digital marketing execution, so no L2 asserted.
+- tag: Traffic Sources
+  spec_file: similarweb-traffic-sources-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.7
+  evidence: GET /v1/website/{domain_name}/traffic-sources/overview-share  getTrafficSourcesOverview  Visits
+    by Marketing Channel - Desktop
+  reason: Breaks a domain's visits down by marketing channel. Marketing Management is clear; it serves
+    both competitive channel benchmarking and digital marketing measurement, so no L2 asserted.
+- tag: Traffic and Engagement
+  spec_file: similarweb-traffic-and-engagement-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.7
+  evidence: GET /v1/website/{domain_name}/traffic-and-engagement/bounce-rate  getBounceRateDesktop
+  reason: Estimated visits and bounce rate for any domain — external digital audience measurement used
+    for benchmarking. Marketing Management at L1; sub-capability ambiguous between market intelligence
+    and digital marketing analytics.
