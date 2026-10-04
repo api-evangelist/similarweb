@@ -40,48 +40,7 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
-  parameters:
-    apiKeyQuery:
-      name: api_key
-      in: query
-      required: true
-      schema:
-        type: string
-      description: SimilarWeb API authentication key
-    format:
-      name: format
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-      description: Response format
-    domainName:
-      name: domain_name
-      in: path
-      required: true
-      schema:
-        type: string
-        example: example.com
-      description: Website domain without 'www.' prefix
   schemas:
-    MetaObject:
-      type: object
-      description: Standard response metadata
-      properties:
-        request:
-          type: object
-          description: Echo of the original request parameters
-        status:
-          type: string
-          description: Request status (Success or error)
-        last_updated:
-          type: string
-          format: date
-          description: Timestamp of the most recent data update
     SimilarSitesResponse:
       type: object
       properties:
@@ -99,6 +58,47 @@ components:
               score:
                 type: number
                 description: Similarity score (0-1)
+    MetaObject:
+      type: object
+      description: Standard response metadata
+      properties:
+        request:
+          type: object
+          description: Echo of the original request parameters
+        status:
+          type: string
+          description: Request status (Success or error)
+        last_updated:
+          type: string
+          format: date
+          description: Timestamp of the most recent data update
+  parameters:
+    domainName:
+      name: domain_name
+      in: path
+      required: true
+      schema:
+        type: string
+        example: example.com
+      description: Website domain without 'www.' prefix
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+      description: Response format
+    apiKeyQuery:
+      name: api_key
+      in: query
+      required: true
+      schema:
+        type: string
+      description: SimilarWeb API authentication key
   responses:
     BadRequest:
       description: Bad request - invalid parameters or missing required fields

@@ -89,30 +89,7 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
   schemas:
-    IntegrationResponse:
-      type: object
-      properties:
-        integration_name:
-          type: string
-        integration_type:
-          type: string
-          enum:
-          - s3
-          - gcs
-          - snowflake
-        status:
-          type: string
-        created_at:
-          type: string
-          format: date-time
     S3IntegrationRequest:
       type: object
       required:
@@ -146,6 +123,29 @@ components:
         prefix:
           type: string
           description: Path prefix within the bucket
+    IntegrationResponse:
+      type: object
+      properties:
+        integration_name:
+          type: string
+        integration_type:
+          type: string
+          enum:
+          - s3
+          - gcs
+          - snowflake
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
   securitySchemes:
     apiKeyHeader:
       type: apiKey

@@ -113,14 +113,25 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
-  responses:
-    BadRequest:
-      description: Bad request - invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
   schemas:
+    WebhookSubscribeRequest:
+      type: object
+      required:
+      - webhook_url
+      - events
+      properties:
+        webhook_url:
+          type: string
+          format: uri
+          description: URL to receive event notifications
+        events:
+          type: array
+          items:
+            type: string
+          description: Event types to subscribe to (e.g., data_release, report_complete)
+        secret:
+          type: string
+          description: Optional secret for webhook signature verification
     WebhookSubscription:
       type: object
       properties:
@@ -142,24 +153,13 @@ components:
           enum:
           - active
           - inactive
-    WebhookSubscribeRequest:
-      type: object
-      required:
-      - webhook_url
-      - events
-      properties:
-        webhook_url:
-          type: string
-          format: uri
-          description: URL to receive event notifications
-        events:
-          type: array
-          items:
-            type: string
-          description: Event types to subscribe to (e.g., data_release, report_complete)
-        secret:
-          type: string
-          description: Optional secret for webhook signature verification
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
   securitySchemes:
     apiKeyHeader:
       type: apiKey

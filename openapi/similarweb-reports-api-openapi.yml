@@ -198,42 +198,17 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    ReportQuery:
-      type: object
-      required:
-      - tables
-      properties:
-        tables:
-          type: array
-          description: Array of table queries to execute
-          items:
-            $ref: '#/components/schemas/TableQuery'
-    DeliveryMethodParams:
+    ReportSubmitResponse:
       type: object
       properties:
-        integration_name:
+        report_id:
           type: string
-          description: Integration name when multiple integrations exist
-        table_name:
+          format: uuid
+          description: Unique identifier for the submitted report
+        status:
           type: string
-          description: Target table name for Snowflake delivery
-        retention_days:
-          type: integer
-          enum:
-          - 1
-          - 30
-          - 60
-          - 180
-          - 365
-          description: File retention period in days
-        num_of_files:
-          type: string
-          description: Number of output files for bucket_access delivery
-        write_mode:
-          type: string
-          enum:
-          - overwrite
-          description: Write mode for S3 operations
+          example: pending
+          description: Current status of the report
     DeliveryInformation:
       type: object
       required:
@@ -260,6 +235,16 @@ components:
           description: Optional webhook URL to notify when report is ready
         delivery_method_params:
           $ref: '#/components/schemas/DeliveryMethodParams'
+    ReportQuery:
+      type: object
+      required:
+      - tables
+      properties:
+        tables:
+          type: array
+          description: Array of table queries to execute
+          items:
+            $ref: '#/components/schemas/TableQuery'
     PagingConfig:
       type: object
       properties:
@@ -277,17 +262,42 @@ components:
           type: string
           description: Sort ascending (default false - descending)
           default: 'false'
-    ReportSubmitResponse:
+    ReportRequest:
+      type: object
+      required:
+      - report_query
+      - delivery_information
+      properties:
+        report_query:
+          $ref: '#/components/schemas/ReportQuery'
+        delivery_information:
+          $ref: '#/components/schemas/DeliveryInformation'
+    DeliveryMethodParams:
       type: object
       properties:
-        report_id:
+        integration_name:
           type: string
-          format: uuid
-          description: Unique identifier for the submitted report
-        status:
+          description: Integration name when multiple integrations exist
+        table_name:
           type: string
-          example: pending
-          description: Current status of the report
+          description: Target table name for Snowflake delivery
+        retention_days:
+          type: integer
+          enum:
+          - 1
+          - 30
+          - 60
+          - 180
+          - 365
+          description: File retention period in days
+        num_of_files:
+          type: string
+          description: Number of output files for bucket_access delivery
+        write_mode:
+          type: string
+          enum:
+          - overwrite
+          description: Write mode for S3 operations
     ReportStatusResponse:
       type: object
       properties:
@@ -315,43 +325,6 @@ components:
         error_message:
           type: string
           description: Error details if status is failed
-    ReportRequest:
-      type: object
-      required:
-      - report_query
-      - delivery_information
-      properties:
-        report_query:
-          $ref: '#/components/schemas/ReportQuery'
-        delivery_information:
-          $ref: '#/components/schemas/DeliveryInformation'
-    TableDescription:
-      type: object
-      properties:
-        vtable:
-          type: string
-          description: Table identifier
-        description:
-          type: string
-          description: Human-readable description of the table
-        metrics:
-          type: array
-          items:
-            type: string
-          description: Available metric columns
-        filters:
-          type: array
-          items:
-            type: string
-          description: Supported filter dimensions
-        min_date:
-          type: string
-          description: Earliest available data date
-        granularities:
-          type: array
-          items:
-            type: string
-          description: Supported granularity levels
     ValidateResponse:
       type: object
       properties:
@@ -407,6 +380,33 @@ components:
           description: Specific column names to include in the output
         paging:
           $ref: '#/components/schemas/PagingConfig'
+    TableDescription:
+      type: object
+      properties:
+        vtable:
+          type: string
+          description: Table identifier
+        description:
+          type: string
+          description: Human-readable description of the table
+        metrics:
+          type: array
+          items:
+            type: string
+          description: Available metric columns
+        filters:
+          type: array
+          items:
+            type: string
+          description: Supported filter dimensions
+        min_date:
+          type: string
+          description: Earliest available data date
+        granularities:
+          type: array
+          items:
+            type: string
+          description: Supported granularity levels
   responses:
     BadRequest:
       description: Bad request - invalid parameters or missing required fields
