@@ -125,3 +125,27 @@ x-evidence:
       http_status: 200
     - url: https://www.similarweb.com/md/plans-api.md
       http_status: 200
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Business
+    access: paid
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: paid
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: API Standalone
+    access: paid
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
