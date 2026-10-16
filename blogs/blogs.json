@@ -2,11 +2,14 @@
   "repo": "similarweb",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/similarweb",
-      "error": "HTTPError"
+      "source": "https://www.similarweb.com/blog/",
+      "feed_url": "https://www.similarweb.com/blog/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 46,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
