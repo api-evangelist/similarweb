@@ -12,6 +12,7 @@ checked:
 - https://monid.ai/tools/similarweb
 - https://n8n.io/integrations/similarweb/
 - https://zapier.com/apps/similarweb/integrations
+- https://aws.amazon.com/marketplace/search/results?FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE
 summary: null
 marketplace_apps: []
 edges:
@@ -41,4 +42,37 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
+- partner_name: AWS Data Exchange
+  partner: amazon-data-exchange
+  partner_match: aggregator
+  type: marketplace
+  marketplace: amazon-data-exchange-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=b01b7b68-954d-4c9d-a5bd-4630025c3be6
+  category: data product listing
+  contract_reference:
+    register: AWS Data Exchange (AWS Marketplace discovery search, FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE + seller-profile
+      sellerWebsiteUrl)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Similarweb
+    matched_domain: similarweb.com
+    matched_by: domain
+    listings: 20
+    sample_listings:
+    - Estimated On Site Search Keywords
+    - Estimated On Site Search Keywords with Conversion
+    - Estimated Retail Top Product Views and Purchases
+    - Estimated Site Channel Conversion
+    - Estimated Site Conversion
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
+  publisher_verified:
+  - Deployed on AWS
+  - Standard Data Agreement
 templates: []
