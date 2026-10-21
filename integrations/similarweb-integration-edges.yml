@@ -13,6 +13,10 @@ checked:
 - https://n8n.io/integrations/similarweb/
 - https://zapier.com/apps/similarweb/integrations
 - https://aws.amazon.com/marketplace/search/results?FULFILLMENT_OPTION_TYPE=DATA_EXCHANGE
+- hubspot/integrations/hubspot-integration-edges.yml
+- https://advertising.amazon.com/partners/directory
+- https://sellercentral.amazon.com/gspn
+- https://sellercentral.amazon.com/selling-partner-appstore
 summary: null
 marketplace_apps: []
 edges:
@@ -75,4 +79,36 @@ edges:
   publisher_verified:
   - Deployed on AWS
   - Standard Data Agreement
+- partner_name: HubSpot (own)
+  partner: hubspot
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://ecosystem.hubspot.com/marketplace/listing/similarweb-sales-intelligence
+  mirror_of: hubspot/integrations/hubspot-integration-edges.yml
+  apps:
+  - Similarweb Sales Intelligence
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: SALES_INTELLIGENCE
+- partner_name: Amazon Selling Partner Appstore
+  partner: amazon-seller-central
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sellerapps.app.4e627169-9443-4187-903e-112e6dc03466
+  mirror_of: amazon-seller-central/integrations/amazon-seller-central-integration-edges.yml
+  apps:
+  - Similarweb
+  detected: '2026-10-21'
+  detected_by: sweep-amazon-sp-api-appstore.py
 templates: []
